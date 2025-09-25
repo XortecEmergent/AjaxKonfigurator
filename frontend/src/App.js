@@ -120,7 +120,7 @@ function App() {
     try {
       const configData = {
         name: configuration.name || `${selectedProductLine} System`,
-        description: configuration.description || 'Ajax System Konfiguration',
+        description: configuration.description || 'Ajax System Konfiguration via Xortec GmbH',
         product_line: selectedProductLine,
         selected_products: selectedProducts
       };
@@ -160,7 +160,7 @@ function App() {
         {productLines.map((line) => (
           <Card 
             key={line.id} 
-            className="cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-xl bg-gray-800/50 border-gray-700 hover:border-blue-500"
+            className="cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-xl bg-gray-800/50 border-gray-700 hover:border-orange-500"
             onClick={() => selectProductLine(line)}
             data-testid={`product-line-${line.id}`}
           >
@@ -171,7 +171,7 @@ function App() {
                 className="w-full h-48 object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-              <Badge className="absolute top-4 right-4 bg-blue-600">
+              <Badge className="absolute top-4 right-4 bg-orange-600">
                 {line.name}
               </Badge>
             </div>
@@ -200,7 +200,7 @@ function App() {
                 </div>
               </div>
               
-              <Button className="w-full bg-blue-600 hover:bg-blue-700">
+              <Button className="w-full bg-orange-600 hover:bg-orange-700">
                 <ArrowRight className="w-4 h-4 ml-2" />
                 Auswählen
               </Button>
@@ -313,7 +313,7 @@ function App() {
               <TabsTrigger 
                 key={category.id} 
                 value={category.id}
-                className="data-[state=active]:bg-blue-600 text-xs"
+                className="data-[state=active]:bg-orange-600 text-xs"
               >
                 {category.name}
               </TabsTrigger>
@@ -330,7 +330,7 @@ function App() {
                       key={product.id}
                       className={`cursor-pointer transition-all duration-300 ${
                         isSelected 
-                          ? 'ring-2 ring-blue-500 bg-blue-900/30' 
+                          ? 'ring-2 ring-orange-500 bg-orange-900/30' 
                           : 'hover:scale-105 bg-gray-800/50'
                       } border-gray-700`}
                       onClick={() => toggleProduct(product)}
@@ -343,7 +343,7 @@ function App() {
                           className="w-full h-32 object-contain bg-gray-900 p-2"
                         />
                         {isSelected && (
-                          <CheckCircle2 className="absolute top-2 right-2 w-6 h-6 text-blue-500" />
+                          <CheckCircle2 className="absolute top-2 right-2 w-6 h-6 text-orange-500" />
                         )}
                       </div>
                       
@@ -391,7 +391,7 @@ function App() {
           <Button 
             onClick={nextStep}
             disabled={selectedProducts.length < 2}
-            className="bg-blue-600 hover:bg-blue-700"
+            className="bg-orange-600 hover:bg-orange-700"
             data-testid="continue-to-summary"
           >
             Weiter zur Zusammenfassung
@@ -487,7 +487,7 @@ function App() {
                 value={configuration.name}
                 onChange={(e) => setConfiguration({...configuration, name: e.target.value})}
                 placeholder={`${selectedProductLine} System`}
-                className="w-full p-3 bg-gray-900 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                className="w-full p-3 bg-gray-900 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:border-orange-500 focus:ring-1 focus:ring-orange-500"
                 data-testid="config-name-input"
               />
             </div>
@@ -498,9 +498,9 @@ function App() {
               <textarea
                 value={configuration.description}
                 onChange={(e) => setConfiguration({...configuration, description: e.target.value})}
-                placeholder="Beschreibung Ihres Ajax Systems..."
+                placeholder="Beschreibung Ihres Systems..."
                 rows="3"
-                className="w-full p-3 bg-gray-900 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                className="w-full p-3 bg-gray-900 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:border-orange-500 focus:ring-1 focus:ring-orange-500"
                 data-testid="config-description-input"
               />
             </div>
@@ -547,7 +547,7 @@ function App() {
       <div className="flex flex-col sm:flex-row gap-4 justify-center">
         <Button 
           onClick={generatePDF}
-          className="bg-blue-600 hover:bg-blue-700"
+          className="bg-orange-600 hover:bg-orange-700"
           data-testid="generate-pdf"
         >
           <Download className="w-4 h-4 mr-2" />
@@ -565,22 +565,23 @@ function App() {
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-gray-800">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-orange-900 to-gray-800">
       {/* Header */}
       <header className="bg-black/20 backdrop-blur-sm border-b border-gray-700">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
-              <img 
-                src="https://ajax.systems/assets/logo.svg" 
-                alt="Ajax Systems"
-                className="h-8"
-              />
-              <h1 className="text-2xl font-bold text-white">
-                Ajax Systems Konfigurator
-              </h1>
+              <div className="w-10 h-10 bg-orange-600 rounded-lg flex items-center justify-center">
+                <span className="text-white font-bold text-lg">X</span>
+              </div>
+              <div>
+                <h1 className="text-2xl font-bold text-white">
+                  Ajax Systemkonfigurator
+                </h1>
+                <p className="text-sm text-orange-200">by Xortec GmbH</p>
+              </div>
             </div>
-            <Badge className="bg-blue-600">
+            <Badge className="bg-orange-600">
               Schritt {currentStep} von {totalSteps}
             </Badge>
           </div>
@@ -622,7 +623,7 @@ function App() {
         <div className="container mx-auto px-4 py-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-gray-400 text-sm">
-              © 2024 Ajax Systems. Alle Rechte vorbehalten.
+              © 2024 Xortec GmbH. Alle Rechte vorbehalten. Ajax Systems Konfigurator.
             </p>
             <div className="flex items-center gap-4 text-sm text-gray-400">
               <a href="#" className="hover:text-white transition-colors">

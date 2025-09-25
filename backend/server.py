@@ -41,6 +41,8 @@ class ProductSpecification(BaseModel):
     weight: Optional[str] = None
     max_devices: Optional[int] = None
     communication: Optional[List[str]] = None
+    xortec_nr: Optional[str] = None
+    hersteller_nr: Optional[str] = None
 
 class Product(BaseModel):
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
@@ -83,22 +85,22 @@ class ConfigurationCreate(BaseModel):
     selected_products: List[str]
     created_by: Optional[str] = None
 
-# Initialize products data with COMPLETE Ajax product list
+# Initialize products data with COMPLETE Ajax product list from Xortec
 async def init_products():
     # Check if products already exist
     existing_products = await db.products.count_documents({})
     if existing_products > 0:
         return
     
-    # Complete Ajax products data based on real specifications
+    # COMPLETE Ajax products data based on Xortec catalog
     products_data = [
-        # Hub-Zentralen - ALL MODELS
+        # ================== HUB-ZENTRALEN (Alle Modelle) ==================
         {
             "name": "Hub 2 Plus Jeweller",
             "category": "hubs",
             "product_line": "baseline",
-            "description": "Kabellose Hub-Zentrale mit Fotoverifizierung. Anschließbar über WLAN, Ethernet und zwei SIM-Karten (2G/3G/LTE)",
-            "short_description": "Zentrale mit Fotoverifizierung und mehrfacher Konnektivität",
+            "description": "Gefahrenmeldezentrale in schwarz/weiß, 200 Komponenten, 25 Sicherungsbereiche, 200 Benutzer, MotionCam Unterstützung, bis zu 100 Kameras GSM 2G/3G/4G, WLAN 2,4 GHz (802.11 b/g/n) u. Ethernet Kommunikationsmodul",
+            "short_description": "Zentrale mit Fotoverifizierung, WLAN und mehrfacher Konnektivität",
             "usps": ["Fotoverifizierung", "WLAN + Ethernet + 2x SIM", "Bis zu 200 Geräte", "4 Kommunikationskanäle"],
             "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fhub_256999a1dd%402.png&1688287078",
             "specifications": {
@@ -107,12 +109,38 @@ async def init_products():
                 "max_devices": 200,
                 "communication": ["WLAN", "Ethernet", "2G/3G/LTE"],
                 "operating_temp": "-10°C bis +40°C",
-                "dimensions": "163 × 163 × 36 mm"
+                "dimensions": "163 × 163 × 36 mm",
+                "xortec_nr": "600810057/600810058",
+                "hersteller_nr": "38244.40.BL1/38245.40.WH1"
             },
             "features": [
                 {"name": "Fotoverifizierung", "description": "Automatische Fotoaufnahme bei Alarm"},
                 {"name": "Mehrfach-Konnektivität", "description": "4 unabhängige Kommunikationskanäle"},
                 {"name": "64 Automatisierungsszenarien", "description": "Intelligente Systemautomatisierung"}
+            ],
+            "compatible_hubs": ["self"]
+        },
+        {
+            "name": "Hub 2 (4G) Jeweller",
+            "category": "hubs", 
+            "product_line": "baseline",
+            "description": "Gefahrenmeldezentrale mit Unterstützung der MotionCam BWM mit visueller Alarmbestätigung, 100 Komponenten, 9 Sicherungsbereiche, 50 Benutzer, bis zu 25 Kameras, GSM 850/900/1800/1900 MHz",
+            "short_description": "Hub mit 4G Konnektivität und Fotoverifizierung",
+            "usps": ["Fotoverifizierung", "4G/LTE", "2x SIM", "Bis zu 100 Geräte"],
+            "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fhub_256999a1dd%402.png&1688287078",
+            "specifications": {
+                "frequency": "868 MHz (Jeweller)",
+                "range": "bis zu 2000m", 
+                "max_devices": 100,
+                "communication": ["Ethernet", "2G/3G/LTE"],
+                "operating_temp": "-10°C bis +40°C",
+                "xortec_nr": "600810009",
+                "hersteller_nr": "38238.40.BL1"
+            },
+            "features": [
+                {"name": "4G LTE", "description": "Schnelle Mobilfunkverbindung"},
+                {"name": "Fotoverifizierung", "description": "Visuelle Alarmbestätigung"},
+                {"name": "Dual SIM", "description": "Ausfallsichere Kommunikation"}
             ],
             "compatible_hubs": ["self"]
         },
@@ -130,7 +158,9 @@ async def init_products():
                 "max_devices": 200,
                 "communication": ["2G/3G/LTE"],
                 "operating_temp": "-10°C bis +40°C",
-                "battery_life": "bis zu 16 Stunden"
+                "battery_life": "bis zu 16 Stunden",
+                "xortec_nr": "600810XXX",
+                "hersteller_nr": "Hub BP"
             },
             "features": [
                 {"name": "Batteriebetrieb", "description": "Unabhängig vom Stromnetz"},
@@ -140,24 +170,26 @@ async def init_products():
             "compatible_hubs": ["self"]
         },
         {
-            "name": "Hub 2 (4G) Jeweller",
-            "category": "hubs", 
-            "product_line": "baseline",
-            "description": "Kabellose Hub-Zentrale mit Fotoverifizierung. Anschließbar über Ethernet und zwei SIM-Karten (2G/3G/LTE)",
-            "short_description": "Hub mit 4G Konnektivität",
-            "usps": ["Fotoverifizierung", "4G/LTE", "2x SIM", "Ethernet"],
+            "name": "Hub (2G) Jeweller",
+            "category": "hubs",
+            "product_line": "baseline", 
+            "description": "Gefahrenmeldezentrale, 100 Komponenten, 9 Sicherungsbereiche, 50 Benutzer, bis zu 10 Kameras GSM 850/900/1800/1900 MHz u. Ethernet Kommunikationsmodul",
+            "short_description": "Basis Hub mit 2G Kommunikation",
+            "usps": ["100 Geräte", "2G Konnektivität", "Ethernet", "9 Bereiche"],
             "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fhub_256999a1dd%402.png&1688287078",
             "specifications": {
                 "frequency": "868 MHz (Jeweller)",
-                "range": "bis zu 2000m", 
-                "max_devices": 200,
-                "communication": ["Ethernet", "2G/3G/LTE"],
-                "operating_temp": "-10°C bis +40°C"
+                "range": "bis zu 2000m",
+                "max_devices": 100,
+                "communication": ["Ethernet", "2G"],
+                "operating_temp": "-10°C bis +40°C",
+                "xortec_nr": "600810007",
+                "hersteller_nr": "38236.01.BL1"
             },
             "features": [
-                {"name": "4G LTE", "description": "Schnelle Mobilfunkverbindung"},
-                {"name": "Fotoverifizierung", "description": "Visuelle Alarmbestätigung"},
-                {"name": "Dual SIM", "description": "Ausfallsichere Kommunikation"}
+                {"name": "Basis Funktionen", "description": "Alle grundlegenden Hub-Funktionen"},
+                {"name": "2G Kommunikation", "description": "Zuverlässige GSM-Verbindung"},
+                {"name": "Ethernet Backup", "description": "Kabelgebundene Internetverbindung"}
             ],
             "compatible_hubs": ["self"]
         },
@@ -174,7 +206,9 @@ async def init_products():
                 "range": "bis zu 2000m (Jeweller)",
                 "max_devices": 400,
                 "communication": ["Ethernet", "2G/3G/LTE"],
-                "operating_temp": "-25°C bis +50°C"
+                "operating_temp": "-25°C bis +50°C",
+                "xortec_nr": "600810XXX",
+                "hersteller_nr": "Superior Hub Hybrid"
             },
             "features": [
                 {"name": "Hybrid-Unterstützung", "description": "Sowohl Fibra als auch Jeweller Geräte"},
@@ -187,7 +221,7 @@ async def init_products():
             "name": "EN54 Fire Hub Jeweller",
             "category": "hubs",
             "product_line": "en54",
-            "description": "Brandwarnzentrale mit Unterstützung von Einbruchschutzgeräten",
+            "description": "Kabellose Steuerzentrale für EN54-Brandwarnsysteme, Touchscreen, Kommunikation über Funk oder Ethernet",
             "short_description": "EN54 zertifizierte Brandwarnzentrale",
             "usps": ["EN 54 zertifiziert", "Brandschutz + Einbruchschutz", "Kommerzielle Anwendungen", "Touchscreen CIE"],
             "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fen54_fire_hub_jeweller_black_fd80de7c0f%402.png&1753716121",
@@ -196,7 +230,9 @@ async def init_products():
                 "range": "bis zu 2000m",
                 "max_devices": 200,
                 "communication": ["Ethernet", "GSM"],
-                "operating_temp": "-10°C bis +55°C"
+                "operating_temp": "-10°C bis +55°C",
+                "xortec_nr": "600810437",
+                "hersteller_nr": "125732.315.WH"
             },
             "features": [
                 {"name": "EN 54 Zertifizierung", "description": "Vollständig zertifiziert für kommerzielle Brandschutzanlagen"},
@@ -206,12 +242,12 @@ async def init_products():
             "compatible_hubs": ["self"]
         },
         
-        # Bewegungsmelder - COMPLETE LIST
+        # ================== BEWEGUNGSMELDER (Alle Modelle) ==================
         {
             "name": "MotionProtect Jeweller",
             "category": "motion_detectors",
             "product_line": "baseline",
-            "description": "Kabelloser IR-Bewegungsmelder",
+            "description": "PIR Funk-Bewegungsmelder, Bewegungserfassungsabstand bis zu 12 m, bis zu 1700 m Reichweite (ohne Hindernisse), 868,0 - 868,6 MHz, Erfassungswinkel Horizontal 88° Vertikal 80°",
             "short_description": "Zuverlässiger PIR-Bewegungsmelder für den Innenbereich",
             "usps": ["12m Erfassungsreichweite", "7 Jahre Batterielaufzeit", "Haustier-Immunität bis 20kg", "SmartDetect Algorithmus"],
             "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fmotionprotect_7e25a60ef8%402.png&1689152842",
@@ -220,42 +256,46 @@ async def init_products():
                 "range": "bis zu 1700m",
                 "battery_life": "bis zu 7 Jahre",
                 "operating_temp": "-10°C bis +40°C",
-                "ip_rating": "IP50"
+                "ip_rating": "IP50",
+                "xortec_nr": "600810025/600810026",
+                "hersteller_nr": "38193.09.WH1/38194.09.BL1"
             },
             "features": [
                 {"name": "SmartDetect", "description": "Intelligente Bewegungserkennung mit Störungsfilter"},
                 {"name": "Haustier-Immunität", "description": "Ignoriert Tiere bis 20kg und 50cm Höhe"},
                 {"name": "Sabotage-Schutz", "description": "Erkennt Manipulationsversuche sofort"}
             ],
-            "compatible_hubs": ["Hub 2 Plus Jeweller", "Hub BP Jeweller", "Hub 2 (4G) Jeweller", "Superior Hub Hybrid (4G)"]
+            "compatible_hubs": ["Hub 2 Plus Jeweller", "Hub 2 (4G) Jeweller", "Hub (2G) Jeweller", "Hub BP Jeweller", "Superior Hub Hybrid (4G)"]
         },
         {
             "name": "MotionProtect Plus Jeweller",
             "category": "motion_detectors",
             "product_line": "baseline", 
-            "description": "Kabelloser IR-Bewegungsmelder mit zusätzlichem K-Band-Mikrowellensensor",
+            "description": "PIR Funk-Bewegungsmelder inkl. Mikrowellensensor (24GHz), Bewegungserfassungsabstand bis zu 12 m, bis zu 1200 m Reichweite (ohne Hindernisse), 868,0 - 868,6 MHz, Erfassungswinkel Horizontal 88° Vertikal 80°",
             "short_description": "Dual-Technologie Bewegungsmelder (PIR + Mikrowelle)",
             "usps": ["Duale Sensorik", "Reduzierte Fehlalarme", "12m Erfassungsreichweite", "Haustier-Immunität"],
             "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fmotionprotect_plus_111a8e0f23%402.png&1689159156",
             "specifications": {
                 "frequency": "868 MHz (Jeweller)",
-                "range": "bis zu 1700m",
+                "range": "bis zu 1200m",
                 "battery_life": "bis zu 5 Jahre",
                 "operating_temp": "-10°C bis +40°C",
-                "ip_rating": "IP50"
+                "ip_rating": "IP50",
+                "xortec_nr": "600810027/600810209",
+                "hersteller_nr": "38198.02.WH1/38199.02.BL1"
             },
             "features": [
                 {"name": "Dual-Technologie", "description": "PIR + Mikrowellen-Sensor für höchste Zuverlässigkeit"},
                 {"name": "Anti-Masking", "description": "Erkennt Versuche der Sensorabdeckung"},
                 {"name": "Erweiterte Filterung", "description": "Minimiert Fehlalarme durch Umwelteinflüsse"}
             ],
-            "compatible_hubs": ["Hub 2 Plus Jeweller", "Hub BP Jeweller", "Hub 2 (4G) Jeweller", "Superior Hub Hybrid (4G)"]
+            "compatible_hubs": ["Hub 2 Plus Jeweller", "Hub 2 (4G) Jeweller", "Hub (2G) Jeweller", "Hub BP Jeweller", "Superior Hub Hybrid (4G)"]
         },
         {
-            "name": "MotionCam Jeweller",
+            "name": "MotionCam (PhOD) Jeweller",
             "category": "motion_detectors",
             "product_line": "baseline",
-            "description": "Kabelloser IR-Bewegungsmelder mit der Funktion Foto nach Alarm",
+            "description": "Kabelloser IR-Bewegungsmelder für den Innenbereich mit Fotoverifizierung von Alarmen und den Funktionen 'Foto auf Anfrage' und 'Foto nach Szenario'",
             "short_description": "Bewegungsmelder mit integrierter Kamera",
             "usps": ["Foto-Verifikation", "120° Bildwinkel", "Nachtsicht bis 5m", "Verschlüsselte Übertragung"],
             "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fmotion_cam_jeweller_black_50c00ca247%402.png&1727442738",
@@ -263,87 +303,95 @@ async def init_products():
                 "frequency": "868 MHz (Jeweller)",
                 "range": "bis zu 1700m",
                 "battery_life": "bis zu 4 Jahre",
-                "operating_temp": "-10°C bis +40°C"
+                "operating_temp": "-10°C bis +40°C",
+                "xortec_nr": "600810128/600810129",
+                "hersteller_nr": "39289.120.BL1/39290.120.WH1"
             },
             "features": [
                 {"name": "Foto-Verifikation", "description": "Automatische Fotoaufnahme bei Alarmauslösung"},
                 {"name": "Infrarot-Illumination", "description": "Klare Aufnahmen auch bei völliger Dunkelheit"},
                 {"name": "Ende-zu-Ende-Verschlüsselung", "description": "Sichere Übertragung aller Bilddaten"}
             ],
-            "compatible_hubs": ["Hub 2 Plus Jeweller", "Hub BP Jeweller", "Hub 2 (4G) Jeweller", "Superior Hub Hybrid (4G)"]
+            "compatible_hubs": ["Hub 2 Plus Jeweller", "Hub 2 (4G) Jeweller", "Hub (2G) Jeweller", "Hub BP Jeweller", "Superior Hub Hybrid (4G)"]
         },
         {
-            "name": "MotionProtect Curtain Jeweller",
+            "name": "MotionCam Outdoor HighMount (PhOD) Jeweller",
             "category": "motion_detectors",
             "product_line": "baseline",
-            "description": "Kabelloser IR-Vorhang-Bewegungsmelder",
-            "short_description": "Schmaler Erfassungsbereich für Durchgänge",
-            "usps": ["Schmale Erfassung", "15m Reichweite", "Aussparung möglich", "Wetterbeständig"],
-            "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fmotionprotect_curtain_e485bc66db%402.png&1689152842",
+            "description": "Wireless IR motion detector that takes on-demand photos and photos by alarm, schedule, and scenario. For outdoor installation at a height of 2–4 m.",
+            "short_description": "Outdoor Bewegungsmelder mit Kamera für Höhenmontage",
+            "usps": ["Outdoor-Installation", "2-4m Höhenmontage", "Foto-Verifikation", "Wetterfest"],
+            "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fmotioncam_outdoor_highmount_white_123abc%402.png",
             "specifications": {
                 "frequency": "868 MHz (Jeweller)",
                 "range": "bis zu 1700m",
-                "battery_life": "bis zu 7 Jahre",
-                "operating_temp": "-10°C bis +40°C",
-                "ip_rating": "IP54"
-            },
-            "features": [
-                {"name": "Vorhang-Detektion", "description": "Schmaler Erfassungsbereich für gezielte Überwachung"},
-                {"name": "Wetterschutz", "description": "Für Innen- und Außeneinsatz geeignet"},
-                {"name": "Flexible Montage", "description": "Verschiedene Montagemöglichkeiten"}
-            ],
-            "compatible_hubs": ["Hub 2 Plus Jeweller", "Hub BP Jeweller", "Hub 2 (4G) Jeweller", "Superior Hub Hybrid (4G)"]
-        },
-        {
-            "name": "MotionProtect Outdoor Jeweller",
-            "category": "motion_detectors",
-            "product_line": "baseline",
-            "description": "Kabelloser IR-Bewegungsmelder für den Innen- und Außenbereich",
-            "short_description": "Wetterfester Außenbewegunsmelde",
-            "usps": ["IP65 Schutz", "Anti-Masking", "Haustier-Immunität", "15m Erfassung"],
-            "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fmotionprotect_outdoor_7bbcf4b52d%402.png&1689152842",
-            "specifications": {
-                "frequency": "868 MHz (Jeweller)",
-                "range": "bis zu 1700m", 
-                "battery_life": "bis zu 7 Jahre",
+                "battery_life": "bis zu 3 Jahre",
                 "operating_temp": "-25°C bis +60°C",
-                "ip_rating": "IP65"
+                "ip_rating": "IP54",
+                "xortec_nr": "600810403",
+                "hersteller_nr": "99164.282.WH1"
             },
             "features": [
-                {"name": "Wetterschutz", "description": "IP65 Schutzart für alle Wetterbedingungen"},
-                {"name": "Anti-Masking", "description": "Erkennt Manipulationsversuche"},
-                {"name": "Erweiterte Reichweite", "description": "Bis zu 15m Erfassungsbereich"}
+                {"name": "Höhenmontage", "description": "Optimiert für Installation in 2-4m Höhe"},
+                {"name": "Wetterschutz", "description": "IP54 für Außeneinsatz"},
+                {"name": "Erweiterte Erkennung", "description": "Spezielle Algorithmen für Outdoor-Einsatz"}
             ],
-            "compatible_hubs": ["Hub 2 Plus Jeweller", "Hub BP Jeweller", "Hub 2 (4G) Jeweller", "Superior Hub Hybrid (4G)"]
+            "compatible_hubs": ["Hub 2 Plus Jeweller", "Hub 2 (4G) Jeweller", "Hub (2G) Jeweller", "Hub BP Jeweller", "Superior Hub Hybrid (4G)"]
         },
         {
             "name": "CombiProtect Jeweller",
             "category": "motion_detectors",
             "product_line": "baseline",
-            "description": "Kabelloser IR-Bewegungs- und Glasbruchmelder mit Mikrofon",
+            "description": "PIR Funk-Bewegungs- u. Glasbruchmelder, Bewegungserfassungsabstand bis zu 12 m, bis zu 1200 m Reichweite (ohne Hindernisse), 868,0 - 868,6 MHz, Erfassungswinkel Horizontal 88° Vertikal 80°",
             "short_description": "Kombinierter Bewegungs- und Glasbruchmelder",
             "usps": ["2-in-1 Gerät", "Bewegung + Glasbruch", "Kosteneffizient", "SmartDetect"],
             "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fcombiprotect_ee0a5c6eb3%402.png&1689152842",
             "specifications": {
                 "frequency": "868 MHz (Jeweller)",
-                "range": "bis zu 1300m",
+                "range": "bis zu 1200m",
                 "battery_life": "bis zu 5 Jahre",
-                "operating_temp": "-10°C bis +40°C"
+                "operating_temp": "-10°C bis +40°C",
+                "xortec_nr": "600810031/600810032",
+                "hersteller_nr": "38097.06.WH1/38096.06.BL1"
             },
             "features": [
                 {"name": "Dual-Funktion", "description": "Bewegungserkennung und Glasbrucherkennung in einem Gerät"},
                 {"name": "Kostenersparnis", "description": "Ein Gerät für zwei Schutzfunktionen"},
                 {"name": "SmartDetect", "description": "Intelligente Signalverarbeitung"}
             ],
-            "compatible_hubs": ["Hub 2 Plus Jeweller", "Hub BP Jeweller", "Hub 2 (4G) Jeweller", "Superior Hub Hybrid (4G)"]
+            "compatible_hubs": ["Hub 2 Plus Jeweller", "Hub 2 (4G) Jeweller", "Hub (2G) Jeweller", "Hub BP Jeweller", "Superior Hub Hybrid (4G)"]
+        },
+        {
+            "name": "Curtain Outdoor Jeweller",
+            "category": "motion_detectors",
+            "product_line": "baseline",
+            "description": "Outdoor Curtain Bewegungsmelder für schmale Erfassungsbereiche",
+            "short_description": "Outdoor Vorhang-Bewegungsmelder",
+            "usps": ["Outdoor-geeignet", "Schmaler Erfassungsbereich", "Wetterschutz", "Perimeterschutz"],
+            "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fcurtain_outdoor_white_abc123%402.png",
+            "specifications": {
+                "frequency": "868 MHz (Jeweller)",
+                "range": "bis zu 1700m",
+                "battery_life": "bis zu 7 Jahre",
+                "operating_temp": "-25°C bis +60°C",
+                "ip_rating": "IP65",
+                "xortec_nr": "600810445",
+                "hersteller_nr": "101441.289.WH1"
+            },
+            "features": [
+                {"name": "Vorhang-Erkennung", "description": "Schmaler Erfassungsbereich für Perimeterschutz"},
+                {"name": "Wetterschutz", "description": "IP65 für Außeneinsatz"},
+                {"name": "Flexible Montage", "description": "Verschiedene Montagemöglichkeiten"}
+            ],
+            "compatible_hubs": ["Hub 2 Plus Jeweller", "Hub 2 (4G) Jeweller", "Hub (2G) Jeweller", "Hub BP Jeweller", "Superior Hub Hybrid (4G)"]
         },
         
-        # Superior Bewegungsmelder
+        # ================== SUPERIOR BEWEGUNGSMELDER ==================
         {
             "name": "Superior MotionProtect Jeweller",
             "category": "motion_detectors",
             "product_line": "superiorline",
-            "description": "Kabelloser IR-Bewegungsmelder. Superior Edition",
+            "description": "Kabelloser IR-Bewegungsmelder. Superior Edition mit Grade 3 Zertifizierung",
             "short_description": "Professional PIR-Bewegungsmelder",
             "usps": ["Grade 3 Zertifizierung", "Erweiterte Anti-Sabotage", "Professional Grade", "12m Erfassung"],
             "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fmpsj_s_34e8d588e9%402.png&1688046986",
@@ -374,7 +422,9 @@ async def init_products():
                 "range": "bis zu 1700m",
                 "battery_life": "bis zu 5 Jahre",
                 "operating_temp": "-25°C bis +50°C",
-                "ip_rating": "IP50"
+                "ip_rating": "IP50",
+                "xortec_nr": "600810641",
+                "hersteller_nr": "133222.02.WH1"
             },
             "features": [
                 {"name": "Dual-Technologie", "description": "PIR + Mikrowellen-Sensor für höchste Zuverlässigkeit"},
@@ -383,51 +433,126 @@ async def init_products():
             ],
             "compatible_hubs": ["Superior Hub Hybrid (4G)"]
         },
+        {
+            "name": "Superior MotionCam AM (PhOD) Jeweller",
+            "category": "motion_detectors",
+            "product_line": "superiorline",
+            "description": "Superior MotionCam AM (PhOD) Jeweller für professionelle Anwendungen",
+            "short_description": "Professional Bewegungsmelder mit Anti-Masking und Foto",
+            "usps": ["Anti-Masking", "Grade 3", "Foto-Verifikation", "Professional"],
+            "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fsuperior_motioncam_am_white%402.png",
+            "specifications": {
+                "frequency": "868 MHz (Jeweller)",
+                "range": "bis zu 1700m",
+                "battery_life": "bis zu 4 Jahre",
+                "operating_temp": "-25°C bis +50°C",
+                "xortec_nr": "600810602",
+                "hersteller_nr": "116768.306.WH1"
+            },
+            "features": [
+                {"name": "Anti-Masking", "description": "Aktiver Schutz gegen Manipulationsversuche"},
+                {"name": "Grade 3 Zertifizierung", "description": "Höchste professionelle Sicherheitsstufe"},
+                {"name": "Foto-Verifikation", "description": "Visuelle Alarmbestätigung"}
+            ],
+            "compatible_hubs": ["Superior Hub Hybrid (4G)"]
+        },
+        {
+            "name": "Superior MotionCam HD (PhOD) Jeweller",
+            "category": "motion_detectors",
+            "product_line": "superiorline",
+            "description": "Superior MotionCam HD (PhOD) Jeweller mit HD Auflösung",
+            "short_description": "Professional HD Bewegungsmelder mit Kamera",
+            "usps": ["HD Auflösung", "Grade 3", "Professional", "Anti-Masking"],
+            "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fsuperior_motioncam_hd_white%402.png",
+            "specifications": {
+                "frequency": "868 MHz (Jeweller)",
+                "range": "bis zu 1700m",
+                "battery_life": "bis zu 3 Jahre",
+                "operating_temp": "-25°C bis +50°C",
+                "xortec_nr": "600810616",
+                "hersteller_nr": "118274.309.WH1"
+            },
+            "features": [
+                {"name": "HD Auflösung", "description": "Hochauflösende Kameraaufnahmen"},
+                {"name": "Professional Grade", "description": "Für anspruchsvollste Sicherheitsanwendungen"},
+                {"name": "Erweiterte Funktionen", "description": "Vollständige Professional-Ausstattung"}
+            ],
+            "compatible_hubs": ["Superior Hub Hybrid (4G)"]
+        },
+        {
+            "name": "Superior CombiProtect Jeweller",
+            "category": "motion_detectors",
+            "product_line": "superiorline",
+            "description": "Superior CombiProtect Jeweller kombiniert Bewegungs- und Glasbruchererkennung",
+            "short_description": "Professional Kombi-Melder für Bewegung und Glasbruch",
+            "usps": ["Grade 3", "Dual-Funktion", "Professional", "Anti-Masking"],
+            "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fsuperior_combiprotect_white%402.png",
+            "specifications": {
+                "frequency": "868 MHz (Jeweller)",
+                "range": "bis zu 1300m",
+                "battery_life": "bis zu 5 Jahre",
+                "operating_temp": "-25°C bis +50°C",
+                "xortec_nr": "600810625",
+                "hersteller_nr": "133190.06.WH1"
+            },
+            "features": [
+                {"name": "Professional Dual-Funktion", "description": "Bewegung und Glasbruch in Grade 3 Qualität"},
+                {"name": "Anti-Masking", "description": "Schutz gegen Manipulationsversuche"},
+                {"name": "Grade 3 Zertifizierung", "description": "Höchste professionelle Standards"}
+            ],
+            "compatible_hubs": ["Superior Hub Hybrid (4G)"]
+        },
         
-        # Öffnungsmelder - COMPLETE LIST
+        # ================== ÖFFNUNGSMELDER (Alle Modelle) ==================
         {
             "name": "DoorProtect Jeweller",
             "category": "opening_detectors",
             "product_line": "baseline",
-            "description": "Kabelloser Öffnungsmelder mit Reedschalter",
+            "description": "Drahtloser Öffnungs-Melder, bis zu 1200 m Reichweite (ohne Hindernisse), 868,0 - 868,6 MHz, CR123A-Batterie, Stromversorgungsspannung 3 V, Batterielaufzeit bis zu 7 Jahre",
             "short_description": "Kompakter Tür-/Fensterkontakt",
             "usps": ["7 Jahre Batterielaufzeit", "Ultrakleine Bauform", "Sabotage-Schutz", "Sofortige Benachrichtigung"],
             "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fdoorprotect_f565be9860%402.png&1689152842",
             "specifications": {
                 "frequency": "868 MHz (Jeweller)",
-                "range": "bis zu 1700m",
+                "range": "bis zu 1200m",
                 "battery_life": "bis zu 7 Jahre",
                 "operating_temp": "-10°C bis +40°C",
-                "dimensions": "88 × 20 × 15 mm"
+                "dimensions": "88 × 20 × 15 mm",
+                "xortec_nr": "600810018/600810019",
+                "hersteller_nr": "38099.03.WH1/38098.03.BL1"
             },
             "features": [
                 {"name": "Reed-Sensor", "description": "Hochzuverlässiger magnetischer Sensor"},
                 {"name": "Kompaktdesign", "description": "Unauffällige Installation an Türen und Fenstern"},
                 {"name": "Sabotage-Erkennung", "description": "Alarm bei Entfernung vom Montageort"}
             ],
-            "compatible_hubs": ["Hub 2 Plus Jeweller", "Hub BP Jeweller", "Hub 2 (4G) Jeweller", "Superior Hub Hybrid (4G)"]
+            "compatible_hubs": ["Hub 2 Plus Jeweller", "Hub 2 (4G) Jeweller", "Hub (2G) Jeweller", "Hub BP Jeweller", "Superior Hub Hybrid (4G)"]
         },
         {
             "name": "DoorProtect Plus Jeweller",
             "category": "opening_detectors",
             "product_line": "baseline",
-            "description": "Kabelloser kombinierter Öffnungs-, Erschütterungs- und Neigungsmelder mit Reedschalter und Beschleunigungssensor",
+            "description": "Drahtloser Öffnungs-Melder, registriert Änderungen des vertikalen Neigungswinkels, Schläge und Vibrationen, bis zu 1200 m Reichweite (ohne Hindernisse), 868,0 - 868,6 MHz, CR123A-Batterie",
             "short_description": "Erweiterte Tür-/Fensterkontakt mit Schock-Sensor",
             "usps": ["3-in-1 Sensor", "Erschütterungserkennung", "Neigungserkennung", "Erhöhte Sicherheit"],
             "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fdoorprotect_f565be9860%402.png&1689152842",
             "specifications": {
                 "frequency": "868 MHz (Jeweller)",
-                "range": "bis zu 1700m",
+                "range": "bis zu 1200m",
                 "battery_life": "bis zu 7 Jahre",
-                "operating_temp": "-10°C bis +40°C"
+                "operating_temp": "-10°C bis +40°C",
+                "xortec_nr": "600810020/600810021",
+                "hersteller_nr": "38101.13.WH1/38100.21.BL1"
             },
             "features": [
                 {"name": "Triple-Sensor", "description": "Öffnung, Erschütterung und Neigung in einem Gerät"},
                 {"name": "Shock-Detection", "description": "Erkennt Einbruchsversuche vor dem Öffnen"},
                 {"name": "Tilt-Detection", "description": "Überwacht Lageveränderungen"}
             ],
-            "compatible_hubs": ["Hub 2 Plus Jeweller", "Hub BP Jeweller", "Hub 2 (4G) Jeweller", "Superior Hub Hybrid (4G)"]
+            "compatible_hubs": ["Hub 2 Plus Jeweller", "Hub 2 (4G) Jeweller", "Hub (2G) Jeweller", "Hub BP Jeweller", "Superior Hub Hybrid (4G)"]
         },
+        
+        # ================== SUPERIOR ÖFFNUNGSMELDER ==================
         {
             "name": "Superior DoorProtect Jeweller",
             "category": "opening_detectors", 
@@ -440,7 +565,9 @@ async def init_products():
                 "frequency": "868 MHz (Jeweller)",
                 "range": "bis zu 1700m",
                 "battery_life": "bis zu 7 Jahre",
-                "operating_temp": "-25°C bis +50°C"
+                "operating_temp": "-25°C bis +50°C",
+                "xortec_nr": "600810627/600810628",
+                "hersteller_nr": "133194.03.WH1/133195.03.BL1"
             },
             "features": [
                 {"name": "Dual Reed-Technologie", "description": "Zwei unabhängige Reed-Schalter für höchste Zuverlässigkeit"},
@@ -449,28 +576,53 @@ async def init_products():
             ],
             "compatible_hubs": ["Superior Hub Hybrid (4G)"]
         },
+        {
+            "name": "Superior DoorProtect Plus Jeweller",
+            "category": "opening_detectors",
+            "product_line": "superiorline",
+            "description": "Kombinierter kabelloser Öffnungs-, Erschütterungs- und Neigungsmelder mit zwei Reedschaltern und Beschleunigungssensor. Superior Edition",
+            "short_description": "Professional erweiterte Tür-/Fensterkontakt",
+            "usps": ["Dual Reed + Schock", "Grade 3", "Professional", "Multi-Sensor"],
+            "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fdoorprotect_superior_plus%402.png",
+            "specifications": {
+                "frequency": "868 MHz (Jeweller)",
+                "range": "bis zu 1700m",
+                "battery_life": "bis zu 7 Jahre",
+                "operating_temp": "-25°C bis +50°C",
+                "xortec_nr": "600810629",
+                "hersteller_nr": "133198.21.WH1"
+            },
+            "features": [
+                {"name": "Professional Multi-Sensor", "description": "Dual-Reed + Erschütterung + Neigung in Grade 3"},
+                {"name": "Erweiterte Sabotage-Erkennung", "description": "Professional-Grade Manipulationsschutz"},
+                {"name": "Grade 3 Zertifizierung", "description": "Höchste professionelle Standards"}
+            ],
+            "compatible_hubs": ["Superior Hub Hybrid (4G)"]
+        },
         
-        # Glasbruchmelder
+        # ================== GLASBRUCHMELDER ==================
         {
             "name": "GlassProtect Jeweller",
             "category": "glass_break_detectors",
             "product_line": "baseline",
-            "description": "Kabelloser Glasbruchmelder mit Mikrofon",
+            "description": "Drahtloser Glasbruchmelder, bis zu 1000 m Reichweite (ohne Hindernisse), 868,0 - 868,6 MHz, Erkennungsabstand für Brüche bis zu 9 m, Erfassungswinkel für Brüche 180°, Batterie CR123A",
             "short_description": "Akustischer Glasbruchmelder",
             "usps": ["9m Erfassungsradius", "SmartDetect Algorithmus", "7 Jahre Batterielaufzeit", "Falschalarmschutz"],
             "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fglassprotect_bb2a29da00%402.png&1689152842",
             "specifications": {
                 "frequency": "868 MHz (Jeweller)",
-                "range": "bis zu 1300m",
+                "range": "bis zu 1000m",
                 "battery_life": "bis zu 7 Jahre",
-                "operating_temp": "-10°C bis +40°C"
+                "operating_temp": "-10°C bis +40°C",
+                "xortec_nr": "600810033",
+                "hersteller_nr": "38193.09.WH1"
             },
             "features": [
                 {"name": "Akustische Erkennung", "description": "Erkennt charakteristische Glasbruchgeräusche"},
                 {"name": "SmartDetect", "description": "Filterung von Störgeräuschen und Falschalarmen"},
                 {"name": "Großer Erfassungsbereich", "description": "Schutz mehrerer Fenster mit einem Gerät"}
             ],
-            "compatible_hubs": ["Hub 2 Plus Jeweller", "Hub BP Jeweller", "Hub 2 (4G) Jeweller", "Superior Hub Hybrid (4G)"]
+            "compatible_hubs": ["Hub 2 Plus Jeweller", "Hub 2 (4G) Jeweller", "Hub (2G) Jeweller", "Hub BP Jeweller", "Superior Hub Hybrid (4G)"]
         },
         {
             "name": "Superior GlassProtect Jeweller",
@@ -482,9 +634,11 @@ async def init_products():
             "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fgpsj_s_b2db014217%402.png&1688046912",
             "specifications": {
                 "frequency": "868 MHz (Jeweller)",
-                "range": "bis zu 1300m",
+                "range": "bis zu 1000m",
                 "battery_life": "bis zu 7 Jahre",
-                "operating_temp": "-25°C bis +50°C"
+                "operating_temp": "-25°C bis +50°C",
+                "xortec_nr": "600810632",
+                "hersteller_nr": "133203.05.BL1"
             },
             "features": [
                 {"name": "Grade 3 Zertifizierung", "description": "Höchste Sicherheitsstufe nach EN 50131"},
@@ -494,7 +648,7 @@ async def init_products():
             "compatible_hubs": ["Superior Hub Hybrid (4G)"]
         },
         
-        # Bedienteile - COMPLETE LIST
+        # ================== BEDIENTEILE / KEYPADS ==================
         {
             "name": "KeyPad TouchScreen Jeweller",
             "category": "keypads",
@@ -514,13 +668,13 @@ async def init_products():
                 {"name": "Multi-Authentifizierung", "description": "Code, RFID-Karte, Smartphone oder Schlüsselanhänger"},
                 {"name": "System-Status", "description": "Anzeige aller Systemzustände und Ereignisse"}
             ],
-            "compatible_hubs": ["Hub 2 Plus Jeweller", "Hub BP Jeweller", "Hub 2 (4G) Jeweller", "Superior Hub Hybrid (4G)"]
+            "compatible_hubs": ["Hub 2 Plus Jeweller", "Hub 2 (4G) Jeweller", "Hub (2G) Jeweller", "Hub BP Jeweller", "Superior Hub Hybrid (4G)"]
         },
         {
             "name": "KeyPad Plus Jeweller",
             "category": "keypads",
             "product_line": "baseline",
-            "description": "Kabelloses Touch-Bedienteil mit Unterstützung für kontaktlose verschlüsselte Karten und Schlüsselanhänger",
+            "description": "Kabellose Touch-Tastatur für die Verwaltung des Ajax Sicherheitssystems mit verschlüsselten, kontaktlosen Karten und Funkfernbedienungen",
             "short_description": "Touch-Bedienteil mit RFID",
             "usps": ["Touchscreen", "RFID-Karten", "Verschlüsselt", "LED-Anzeigen"],
             "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fkeypad_plus_cb76223961%402.png&1689152843",
@@ -528,65 +682,70 @@ async def init_products():
                 "frequency": "868 MHz (Jeweller)",
                 "range": "bis zu 1700m",
                 "battery_life": "bis zu 2 Jahre",
-                "operating_temp": "0°C bis +40°C"
+                "operating_temp": "0°C bis +40°C",
+                "xortec_nr": "600810066/600810067",
+                "hersteller_nr": "38252.83.BL1/38253.83.WH1"
             },
             "features": [
                 {"name": "Touch-Bedienung", "description": "Kapazitive Touch-Tasten"},
                 {"name": "RFID-Unterstützung", "description": "Pass und Tag Authentifizierung"},
                 {"name": "LED-Feedback", "description": "Visuelle Statusanzeigen"}
             ],
-            "compatible_hubs": ["Hub 2 Plus Jeweller", "Hub BP Jeweller", "Hub 2 (4G) Jeweller", "Superior Hub Hybrid (4G)"]
+            "compatible_hubs": ["Hub 2 Plus Jeweller", "Hub 2 (4G) Jeweller", "Hub (2G) Jeweller", "Hub BP Jeweller", "Superior Hub Hybrid (4G)"]
         },
         {
-            "name": "KeyPad Jeweller",
-            "category": "keypads", 
-            "product_line": "baseline",
-            "description": "Kabelloses Touch-Bedienteil",
-            "short_description": "Basis Touch-Bedienteil",
-            "usps": ["Einfache Bedienung", "Touch-Tasten", "LED-Anzeigen", "Kompaktdesign"],
-            "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fkeypad_47746aa72c%402.png&1689152843",
+            "name": "Superior KeyPad Plus Jeweller",
+            "category": "keypads",
+            "product_line": "superiorline",
+            "description": "Superior KeyPad Plus Jeweller für professionelle Anwendungen",
+            "short_description": "Professional Touch-Bedienteil",
+            "usps": ["Grade 3 Zertifizierung", "Professional", "RFID", "Erweiterte Sicherheit"],
+            "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fsuperior_keypad_plus%402.png",
             "specifications": {
                 "frequency": "868 MHz (Jeweller)",
-                "range": "bis zu 1700m", 
+                "range": "bis zu 1700m",
                 "battery_life": "bis zu 2 Jahre",
-                "operating_temp": "0°C bis +40°C"
+                "operating_temp": "-25°C bis +50°C",
+                "xortec_nr": "600810636",
+                "hersteller_nr": "133211.83.BL1"
             },
             "features": [
-                {"name": "Touch-Tasten", "description": "Kapazitive Berührungstasten"},
-                {"name": "LED-Anzeigen", "description": "Farbige Statusanzeigen"},
-                {"name": "Kompaktdesign", "description": "Platzsparende Installation"}
+                {"name": "Grade 3 Zertifizierung", "description": "Höchste professionelle Sicherheitsstufe"},
+                {"name": "Erweiterte Verschlüsselung", "description": "Professional-Grade Datenschutz"},
+                {"name": "Robustes Design", "description": "Für anspruchsvolle Umgebungen"}
             ],
-            "compatible_hubs": ["Hub 2 Plus Jeweller", "Hub BP Jeweller", "Hub 2 (4G) Jeweller", "Superior Hub Hybrid (4G)"]
+            "compatible_hubs": ["Superior Hub Hybrid (4G)"]
         },
         
-        # Sirenen - COMPLETE LIST
+        # ================== SIRENEN (Alle Modelle) ==================
         {
-            "name": "StreetSiren DoubleDeck Jeweller",
+            "name": "HomeSiren Jeweller",
             "category": "sirens",
-            "product_line": "baseline",
-            "description": "Kabellose Sirene mit Halterung für eine Marken/Logo-Frontplatte",
-            "short_description": "Außensirene mit LED-Blitzlicht und Brandplate",
-            "usps": ["113 dB Lautstärke", "Brandplate-Support", "LED-Blitzlicht", "5 Jahre Batterielaufzeit"],
-            "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fstreetsiren_doubledeck_aa7ec7f313%402.png&1716365399",
+            "product_line": "baseline", 
+            "description": "Kabellose Jeweller Sirene für den Innenbereich; Türglockenfunktion; einstellbare Lautstärke für Alarme und Signale von 80 dB bis 100 dB; einstellbare Alarmdauer von 3 bis 180s",
+            "short_description": "Innensirene für Wohnbereiche",
+            "usps": ["81 dB Lautstärke", "Kompaktdesign", "LED-Anzeigen", "Türglocken-Funktion"],
+            "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fhomesiren_90d4c3023b%402.png&1689152842",
             "specifications": {
                 "frequency": "868 MHz (Jeweller)",
-                "range": "bis zu 1500m",
+                "range": "bis zu 1700m",
                 "battery_life": "bis zu 5 Jahre",
-                "operating_temp": "-25°C bis +50°C",
-                "ip_rating": "IP54"
+                "operating_temp": "0°C bis +40°C",
+                "xortec_nr": "600810205/600810206",
+                "hersteller_nr": "38110.11.BL1/38111.11.WH1"
             },
             "features": [
-                {"name": "Hohe Lautstärke", "description": "Bis zu 113 dB Schallleistung"},
-                {"name": "LED-Signalgebung", "description": "Helles Blitzlicht als visuelle Warnung"},
-                {"name": "Brandplate-Option", "description": "Individualisierung mit Firmenkennzeichnung"}
+                {"name": "Innenbereich", "description": "Optimiert für Wohnräume"},
+                {"name": "Kompakte Bauweise", "description": "Unauffällige Installation"},
+                {"name": "Angenehme Lautstärke", "description": "Effektiv aber nicht übermäßig laut"}
             ],
-            "compatible_hubs": ["Hub 2 Plus Jeweller", "Hub BP Jeweller", "Hub 2 (4G) Jeweller", "Superior Hub Hybrid (4G)"]
+            "compatible_hubs": ["Hub 2 Plus Jeweller", "Hub 2 (4G) Jeweller", "Hub (2G) Jeweller", "Hub BP Jeweller", "Superior Hub Hybrid (4G)"]
         },
         {
             "name": "StreetSiren Jeweller",
             "category": "sirens",
             "product_line": "baseline",
-            "description": "Kabellose Sirene für den Innen- und Außenbereich",
+            "description": "Drahtlose Außensirene, 85 - 113 dB in 1 m Entfernung, LED-Ring f. optische Alarmierung, bis zu 1500 m Reichweite (ohne Hindernisse), 868,0 - 868,6 MHz, Batterie 4 x CR123A",
             "short_description": "Standard Außensirene",
             "usps": ["105 dB Lautstärke", "Wetterschutz", "LED-Anzeigen", "Langlebig"],
             "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fstreetsiren_ef479c2a02%402.png&1689152843",
@@ -595,38 +754,328 @@ async def init_products():
                 "range": "bis zu 1500m",
                 "battery_life": "bis zu 5 Jahre",
                 "operating_temp": "-25°C bis +50°C",
-                "ip_rating": "IP54"
+                "ip_rating": "IP54",
+                "xortec_nr": "600810035",
+                "hersteller_nr": "38178.07.WH1"
             },
             "features": [
                 {"name": "Wetterschutz", "description": "IP54 Schutzart für Außeneinsatz"},
                 {"name": "LED-Signalisierung", "description": "Farbige LED-Anzeigen"},
                 {"name": "Robustes Gehäuse", "description": "Vandalismus-sicheres Design"}
             ],
-            "compatible_hubs": ["Hub 2 Plus Jeweller", "Hub BP Jeweller", "Hub 2 (4G) Jeweller", "Superior Hub Hybrid (4G)"]
+            "compatible_hubs": ["Hub 2 Plus Jeweller", "Hub 2 (4G) Jeweller", "Hub (2G) Jeweller", "Hub BP Jeweller", "Superior Hub Hybrid (4G)"]
         },
         {
-            "name": "HomeSiren Jeweller",
+            "name": "StreetSiren DoubleDeck Jeweller",
             "category": "sirens",
-            "product_line": "baseline", 
-            "description": "Kabellose Sirene",
-            "short_description": "Innensirene für Wohnbereiche",
-            "usps": ["81 dB Lautstärke", "Kompaktdesign", "LED-Anzeigen", "Einfache Installation"],
-            "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fhomesiren_90d4c3023b%402.png&1689152842",
+            "product_line": "baseline",
+            "description": "Drahtlose Außensirene, Unterteil für bedruckbare Frontplatte, 85 - 113 dB in 1 m Entfernung, LED-Ring f. optische Alarmierung, bis zu 1500 m Reichweite (ohne Hindernisse), 868,0 - 868,6 MHz",
+            "short_description": "Außensirene mit LED-Blitzlicht und Brandplate",
+            "usps": ["113 dB Lautstärke", "Brandplate-Support", "LED-Blitzlicht", "5 Jahre Batterielaufzeit"],
+            "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fstreetsiren_doubledeck_aa7ec7f313%402.png&1716365399",
+            "specifications": {
+                "frequency": "868 MHz (Jeweller)",
+                "range": "bis zu 1500m",
+                "battery_life": "bis zu 5 Jahre",
+                "operating_temp": "-25°C bis +50°C",
+                "ip_rating": "IP54",
+                "xortec_nr": "600810061",
+                "hersteller_nr": "38181.61.BL1"
+            },
+            "features": [
+                {"name": "Hohe Lautstärke", "description": "Bis zu 113 dB Schallleistung"},
+                {"name": "LED-Signalgebung", "description": "Helles Blitzlicht als visuelle Warnung"},
+                {"name": "Brandplate-Option", "description": "Individualisierung mit Firmenkennzeichnung"}
+            ],
+            "compatible_hubs": ["Hub 2 Plus Jeweller", "Hub 2 (4G) Jeweller", "Hub (2G) Jeweller", "Hub BP Jeweller", "Superior Hub Hybrid (4G)"]
+        },
+        {
+            "name": "Superior StreetSiren Plus Fibra",
+            "category": "sirens",
+            "product_line": "superiorline",
+            "description": "Superior StreetSiren Plus Fibra für kabelgebundene Installation",
+            "short_description": "Professional kabelgebundene Außensirene",
+            "usps": ["Fibra-Technologie", "Grade 3", "Kabelgebunden", "Professional"],
+            "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fsuperior_streetsiren_fibra%402.png",
+            "specifications": {
+                "frequency": "Fibra (kabelgebunden)",
+                "range": "bis zu 2000m über Fibra",
+                "operating_temp": "-25°C bis +50°C",
+                "ip_rating": "IP54",
+                "xortec_nr": "600810606",
+                "hersteller_nr": "117726.268.BL1"
+            },
+            "features": [
+                {"name": "Fibra-Technologie", "description": "Kabelgebundene Übertragung für höchste Zuverlässigkeit"},
+                {"name": "Grade 3 Zertifizierung", "description": "Professional-Grade Sicherheit"},
+                {"name": "Erweiterte Funktionen", "description": "Vollständige Professional-Ausstattung"}
+            ],
+            "compatible_hubs": ["Superior Hub Hybrid (4G)"]
+        },
+        
+        # ================== BUTTONS & HANDSENDER ==================
+        {
+            "name": "Button Jeweller",
+            "category": "buttons_keyfobs",
+            "product_line": "baseline",
+            "description": "Kabelloser Notruf-/Smart-Knopf für Panikalarme",
+            "short_description": "Notfallknopf für Panikalarme",
+            "usps": ["Notfallknopf", "Wasserdicht", "Tragbar", "Sofortalarm"],
+            "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fbutton_0e53cdc0b2%402.png&1689152841",
+            "specifications": {
+                "frequency": "868 MHz (Jeweller)",
+                "range": "bis zu 1300m",
+                "battery_life": "bis zu 5 Jahre",
+                "operating_temp": "-10°C bis +40°C",
+                "ip_rating": "IP54",
+                "xortec_nr": "600810097/600810098",
+                "hersteller_nr": "38094.26.BL1/38095.26.WH1"
+            },
+            "features": [
+                {"name": "Panik-Alarm", "description": "Sofortiger Notfallalarm per Knopfdruck"},
+                {"name": "Wasserschutz", "description": "IP54 Schutzart"},
+                {"name": "Tragbares Design", "description": "Kompakt und leicht zu tragen"}
+            ],
+            "compatible_hubs": ["Hub 2 Plus Jeweller", "Hub 2 (4G) Jeweller", "Hub (2G) Jeweller", "Hub BP Jeweller", "Superior Hub Hybrid (4G)"]
+        },
+        {
+            "name": "DoubleButton Jeweller",
+            "category": "buttons_keyfobs",
+            "product_line": "baseline",
+            "description": "kabelloser Jeweller Notfallknopf mit 2 Tasten. Zur Aktivierung müssen beide Tasten gedrückt werden",
+            "short_description": "Doppelknopf gegen versehentliche Auslösung",
+            "usps": ["Doppelknopf", "Fehlalarmschutz", "Notfall", "Tragbar"],
+            "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fdoublebutton_3b06f09e9d%402.png&1689152842",
+            "specifications": {
+                "frequency": "868 MHz (Jeweller)",
+                "range": "bis zu 1300m", 
+                "battery_life": "bis zu 5 Jahre",
+                "operating_temp": "-10°C bis +40°C",
+                "xortec_nr": "600810201",
+                "hersteller_nr": "38102.79.BL1"
+            },
+            "features": [
+                {"name": "Doppelknopf-Sicherheit", "description": "Verhindert versehentliche Aktivierung"},
+                {"name": "Notfall-Funktion", "description": "Zuverlässiger Notruf im Ernstfall"},
+                {"name": "Kompakte Bauweise", "description": "Einfach zu transportieren"}
+            ],
+            "compatible_hubs": ["Hub 2 Plus Jeweller", "Hub 2 (4G) Jeweller", "Hub (2G) Jeweller", "Hub BP Jeweller", "Superior Hub Hybrid (4G)"]
+        },
+        {
+            "name": "SpaceControl Jeweller",
+            "category": "buttons_keyfobs",
+            "product_line": "baseline",
+            "description": "Funkfernbedienung mit vier Tasten und der Bestätigung der Signal-Zustellung, Paniktaste, bis zu 1300 m Reichweite (ohne Hindernisse), 868,0 - 868,6 MHz",
+            "short_description": "4-Tasten Handsender für Systemsteuerung",
+            "usps": ["4 Tasten", "Systemsteuerung", "Panikfunktion", "Fernbedienung"],
+            "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fspacecontrol_495b92c9f7%402.png&1689152842",
+            "specifications": {
+                "frequency": "868 MHz (Jeweller)",
+                "range": "bis zu 1300m",
+                "battery_life": "bis zu 5 Jahre", 
+                "operating_temp": "-10°C bis +40°C",
+                "xortec_nr": "600810016/600810017",
+                "hersteller_nr": "38166.04.WH1/38167.04.BL1"
+            },
+            "features": [
+                {"name": "Vier Tasten", "description": "Scharf, Unscharf, Teilscharf und Panik"},
+                {"name": "Systemsteuerung", "description": "Vollständige Fernbedienung des Systems"},
+                {"name": "Panikfunktion", "description": "Separate Paniktaste für Notfälle"}
+            ],
+            "compatible_hubs": ["Hub 2 Plus Jeweller", "Hub 2 (4G) Jeweller", "Hub (2G) Jeweller", "Hub BP Jeweller", "Superior Hub Hybrid (4G)"]
+        },
+        
+        # ================== FUNK-REPEATER ==================
+        {
+            "name": "ReX 2 Jeweller",
+            "category": "range_extenders",
+            "product_line": "baseline",
+            "description": "Kabelloser Funk-Repeater mit Unterstützung für Jeweller und Wings Protokolle",
+            "short_description": "Dual-Protokoll Funkverstärker",
+            "usps": ["Jeweller + Wings", "Reichweitenverlängerung", "Dual-Protokoll", "Einfache Installation"],
+            "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Frex_2_ca92ad0fe2%402.png&1689158367",
+            "specifications": {
+                "frequency": "868 MHz (Jeweller) + Wings",
+                "range": "bis zu 1700m",
+                "operating_temp": "-10°C bis +40°C",
+                "ip_rating": "IP65",
+                "xortec_nr": "600810143",
+                "hersteller_nr": "38207.106.WH1"
+            },
+            "features": [
+                {"name": "Dual-Protokoll", "description": "Unterstützt Jeweller und Wings Geräte"},
+                {"name": "Reichweitenverlängerung", "description": "Verdoppelt die Funkreichweite"},
+                {"name": "Wetterschutz", "description": "IP65 für Außeninstallation"}
+            ],
+            "compatible_hubs": ["Hub 2 Plus Jeweller", "Hub 2 (4G) Jeweller", "Hub (2G) Jeweller", "Hub BP Jeweller", "Superior Hub Hybrid (4G)"]
+        },
+        
+        # ================== BRANDSCHUTZ ==================
+        {
+            "name": "FireProtect 2 RB (Heat/Smoke)",
+            "category": "fire_detectors",
+            "product_line": "baseline",
+            "description": "AJAX FireProtect 2 RB (Heat/Smoke) Rauch- und Wärmemelder mit austauschbaren Batterien",
+            "short_description": "Rauch-/Wärmemelder für Wohnbereiche",
+            "usps": ["10 Jahre Batterielaufzeit", "Dual-Sensor-Technologie", "Austauschbare Batterie", "SmartDetect"],
+            "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Ffireprotect_2_rb_black_a1b2c3d4e5%402.png&1688287078",
             "specifications": {
                 "frequency": "868 MHz (Jeweller)",
                 "range": "bis zu 1700m",
-                "battery_life": "bis zu 5 Jahre",
-                "operating_temp": "0°C bis +40°C"
+                "battery_life": "bis zu 10 Jahre",
+                "operating_temp": "-10°C bis +50°C",
+                "xortec_nr": "600810100/600810101",
+                "hersteller_nr": "52251.136.BL1/52250.136.WH1"
             },
             "features": [
-                {"name": "Innenbereich", "description": "Optimiert für Wohnräume"},
-                {"name": "Kompakte Bauweise", "description": "Unauffällige Installation"},
-                {"name": "Angenehme Lautstärke", "description": "Effektiv aber nicht übermäßig laut"}
+                {"name": "Langzeit-Batterie", "description": "10 Jahre Lebensdauer ohne Batteriewechsel"},
+                {"name": "Dual-Sensor", "description": "Kombinierte Rauch- und Temperaturerkennung"},
+                {"name": "Austauschbare Batterie", "description": "Wartungsfreundliches Design"}
             ],
-            "compatible_hubs": ["Hub 2 Plus Jeweller", "Hub BP Jeweller", "Hub 2 (4G) Jeweller", "Superior Hub Hybrid (4G)"]
+            "compatible_hubs": ["Hub 2 Plus Jeweller", "Hub 2 (4G) Jeweller", "Hub (2G) Jeweller", "Hub BP Jeweller", "Superior Hub Hybrid (4G)", "EN54 Fire Hub Jeweller"]
+        },
+        {
+            "name": "FireProtect 2 RB (Heat/Smoke/CO)",
+            "category": "fire_detectors",
+            "product_line": "baseline",
+            "description": "AJAX FireProtect 2 RB (Heat/Smoke/CO) mit Kohlenmonoxid-Erkennung",
+            "short_description": "Kombi-Brandmelder mit CO-Erkennung",
+            "usps": ["Triple-Sensor", "CO-Erkennung", "10 Jahre Batterie", "Lebensgefahr-Warnung"],
+            "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Ffireprotect_2_co_white%402.png",
+            "specifications": {
+                "frequency": "868 MHz (Jeweller)",
+                "range": "bis zu 1700m",
+                "battery_life": "bis zu 10 Jahre",
+                "operating_temp": "-10°C bis +50°C",
+                "xortec_nr": "600810103",
+                "hersteller_nr": "52252.137.WH1"
+            },
+            "features": [
+                {"name": "Triple-Sensor", "description": "Rauch, Hitze und Kohlenmonoxid-Erkennung"},
+                {"name": "Lebensgefahr-Warnung", "description": "Warnt vor tödlichem Kohlenmonoxid"},
+                {"name": "Langzeit-Batterie", "description": "10 Jahre wartungsfreier Betrieb"}
+            ],
+            "compatible_hubs": ["Hub 2 Plus Jeweller", "Hub 2 (4G) Jeweller", "Hub (2G) Jeweller", "Hub BP Jeweller", "Superior Hub Hybrid (4G)", "EN54 Fire Hub Jeweller"]
         },
         
-        # Video-Kameras - COMPLETE LIST
+        # ================== EN54 BRANDSCHUTZ ==================
+        {
+            "name": "EN54 FireProtect (Smoke)",
+            "category": "fire_detectors",
+            "product_line": "en54",
+            "description": "Kabelloser Rauchmelder ohne Sirene. Funk-Rauchmelder nach EN54-7 für frühzeitige Branderkennung. Erkennt Rauch zuverlässig, kabellos, batteriebetrieben und einfach zu installieren",
+            "short_description": "EN54-zertifizierter Rauchmelder",
+            "usps": ["EN 54-7 zertifiziert", "Kommerzielle Anwendung", "10 Jahre Batterielaufzeit", "Professionelle Anwendung"],
+            "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fen54_fireprotect_smoke_white%402.png",
+            "specifications": {
+                "frequency": "868 MHz (Jeweller)",
+                "range": "bis zu 1700m",
+                "battery_life": "bis zu 10 Jahre",
+                "operating_temp": "-10°C bis +55°C",
+                "xortec_nr": "600810430/600810431",
+                "hersteller_nr": "119921.275.WH1/119922.275.BL1"
+            },
+            "features": [
+                {"name": "EN 54-7 Zertifizierung", "description": "Vollständig zertifiziert für kommerzielle Brandschutzanlagen"},
+                {"name": "Professional Grade", "description": "Für gewerbliche und öffentliche Gebäude"},
+                {"name": "Langzeit-Batterie", "description": "10 Jahre wartungsfreier Betrieb"}
+            ],
+            "compatible_hubs": ["EN54 Fire Hub Jeweller"]
+        },
+        {
+            "name": "EN54 FireProtect (Heat)",
+            "category": "fire_detectors",
+            "product_line": "en54",
+            "description": "Kabelloser Wärmemelder ohne Sirene. Zuverlässiger Funk-Hitzemelder nach EN54-5 für den Brandschutz. Erkennt rasch Temperaturanstieg oder hohe Hitze, kabellos, batteriebetrieben",
+            "short_description": "EN54-zertifizierter Wärmemelder",
+            "usps": ["EN 54-5 zertifiziert", "Temperaturerkennung", "Kommerzielle Anwendung", "Wartungsarm"],
+            "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fen54_fireprotect_heat_white%402.png",
+            "specifications": {
+                "frequency": "868 MHz (Jeweller)",
+                "range": "bis zu 1700m",
+                "battery_life": "bis zu 10 Jahre",
+                "operating_temp": "-10°C bis +55°C",
+                "xortec_nr": "600810426/600810427",
+                "hersteller_nr": "119917.273.WH1/119918.273.BL1"
+            },
+            "features": [
+                {"name": "EN 54-5 Zertifizierung", "description": "Zertifiziert für kommerzielle Wärmeerkennung"},
+                {"name": "Temperatur-Erkennung", "description": "Erkennt schnellen Temperaturanstieg"},
+                {"name": "Professional Grade", "description": "Für gewerbliche Anwendungen"}
+            ],
+            "compatible_hubs": ["EN54 Fire Hub Jeweller"]
+        },
+        {
+            "name": "EN54 FireProtect (Smoke/Sounder)",
+            "category": "fire_detectors",
+            "product_line": "en54",
+            "description": "Kabelloser Rauchmelder mit integrierter Sirene, EN54, 85dB Alarmlautstärke. Funk-Rauchmelder nach EN54-7 mit integriertem Alarmton. Erkennt Rauch zuverlässig, warnt akustisch, kabellos",
+            "short_description": "EN54 Rauchmelder mit Sirene",
+            "usps": ["EN 54 mit Sirene", "85dB Alarmlautstärke", "Integrierter Alarmton", "Kommerzielle Anwendung"],
+            "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fen54_fireprotect_smoke_sounder%402.png",
+            "specifications": {
+                "frequency": "868 MHz (Jeweller)",
+                "range": "bis zu 1700m",
+                "battery_life": "bis zu 10 Jahre",
+                "operating_temp": "-10°C bis +55°C",
+                "xortec_nr": "600810429",
+                "hersteller_nr": "119920.276.BL1"
+            },
+            "features": [
+                {"name": "Integrierte Sirene", "description": "85dB Alarmlautstärke vor Ort"},
+                {"name": "EN 54 Zertifizierung", "description": "Für kommerzielle Brandschutzanlagen"},
+                {"name": "Sofort-Warnung", "description": "Lokale akustische Alarmierung"}
+            ],
+            "compatible_hubs": ["EN54 Fire Hub Jeweller"]
+        },
+        {
+            "name": "EN54 FireProtect (Heat/Sounder)",
+            "category": "fire_detectors",
+            "product_line": "en54",
+            "description": "Kabelloser Wärmemelder mit Sirene. Funk-Hitzemelder nach EN54-5 mit integriertem Alarmton. Erkennt Hitze und schnellen Temperaturanstieg, warnt akustisch, kabellos, batteriebetrieben",
+            "short_description": "EN54 Wärmemelder mit Sirene",
+            "usps": ["EN 54-5 mit Sirene", "Temperaturerkennung", "Integrierter Alarmton", "Kommerzielle Anwendung"],
+            "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fen54_fireprotect_heat_sounder%402.png",
+            "specifications": {
+                "frequency": "868 MHz (Jeweller)",
+                "range": "bis zu 1700m",
+                "battery_life": "bis zu 10 Jahre",
+                "operating_temp": "-10°C bis +55°C",
+                "xortec_nr": "600810424",
+                "hersteller_nr": "119915.274.WH1"
+            },
+            "features": [
+                {"name": "Integrierte Sirene", "description": "Lokale akustische Alarmierung bei Hitze"},
+                {"name": "EN 54-5 Zertifizierung", "description": "Für kommerzielle Wärmeerkennung"},
+                {"name": "Temperatur-Alarm", "description": "Warnt vor schnellem Temperaturanstieg"}
+            ],
+            "compatible_hubs": ["EN54 Fire Hub Jeweller"]
+        },
+        {
+            "name": "Manual Call Point",
+            "category": "fire_detectors",
+            "product_line": "en54",
+            "description": "Funk-Druckknopfmelder für manuelle Brandmeldung mit rücksetzbarem Auslöseelement und programmierbaren Szenarien",
+            "short_description": "Manueller Brandmeldungsknopf",
+            "usps": ["Manuelle Brandmeldung", "Rücksetzbar", "Programmierbare Szenarien", "EN54 konform"],
+            "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fmanual_call_point%402.png",
+            "specifications": {
+                "frequency": "868 MHz (Jeweller)",
+                "range": "bis zu 1700m",
+                "battery_life": "bis zu 10 Jahre",
+                "operating_temp": "-10°C bis +55°C",
+                "xortec_nr": "600810245/600810366",
+                "hersteller_nr": "60815.171.NC1/83805.171.NC1"
+            },
+            "features": [
+                {"name": "Manuelle Aktivierung", "description": "Ermöglicht bewusste Brandmeldung"},
+                {"name": "Rücksetzbar", "description": "Wiederverwendbar nach Reset"},
+                {"name": "Szenarien-Programmierung", "description": "Flexible Reaktionsmöglichkeiten"}
+            ],
+            "compatible_hubs": ["EN54 Fire Hub Jeweller"]
+        },
+        
+        # ================== VIDEO-KAMERAS (von Xortec) ==================
         {
             "name": "BulletCam (5 Mp/2.8 mm)",
             "category": "wired_cameras",
@@ -646,28 +1095,7 @@ async def init_products():
                 {"name": "KI-Erkennung", "description": "Intelligente Objekt- und Personenerkennung"},
                 {"name": "TrueWDR", "description": "Optimale Bildqualität bei schwierigen Lichtverhältnissen"}
             ],
-            "compatible_hubs": ["Hub 2 Plus Jeweller", "Hub BP Jeweller", "Hub 2 (4G) Jeweller", "Superior Hub Hybrid (4G)"]
-        },
-        {
-            "name": "BulletCam HL (5 Mp/2.8 mm)",
-            "category": "wired_cameras",
-            "product_line": "video",
-            "description": "Kabelgebundene IP-Überwachungskamera mit KI, 110° Blickwinkel, hybrider Beleuchtung, TrueWDR, Mikrofon und PoE/12 V. Für den Außen- und Innenbereich.",
-            "short_description": "5MP Kamera mit hybrider Beleuchtung",
-            "usps": ["Hybride Beleuchtung", "Farbbilder bei Nacht", "5 MP Auflösung", "KI-Features"],
-            "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fbulletcam_hl_black_d032cbd5e2%402.png&1755086269",
-            "specifications": {
-                "frequency": "IP (Ethernet/PoE)",
-                "range": "Netzwerkbasiert",
-                "operating_temp": "-30°C bis +60°C",
-                "ip_rating": "IP66"
-            },
-            "features": [
-                {"name": "Hybride Beleuchtung", "description": "IR + Weißlicht für Farbaufnahmen bei Nacht"},
-                {"name": "KI-Analyse", "description": "Erweiterte Objekterkennung"},
-                {"name": "TrueWDR", "description": "Beste Bildqualität bei allen Lichtverhältnissen"}
-            ],
-            "compatible_hubs": ["Hub 2 Plus Jeweller", "Hub BP Jeweller", "Hub 2 (4G) Jeweller", "Superior Hub Hybrid (4G)"]
+            "compatible_hubs": ["Hub 2 Plus Jeweller", "Hub 2 (4G) Jeweller", "Hub (2G) Jeweller", "Hub BP Jeweller", "Superior Hub Hybrid (4G)"]
         },
         {
             "name": "TurretCam (5 Mp/2.8 mm)",
@@ -688,7 +1116,7 @@ async def init_products():
                 {"name": "Vandalismusschutz", "description": "Robustes, manipulationssicheres Gehäuse"},
                 {"name": "KI-Integration", "description": "Intelligente Videoanalyse"}
             ],
-            "compatible_hubs": ["Hub 2 Plus Jeweller", "Hub BP Jeweller", "Hub 2 (4G) Jeweller", "Superior Hub Hybrid (4G)"]
+            "compatible_hubs": ["Hub 2 Plus Jeweller", "Hub 2 (4G) Jeweller", "Hub (2G) Jeweller", "Hub BP Jeweller", "Superior Hub Hybrid (4G)"]
         },
         {
             "name": "DomeCam Mini (5 Mp/2.8 mm)",
@@ -709,7 +1137,7 @@ async def init_products():
                 {"name": "Dome-Design", "description": "Nicht erkennbare Blickrichtung"},
                 {"name": "Vollausstattung", "description": "Alle Premium-Features in kompakter Größe"}
             ],
-            "compatible_hubs": ["Hub 2 Plus Jeweller", "Hub BP Jeweller", "Hub 2 (4G) Jeweller", "Superior Hub Hybrid (4G)"]
+            "compatible_hubs": ["Hub 2 Plus Jeweller", "Hub 2 (4G) Jeweller", "Hub (2G) Jeweller", "Hub BP Jeweller", "Superior Hub Hybrid (4G)"]
         },
         {
             "name": "IndoorCam",
@@ -729,7 +1157,7 @@ async def init_products():
                 {"name": "PIR-Integration", "description": "Kombiniert Video mit präziser Bewegungserkennung"},
                 {"name": "Smart Features", "description": "KI-basierte Analyse und Benachrichtigungen"}
             ],
-            "compatible_hubs": ["Hub 2 Plus Jeweller", "Hub BP Jeweller", "Hub 2 (4G) Jeweller", "Superior Hub Hybrid (4G)"]
+            "compatible_hubs": ["Hub 2 Plus Jeweller", "Hub 2 (4G) Jeweller", "Hub (2G) Jeweller", "Hub BP Jeweller", "Superior Hub Hybrid (4G)"]
         },
         {
             "name": "DoorBell",
@@ -750,192 +1178,15 @@ async def init_products():
                 {"name": "PIR-Erkennung", "description": "Bewegungserkennung vor der Tür"},
                 {"name": "App-Integration", "description": "Vollständige Smartphone-Steuerung"}
             ],
-            "compatible_hubs": ["Hub 2 Plus Jeweller", "Hub BP Jeweller", "Hub 2 (4G) Jeweller", "Superior Hub Hybrid (4G)"]
+            "compatible_hubs": ["Hub 2 Plus Jeweller", "Hub 2 (4G) Jeweller", "Hub (2G) Jeweller", "Hub BP Jeweller", "Superior Hub Hybrid (4G)"]
         },
         
-        # Brandschutz EN54 - COMPLETE LIST
-        {
-            "name": "FireProtect 2 RB (Heat/Smoke) Jeweller",
-            "category": "fire_detectors",
-            "product_line": "en54",
-            "description": "Kabelloser Rauch- und Wärmemelder mit austauschbaren Batterien",
-            "short_description": "EN54-zertifizierter Rauch-/Wärmemelder",
-            "usps": ["EN 54-7/5 zertifiziert", "Dual-Sensor-Technologie", "10 Jahre Batterielaufzeit", "Professionelle Anwendung"],
-            "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Ffireprotect_2_rb_black_a1b2c3d4e5%402.png&1688287078",
-            "specifications": {
-                "frequency": "868 MHz (Jeweller)",
-                "range": "bis zu 1700m",
-                "battery_life": "bis zu 10 Jahre",
-                "operating_temp": "-10°C bis +55°C"
-            },
-            "features": [
-                {"name": "EN 54 Zertifizierung", "description": "Vollständig zertifiziert für kommerzielle Brandschutzanlagen"},
-                {"name": "Dual-Sensor", "description": "Kombinierte Rauch- und Temperaturerkennung"},
-                {"name": "Austauschbare Batterie", "description": "Wartungsfreundliches Design"}
-            ],
-            "compatible_hubs": ["EN54 Fire Hub Jeweller"]
-        },
-        {
-            "name": "FireProtect 2 (Smoke) Jeweller",
-            "category": "fire_detectors",
-            "product_line": "baseline",
-            "description": "Kabelloser Rauchmelder mit 10-Jahre Batterie",
-            "short_description": "Rauchmelder für Wohnbereiche",
-            "usps": ["10 Jahre Batterielaufzeit", "Photoelektrischer Sensor", "SmartDetect", "Test-Button"],
-            "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Ffireprotect_2_smoke_white_abc123def4%402.png&1688287078",
-            "specifications": {
-                "frequency": "868 MHz (Jeweller)",
-                "range": "bis zu 1700m",
-                "battery_life": "bis zu 10 Jahre",
-                "operating_temp": "-10°C bis +50°C"
-            },
-            "features": [
-                {"name": "Langzeit-Batterie", "description": "10 Jahre Lebensdauer ohne Batteriewechsel"},
-                {"name": "Photoelektrische Erkennung", "description": "Zuverlässige Raucherkennung"},
-                {"name": "SmartDetect", "description": "Intelligente Falschalarmerelementierung"}
-            ],
-            "compatible_hubs": ["Hub 2 Plus Jeweller", "Hub BP Jeweller", "Hub 2 (4G) Jeweller", "Superior Hub Hybrid (4G)", "EN54 Fire Hub Jeweller"]
-        },
-        
-        # Sprachmodule
-        {
-            "name": "SpeakerPhone Jeweller",
-            "category": "voice_modules",
-            "product_line": "baseline",
-            "description": "Kabelloses Sprachmodul zur Alarmverifizierung",
-            "short_description": "Sprachmodul für Zweiwege-Kommunikation",
-            "usps": ["Zweiwege-Audio", "Alarmverifizierung", "Fernkommunikation", "Hohe Audioqualität"],
-            "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fspeaker_phone_jeweller_black_cc7f5990dc%402.png&1724669441",
-            "specifications": {
-                "frequency": "868 MHz (Jeweller)",
-                "range": "bis zu 1700m",
-                "battery_life": "bis zu 7 Jahre",
-                "operating_temp": "0°C bis +40°C"
-            },
-            "features": [
-                {"name": "Zweiwege-Kommunikation", "description": "Sprechen und Hören über die Ferne"},
-                {"name": "Alarmverifizierung", "description": "Bestätigung von Alarmereignissen"},
-                {"name": "Kristallklarer Sound", "description": "Hochwertige Audioübertragung"}
-            ],
-            "compatible_hubs": ["Hub 2 Plus Jeweller", "Hub BP Jeweller", "Hub 2 (4G) Jeweller", "Superior Hub Hybrid (4G)"]
-        },
-        
-        # Buttons & Handsender - COMPLETE LIST
-        {
-            "name": "Button Jeweller",
-            "category": "buttons_keyfobs",
-            "product_line": "baseline",
-            "description": "Kabelloser Notruf-/Smart-Knopf",
-            "short_description": "Notfallknopf für Panikalarme",
-            "usps": ["Notfallknopf", "Wasserdicht", "Tragbar", "Sofortalarm"],
-            "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fbutton_0e53cdc0b2%402.png&1689152841",
-            "specifications": {
-                "frequency": "868 MHz (Jeweller)",
-                "range": "bis zu 1300m",
-                "battery_life": "bis zu 5 Jahre",
-                "operating_temp": "-10°C bis +40°C",
-                "ip_rating": "IP54"
-            },
-            "features": [
-                {"name": "Panik-Alarm", "description": "Sofortiger Notfallalarm per Knopfdruck"},
-                {"name": "Wasserschutz", "description": "IP54 Schutzart"},
-                {"name": "Tragbares Design", "description": "Kompakt und leicht zu tragen"}
-            ],
-            "compatible_hubs": ["Hub 2 Plus Jeweller", "Hub BP Jeweller", "Hub 2 (4G) Jeweller", "Superior Hub Hybrid (4G)"]
-        },
-        {
-            "name": "DoubleButton Jeweller",
-            "category": "buttons_keyfobs",
-            "product_line": "baseline",
-            "description": "Kabelloser Notfallknopf",
-            "short_description": "Doppelknopf gegen versehentliche Auslösung",
-            "usps": ["Doppelknopf", "Fehlalarmschutz", "Notfall", "Tragbar"],
-            "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fdoublebutton_3b06f09e9d%402.png&1689152842",
-            "specifications": {
-                "frequency": "868 MHz (Jeweller)",
-                "range": "bis zu 1300m", 
-                "battery_life": "bis zu 5 Jahre",
-                "operating_temp": "-10°C bis +40°C"
-            },
-            "features": [
-                {"name": "Doppelknopf-Sicherheit", "description": "Verhindert versehentliche Aktivierung"},
-                {"name": "Notfall-Funktion", "description": "Zuverlässiger Notruf im Ernstfall"},
-                {"name": "Kompakte Bauweise", "description": "Einfach zu transportieren"}
-            ],
-            "compatible_hubs": ["Hub 2 Plus Jeweller", "Hub BP Jeweller", "Hub 2 (4G) Jeweller", "Superior Hub Hybrid (4G)"]
-        },
-        {
-            "name": "Ajax SpaceControl Jeweller",
-            "category": "buttons_keyfobs",
-            "product_line": "baseline",
-            "description": "Drahtloser Handsender mit Paniktaste und Tasten zur Steuerung von Sicherheitszuständen",
-            "short_description": "4-Tasten Handsender für Systemsteuerung",
-            "usps": ["4 Tasten", "Systemsteuerung", "Panikfunktion", "Fernbedienung"],
-            "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fspacecontrol_495b92c9f7%402.png&1689152842",
-            "specifications": {
-                "frequency": "868 MHz (Jeweller)",
-                "range": "bis zu 1300m",
-                "battery_life": "bis zu 5 Jahre", 
-                "operating_temp": "-10°C bis +40°C"
-            },
-            "features": [
-                {"name": "Vier Tasten", "description": "Scharf, Unscharf, Teilscharf und Panik"},
-                {"name": "Systemsteuerung", "description": "Vollständige Fernbedienung des Systems"},
-                {"name": "Panikfunktion", "description": "Separate Paniktaste für Notfälle"}
-            ],
-            "compatible_hubs": ["Hub 2 Plus Jeweller", "Hub BP Jeweller", "Hub 2 (4G) Jeweller", "Superior Hub Hybrid (4G)"]
-        },
-        {
-            "name": "Superior SpaceControl Jeweller",
-            "category": "buttons_keyfobs",
-            "product_line": "superiorline",
-            "description": "Kabelloser Handsender mit Paniktaste und Tasten zur Steuerung von Sicherheitszuständen. Superior Edition",
-            "short_description": "Professional 4-Tasten Handsender",
-            "usps": ["Grade 3 Zertifizierung", "4 Tasten", "Professional", "Erweiterte Verschlüsselung"],
-            "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fspace_control_s_black_b1b151a9ae%402.png&1728480070",
-            "specifications": {
-                "frequency": "868 MHz (Jeweller)",
-                "range": "bis zu 1300m",
-                "battery_life": "bis zu 5 Jahre",
-                "operating_temp": "-25°C bis +50°C"
-            },
-            "features": [
-                {"name": "Grade 3 Zertifizierung", "description": "Höchste Sicherheitsstufe nach EN 50131"},
-                {"name": "Erweiterte Verschlüsselung", "description": "Professional-Grade Sicherheit"},
-                {"name": "Robustes Design", "description": "Für anspruchsvolle Einsätze"}
-            ],
-            "compatible_hubs": ["Superior Hub Hybrid (4G)"]
-        },
-        
-        # Funk-Repeater
-        {
-            "name": "ReX 2 Jeweller",
-            "category": "range_extenders",
-            "product_line": "baseline",
-            "description": "Kabelloser Funk-Repeater mit Unterstützung für Jeweller und Wings Protokolle",
-            "short_description": "Dual-Protokoll Funkverstärker",
-            "usps": ["Jeweller + Wings", "Reichweitenverlängerung", "Dual-Protokoll", "Einfache Installation"],
-            "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Frex_2_ca92ad0fe2%402.png&1689158367",
-            "specifications": {
-                "frequency": "868 MHz (Jeweller) + Wings",
-                "range": "bis zu 1700m",
-                "operating_temp": "-10°C bis +40°C",
-                "ip_rating": "IP65"
-            },
-            "features": [
-                {"name": "Dual-Protokoll", "description": "Unterstützt Jeweller und Wings Geräte"},
-                {"name": "Reichweitenverlängerung", "description": "Verdoppelt die Funkreichweite"},
-                {"name": "Wetterschutz", "description": "IP65 für Außeninstallation"}
-            ],
-            "compatible_hubs": ["Hub 2 Plus Jeweller", "Hub BP Jeweller", "Hub 2 (4G) Jeweller", "Superior Hub Hybrid (4G)"]
-        },
-        
-        # Relais & Automatisierung
+        # ================== RELAIS & AUTOMATISIERUNG ==================
         {
             "name": "Relay Jeweller",
             "category": "relays",
             "product_line": "baseline",
-            "description": "Funkrelais mit potenzialfreiem Kontakt",
+            "description": "Funkrelais mit potenzialfreiem Kontakt für Automatisierung",
             "short_description": "Drahtloses Schaltrelais",
             "usps": ["Potenzialfrei", "Fernschaltung", "Automatisierung", "Kompakt"],
             "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Frelay_a81e255a8b%402.png&1689152843",
@@ -950,7 +1201,7 @@ async def init_products():
                 {"name": "Fernschaltung", "description": "Steuerung über Ajax Apps"},
                 {"name": "Automatisierung", "description": "Szenario-basierte Schaltung"}
             ],
-            "compatible_hubs": ["Hub 2 Plus Jeweller", "Hub BP Jeweller", "Hub 2 (4G) Jeweller", "Superior Hub Hybrid (4G)"]
+            "compatible_hubs": ["Hub 2 Plus Jeweller", "Hub 2 (4G) Jeweller", "Hub (2G) Jeweller", "Hub BP Jeweller", "Superior Hub Hybrid (4G)"]
         },
         {
             "name": "WallSwitch Jeweller",
@@ -971,7 +1222,93 @@ async def init_products():
                 {"name": "Lichtsteuerung", "description": "Perfekt für Beleuchtungssteuerung"},
                 {"name": "Smart Home Integration", "description": "Vollständige App-Steuerung"}
             ],
-            "compatible_hubs": ["Hub 2 Plus Jeweller", "Hub BP Jeweller", "Hub 2 (4G) Jeweller", "Superior Hub Hybrid (4G)"]
+            "compatible_hubs": ["Hub 2 Plus Jeweller", "Hub 2 (4G) Jeweller", "Hub (2G) Jeweller", "Hub BP Jeweller", "Superior Hub Hybrid (4G)"]
+        },
+        {
+            "name": "Superior MultiRelay Fibra",
+            "category": "relais",
+            "product_line": "superiorline",
+            "description": "Superior MultiRelay Fibra für professionelle Automatisierung",
+            "short_description": "Professional Multi-Relais kabelgebunden",
+            "usps": ["Fibra-Technologie", "Multi-Relais", "Professional", "Grade 3"],
+            "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fsuperior_multirelay_fibra%402.png",
+            "specifications": {
+                "frequency": "Fibra (kabelgebunden)",
+                "range": "bis zu 2000m über Fibra",
+                "operating_temp": "-25°C bis +50°C",
+                "xortec_nr": "600810620",
+                "hersteller_nr": "127496.183.NC1"
+            },
+            "features": [
+                {"name": "Fibra-Technologie", "description": "Kabelgebundene Übertragung für höchste Zuverlässigkeit"},
+                {"name": "Multi-Relais", "description": "Mehrere Schaltausgänge in einem Gerät"},
+                {"name": "Grade 3 Zertifizierung", "description": "Professional-Grade Automatisierung"}
+            ],
+            "compatible_hubs": ["Superior Hub Hybrid (4G)"]
+        },
+        {
+            "name": "Superior Transmitter Fibra ASP",
+            "category": "integration_modules",
+            "product_line": "superiorline",
+            "description": "Transmitter Fibra ASP Fibra Product Line für Integration von Drittanbietersystemen",
+            "short_description": "Professional Integrationsmodul",
+            "usps": ["Fibra-Technologie", "Drittanbieter-Integration", "Professional", "ASP"],
+            "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fsuperior_transmitter_fibra%402.png",
+            "specifications": {
+                "frequency": "Fibra (kabelgebunden)",
+                "range": "bis zu 2000m über Fibra",
+                "operating_temp": "-25°C bis +50°C",
+                "xortec_nr": "600810316",
+                "hersteller_nr": "77373.182.NC1"
+            },
+            "features": [
+                {"name": "ASP Integration", "description": "Alarm System Provider Interface"},
+                {"name": "Fibra-Technologie", "description": "Kabelgebundene professionelle Übertragung"},
+                {"name": "Drittanbieter-Kompatibilität", "description": "Integration verschiedener Systeme"}
+            ],
+            "compatible_hubs": ["Superior Hub Hybrid (4G)"]
+        },
+        
+        # ================== ZUBEHÖR & NETZTEILE ==================
+        {
+            "name": "12-24V PSU for Hub 2 / Hub 2 Plus / ReX 2",
+            "category": "power_supplies",
+            "product_line": "baseline",
+            "description": "12-24V PSU for Hub 2/Hub 2 Plus/ReX 2 ASP Baseline | Intrusion protection",
+            "short_description": "Netzteil für Hub 2 Serie",
+            "usps": ["12-24V", "Für Hub 2 Serie", "ASP", "Backup-Stromversorgung"],
+            "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fpsu_12-24v%402.png",
+            "specifications": {
+                "operating_temp": "-10°C bis +40°C",
+                "xortec_nr": "600810226",
+                "hersteller_nr": "59359.94.NC"
+            },
+            "features": [
+                {"name": "Flexibel", "description": "12-24V Spannungsbereich"},
+                {"name": "Kompatibilität", "description": "Für Hub 2, Hub 2 Plus und ReX 2"},
+                {"name": "Backup-Versorgung", "description": "Unterbrechungsfreie Stromversorgung"}
+            ],
+            "compatible_hubs": ["Hub 2 Plus Jeweller", "Hub 2 (4G) Jeweller", "Hub BP Jeweller"]
+        },
+        {
+            "name": "12V PSU for Hub/Hub Plus/ReX",
+            "category": "power_supplies",
+            "product_line": "baseline",
+            "description": "12 V Netzteil für Hub / Hub Plus / ReX. Das 12 V Netzteil wird im Gehäuse der EMA installiert und ersetzt das vorinstallierte Netzteil",
+            "short_description": "12V Netzteil für Hub Serie",
+            "usps": ["12V", "Für Hub Serie", "EMA-Installation", "Ersatz-Netzteil"],
+            "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fpsu_12v%402.png",
+            "specifications": {
+                "operating_temp": "-10°C bis +40°C",
+                "xortec_nr": "600810055",
+                "hersteller_nr": "38212.54.NC"
+            },
+            "features": [
+                {"name": "Standard 12V", "description": "Standardspannung für Hub-Systeme"},
+                {"name": "EMA-Gehäuse", "description": "Installation im EMA-Gehäuse"},
+                {"name": "Ersatz-Netzteil", "description": "Ersetzt vorinstallierte Netzteile"}
+            ],
+            "compatible_hubs": ["Hub (2G) Jeweller", "Superior Hub Hybrid (4G)"]
         }
     ]
     
@@ -1040,10 +1377,11 @@ async def get_categories():
             {"id": "wifi_cameras", "name": "WLAN-Kameras", "description": "Drahtlose IP-Kameras"},
             {"id": "doorbells", "name": "Türklingeln", "description": "Video-Türklingeln"},
             {"id": "fire_detectors", "name": "Brandmelder", "description": "Rauch- und Wärmemelder"},
-            {"id": "voice_modules", "name": "Sprachmodule", "description": "Zweiwege-Kommunikation"},
             {"id": "buttons_keyfobs", "name": "Knöpfe & Handsender", "description": "Notfallknöpfe und Fernbedienungen"},
             {"id": "range_extenders", "name": "Funk-Repeater", "description": "Reichweitenverlängerung"},
-            {"id": "relays", "name": "Relais", "description": "Schalt- und Steuerrelais"}
+            {"id": "relays", "name": "Relais", "description": "Schalt- und Steuerrelais"},
+            {"id": "integration_modules", "name": "Integrationsmodule", "description": "Drittanbieter-Integration"},
+            {"id": "power_supplies", "name": "Netzteile", "description": "Stromversorgung"}
         ]
     }
 

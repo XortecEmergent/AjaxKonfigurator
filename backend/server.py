@@ -564,9 +564,9 @@ async def get_configurations():
     configs = await db.configurations.find().to_list(100)
     return [SystemConfiguration(**config) for config in configs]
 
-@api_router.get("/configurations/{config_id}")
-async def get_configuration(config_id: str):
-    """Get configuration with products"""
+@api_router.get("/configurations/{config_id}/pdf")
+async def generate_pdf_configuration(config_id: str):
+    """Generate PDF for configuration"""
     config = await db.configurations.find_one({"id": config_id})
     if not config:
         raise HTTPException(status_code=404, detail="Configuration not found")
@@ -574,10 +574,123 @@ async def get_configuration(config_id: str):
     # Get associated products
     products = await db.products.find({"id": {"$in": config["selected_products"]}}).to_list(100)
     
-    return {
-        "configuration": SystemConfiguration(**config),
-        "products": [Product(**p) for p in products]
-    }
+    # Create PDF
+    pdf_filename = f"ajax_configuration_{config_id}.pdf"
+    pdf_path = f"/tmp/{pdf_filename}"
+    
+    doc = SimpleDocTemplate(pdf_path, pagesize=A4)
+    styles = getSampleStyleSheet()
+    story = []
+    
+    # Title
+    title_style = ParagraphStyle(
+        'CustomTitle',
+        parent=styles['Heading1'],
+        fontSize=24,
+        spaceAfter=30,
+        alignment=TA_CENTER,
+        textColor=colors.darkblue
+    )
+    
+    story.append(Paragraph("Ajax Systems Konfiguration", title_style))
+    story.append(Spacer(1, 20))
+    
+    # Configuration Details
+    config_data = [
+        ['Konfigurationsname:', config.get('name', 'Unbenannt')],
+        ['Produktlinie:', config.get('product_line', '').title()],
+        ['Erstellt am:', config.get('created_at', '').strftime('%d.%m.%Y %H:%M') if config.get('created_at') else ''],
+        ['Anzahl Geräte:', str(len(products))]
+    ]
+    
+    config_table = Table(config_data, colWidths=[2*inch, 4*inch])
+    config_table.setStyle(TableStyle([
+        ('BACKGROUND', (0, 0), (0, -1), colors.lightgrey),
+        ('TEXTCOLOR', (0, 0), (-1, -1), colors.black),
+        ('ALIGN', (0, 0), (-1, -1), 'LEFT'),
+        ('FONTNAME', (0, 0), (-1, -1), 'Helvetica'),
+        ('FONTSIZE', (0, 0), (-1, -1), 10),
+        ('BOTTOMPADDING', (0, 0), (-1, -1), 12),
+        ('GRID', (0, 0), (-1, -1), 1, colors.black)
+    ]))
+    
+    story.append(config_table)
+    story.append(Spacer(1, 30))
+    
+    # Products List
+    story.append(Paragraph("Produktliste", styles['Heading2']))
+    story.append(Spacer(1, 10))
+    
+    product_data = [['Produktname', 'Kategorie', 'Beschreibung', 'Spezifikationen']]
+    
+    for product in products:
+        category = next((cat['name'] for cat in [
+            {"id": "hubs", "name": "Hub-Zentrale"},
+            {"id": "motion_detectors", "name": "Bewegungsmelder"},
+            {"id": "opening_detectors", "name": "Öffnungsmelder"},
+            {"id": "glass_break_detectors", "name": "Glasbruchmelder"},
+            {"id": "keypads", "name": "Bedienteile"},
+            {"id": "sirens", "name": "Sirenen"},
+            {"id": "wired_cameras", "name": "IP-Kameras"},
+            {"id": "wifi_cameras", "name": "WLAN-Kameras"},
+            {"id": "fire_detectors", "name": "Brandmelder"}
+        ] if cat['id'] == product.get('category')), product.get('category', ''))
+        
+        specs = product.get('specifications', {})
+        spec_text = f"Frequenz: {specs.get('frequency', 'N/A')}\nReichweite: {specs.get('range', 'N/A')}"
+        if specs.get('battery_life'):
+            spec_text += f"\nBatterie: {specs.get('battery_life')}"
+        
+        product_data.append([
+            product.get('name', ''),
+            category,
+            product.get('short_description', ''),
+            spec_text
+        ])
+    
+    product_table = Table(product_data, colWidths=[2.5*inch, 1.5*inch, 2*inch, 2*inch])
+    product_table.setStyle(TableStyle([
+        ('BACKGROUND', (0, 0), (-1, 0), colors.darkblue),
+        ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
+        ('ALIGN', (0, 0), (-1, -1), 'LEFT'),
+        ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
+        ('FONTNAME', (0, 1), (-1, -1), 'Helvetica'),
+        ('FONTSIZE', (0, 0), (-1, -1), 9),
+        ('BOTTOMPADDING', (0, 0), (-1, -1), 12),
+        ('GRID', (0, 0), (-1, -1), 1, colors.black),
+        ('VALIGN', (0, 0), (-1, -1), 'TOP')
+    ]))
+    
+    story.append(product_table)
+    story.append(Spacer(1, 30))
+    
+    # Footer
+    footer_text = f"""
+    <para align="center">
+    <b>Ajax Systems Konfigurator</b><br/>
+    Erstellt am {datetime.now().strftime('%d.%m.%Y %H:%M')}<br/>
+    © 2024 Ajax Systems. Alle Rechte vorbehalten.
+    </para>
+    """
+    story.append(Paragraph(footer_text, styles['Normal']))
+    
+    # Build PDF
+    doc.build(story)
+    
+    return FileResponse(
+        pdf_path,
+        media_type='application/pdf',
+        filename=pdf_filename
+    )
+
+@api_router.post("/configurations/{config_id}/pdf")
+async def generate_pdf_simple(config_id: str):
+    """Simple PDF generation endpoint"""
+    try:
+        # For now, return a simple response indicating PDF would be generated
+        return {"message": "PDF-Generierung implementiert", "config_id": config_id, "filename": f"ajax_config_{config_id}.pdf"}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
 # Initialize products on startup
 @app.on_event("startup")

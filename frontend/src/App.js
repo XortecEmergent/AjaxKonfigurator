@@ -225,7 +225,7 @@ function App() {
               key={hub.id}
               className="cursor-pointer transition-all duration-300 hover:scale-105 bg-gray-800/50 border-gray-700 hover:border-green-500"
               onClick={() => selectHub(hub)}
-              data-testid={`hub-${hub.id}`}
+              data-testid={`hub-${hub.name.replace(/\s+/g, '-').toLowerCase()}`}
             >
               <div className="relative">
                 <img 

@@ -328,7 +328,7 @@ function App() {
                           : 'hover:scale-105 bg-gray-800/50'
                       } border-gray-700`}
                       onClick={() => toggleProduct(product)}
-                      data-testid={`product-${product.id}`}
+                      data-testid={`product-${product.name.replace(/\s+/g, '-').toLowerCase()}`}
                     >
                       <div className="relative">
                         <img 

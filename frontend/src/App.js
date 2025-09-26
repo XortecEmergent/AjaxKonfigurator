@@ -318,6 +318,7 @@ function App() {
   const getAvailableColors = (product) => {
     // Most Ajax products are available in black and white
     if (product.category === 'hubs' || 
+        product.category === 'nvr' ||  // NVRs auch mit Farbauswahl
         product.category === 'motion_detectors' || 
         product.category === 'opening_detectors' ||
         product.category === 'keypads' ||

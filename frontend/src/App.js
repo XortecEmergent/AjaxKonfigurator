@@ -553,6 +553,20 @@ function App() {
                       </>
                     )}
                   </div>
+
+                  {/* Color Selection for Hubs/NVRs */}
+                  {(() => {
+                    const availableColors = getAvailableColors(hub);
+                    const selectedColor = productColors[hub.id] || availableColors[0] || 'black';
+                    
+                    return availableColors.length > 1 && (
+                      <ColorSelector 
+                        selectedColor={selectedColor}
+                        onColorChange={(color) => updateProductColor(hub.id, color)}
+                        availableColors={availableColors}
+                      />
+                    );
+                  })()}
                 </div>
               </CardContent>
             </Card>

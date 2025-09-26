@@ -685,20 +685,32 @@ function App() {
           </Card>
         )}
 
-        <div className="flex justify-between items-center pt-6">
-          <div>
-            <p className="text-gray-300">
-              {Object.values(productQuantities).reduce((sum, qty) => sum + qty, 0)} Geräte ausgewählt
-            </p>
-            <Button
-              onClick={() => checkCapacityLimits()}
-              variant="outline"
-              size="sm"
-              className="mt-2 border-gray-600 text-white hover:bg-gray-700"
-            >
-              Kapazität prüfen
-            </Button>
-          </div>
+          <div className="flex justify-between items-center pt-6">
+            <div className="flex items-center gap-4">
+              {currentStep > 1 && (
+                <Button
+                  onClick={prevStep}
+                  variant="outline"
+                  className="border-gray-600 text-white hover:bg-gray-700"
+                >
+                  <ArrowLeft className="w-4 h-4 mr-2" />
+                  Zurück
+                </Button>
+              )}
+              <div>
+                <p className="text-gray-300">
+                  {Object.values(productQuantities).reduce((sum, qty) => sum + qty, 0)} Geräte ausgewählt
+                </p>
+                <Button
+                  onClick={() => checkCapacityLimits()}
+                  variant="outline"
+                  size="sm"
+                  className="mt-2 border-gray-600 text-white hover:bg-gray-700"
+                >
+                  Kapazität prüfen
+                </Button>
+              </div>
+            </div>
           <Button 
             onClick={nextStep}
             disabled={selectedProducts.length < 2}

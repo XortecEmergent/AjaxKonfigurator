@@ -872,6 +872,44 @@ function App() {
               </div>
             </CardContent>
           </Card>
+
+          {/* Accessories Section */}
+          {Object.keys(selectedAccessories).length > 0 && (
+            <Card className="lg:col-span-1 bg-gray-800/50 border-gray-700">
+              <CardHeader>
+                <CardTitle className="text-green-400 flex items-center gap-2">
+                  <Settings className="w-5 h-5" />
+                  Zubehör ({Object.keys(selectedAccessories).length})
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-1 gap-3">
+                  {Object.entries(selectedAccessories).map(([key, accessory]) => (
+                    <div key={key} className="flex items-center gap-3 p-3 bg-gray-900/50 rounded-lg">
+                      <div className="w-12 h-12 bg-orange-600 rounded flex items-center justify-center">
+                        <Settings className="w-6 h-6 text-white" />
+                      </div>
+                      <div className="flex-1">
+                        <h5 className="text-white text-sm font-medium">
+                          {accessory.name} {accessory.quantity > 1 && <span className="text-orange-400">({accessory.quantity}x)</span>}
+                        </h5>
+                        {accessory.xortec_nr && (
+                          <p className="text-orange-400 text-xs">
+                            Xortec-Nr.: {accessory.xortec_nr}
+                          </p>
+                        )}
+                        {accessory.required && (
+                          <Badge variant="destructive" className="text-xs mt-1">
+                            Erforderlich
+                          </Badge>
+                        )}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          )}
         </div>
 
         {/* Configuration Details */}

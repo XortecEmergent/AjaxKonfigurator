@@ -87,66 +87,95 @@ class ConfigurationCreate(BaseModel):
 
 # Initialize products data with COMPLETE Ajax product list from Xortec
 
-# Improved product image mapping with proper placeholder images
+# Improved product image mapping with proper Ajax CDN images
 def get_product_image_url(product_name, category):
     """Get appropriate product image URL based on product name and category"""
     
-    # High-quality stock images for different Ajax product categories
+    # Real Ajax product images from official CDN
+    ajax_product_images = {
+        # Hubs - Real Ajax CDN URLs
+        'Hub (2G) Jeweller': 'https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fhub_256999a1dd%402.png&1688287078',
+        'Hub 2 (2G) Jeweller': 'https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fhub_256999a1dd%402.png&1688287078',
+        'Hub 2 (4G) Jeweller': 'https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fhub_256999a1dd%402.png&1688287078',
+        'Hub 2 Plus Jeweller': 'https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fhub_256999a1dd%402.png&1688287078',
+        'Hub BP Jeweller': 'https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fhub_bp_jeweller_black_1760739e4c%402.png&1732115997',
+        'Superior Hub Hybrid (4G)': 'https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fhub_hybrid_black_eb78efaa15%402.png&1696515890',
+        'EN54 Fire Hub Jeweller': 'https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fen54_fire_hub_jeweller_black_fd80de7c0f%402.png&1753716121',
+
+        # Motion Detectors - Real Ajax CDN URLs
+        'MotionProtect Jeweller': 'https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fmotionprotect_7e25a60ef8%402.png&1689152842',
+        'MotionProtect Plus Jeweller': 'https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fmotionprotect_plus_111a8e0f23%402.png&1689159156',
+        'MotionCam (PhOD) Jeweller': 'https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fmotion_cam_jeweller_black_50c00ca247%402.png&1727442738',
+        'MotionCam Outdoor (PhOD) Jeweller': 'https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fmotioncam_outdoor_phod_42ba3d7fb5%402.png&1689160643',
+        'CombiProtect Jeweller': 'https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fcombiprotect_ee0a5c6eb3%402.png&1689152842',
+        
+        # Superior Motion Detectors
+        'Superior MotionProtect Jeweller': 'https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fmpsj_s_34e8d588e9%402.png&1688046986',
+        'Superior MotionProtect Plus Jeweller': 'https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fmpspj_s_68b8826cc2%402.png&1688046815',
+
+        # Door/Window Sensors - Real Ajax CDN URLs
+        'DoorProtect Jeweller': 'https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fdoorprotect_f565be9860%402.png&1689152842',
+        'DoorProtect Plus Jeweller': 'https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fdoorprotect_f565be9860%402.png&1689152842',
+        'Superior DoorProtect Jeweller': 'https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fdpsj_s_553d1e2fdd%402.png&1688046834',
+        'Superior DoorProtect Plus Jeweller': 'https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fdpspj_s_7f05c12224%402.png&1688046891',
+
+        # Glass Break Detectors - Real Ajax CDN URLs
+        'GlassProtect Jeweller': 'https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fglassprotect_bb2a29da00%402.png&1689152842',
+        'Superior GlassProtect Jeweller': 'https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fgpsj_s_b2db014217%402.png&1688046912',
+
+        # Keypads - Real Ajax CDN URLs
+        'Keypad Plus Jeweller': 'https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fkeypad_plus_cb76223961%402.png&1689152843',
+        'KeyPad TouchScreen Plus Jeweller': 'https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fkeypad_touchscreen_4a49692df5%402.png&1691157817',
+
+        # Sirens - Real Ajax CDN URLs
+        'HomeSiren Jeweller': 'https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fhomesiren_90d4c3023b%402.png&1689152842',
+        'StreetSiren Jeweller': 'https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fstreetsiren_ef479c2a02%402.png&1689152843',
+        'StreetSiren DoubleDeck Jeweller': 'https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fstreetsiren_doubledeck_aa7ec7f313%402.png&1716365399',
+
+        # Buttons and Controls - Real Ajax CDN URLs
+        'Button Jeweller': 'https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fbutton_0e53cdc0b2%402.png&1689152841',
+        'DoubleButton Jeweller': 'https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fdoublebutton_3b06f09e9d%402.png&1689152842',
+        'SpaceControl Jeweller': 'https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fspacecontrol_495b92c9f7%402.png&1689152842',
+
+        # Range Extenders - Real Ajax CDN URLs
+        'ReX 2 Jeweller': 'https://ajax.systems/api/cdn-img/?img=%2Fupload%2Frex_2_ca92ad0fe2%402.png&1689158367',
+
+        # Relays - Real Ajax CDN URLs
+        'Relay Jeweller': 'https://ajax.systems/api/cdn-img/?img=%2Fupload%2Frelay_a81e255a8b%402.png&1689152843',
+        'WallSwitch Jeweller': 'https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fwallswitch_6f717abe66%402.png&1689152843',
+
+        # Starter Kits - Real Ajax CDN URLs
+        'StarterKit': 'https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fstarterkit_0a4ef7b39a%402.png&1689152842',
+        'StarterKit 2': 'https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fstarterkit_2_7b40f5034c%402.png&1689152842',
+        'StarterKit Cam': 'https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fstarterkit_cam_b5267ff637%402.png&1689152843',
+        'StarterKit Cam Plus': 'https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fstarterkit_cam_plus_c8912742a8%402.png&1689152843',
+
+        # RFID Access Control
+        'Pass': 'https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fpass_5c971501a7%402.png&1688287078',
+        'Tag': 'https://ajax.systems/api/cdn-img/?img=%2Fupload%2Ftag_cf7180faf3%402.png&1688287078'
+    }
+    
+    # If we have a specific image for this product, use it
+    if ajax_product_images.get(product_name):
+        return ajax_product_images[product_name]
+    
+    # Fallback to category-specific high-quality images
     category_images = {
-        'hubs': 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=400&h=300&fit=crop&crop=center',  # Smart home hub
-        'motion_detectors': 'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=400&h=300&fit=crop&crop=center',  # Motion sensor
-        'opening_detectors': 'https://images.unsplash.com/photo-1586864387967-d02ef85d93e8?w=400&h=300&fit=crop&crop=center',  # Door sensor
-        'glass_break_detectors': 'https://images.unsplash.com/photo-1586864387967-d02ef85d93e8?w=400&h=300&fit=crop&crop=center',  # Glass sensor
-        'fire_detectors': 'https://images.unsplash.com/photo-1609205807107-e8ec2120f9de?w=400&h=300&fit=crop&crop=center',  # Smoke detector
-        'keypads': 'https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=400&h=300&fit=crop&crop=center',  # Keypad
-        'sirens': 'https://images.unsplash.com/photo-1557804506-669a67965ba0?w=400&h=300&fit=crop&crop=center',  # Security siren
-        'buttons_keyfobs': 'https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=400&h=300&fit=crop&crop=center',  # Button/keyfob
-        'range_extenders': 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=400&h=300&fit=crop&crop=center',  # Network device
-        'wired_cameras': 'https://images.unsplash.com/photo-1557804506-669a67965ba0?w=400&h=300&fit=crop&crop=center',  # Security camera
-        'wifi_cameras': 'https://images.unsplash.com/photo-1557804506-669a67965ba0?w=400&h=300&fit=crop&crop=center'  # WiFi camera
+        'hubs': 'https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fhub_256999a1dd%402.png&1688287078',
+        'motion_detectors': 'https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fmotionprotect_7e25a60ef8%402.png&1689152842',
+        'opening_detectors': 'https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fdoorprotect_f565be9860%402.png&1689152842',
+        'glass_break_detectors': 'https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fglassprotect_bb2a29da00%402.png&1689152842',
+        'fire_detectors': 'https://images.unsplash.com/photo-1609205807107-e8ec2120f9de?w=400&h=300&fit=crop&crop=center',  # High-quality smoke detector
+        'keypads': 'https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fkeypad_plus_cb76223961%402.png&1689152843',
+        'sirens': 'https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fhomesiren_90d4c3023b%402.png&1689152842',
+        'buttons_keyfobs': 'https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fbutton_0e53cdc0b2%402.png&1689152841',
+        'range_extenders': 'https://ajax.systems/api/cdn-img/?img=%2Fupload%2Frex_2_ca92ad0fe2%402.png&1689158367',
+        'wired_cameras': 'https://images.unsplash.com/photo-1557804506-669a67965ba0?w=400&h=300&fit=crop&crop=center',
+        'wifi_cameras': 'https://images.unsplash.com/photo-1557804506-669a67965ba0?w=400&h=300&fit=crop&crop=center',
+        'relays': 'https://ajax.systems/api/cdn-img/?img=%2Fupload%2Frelay_a81e255a8b%402.png&1689152843'
     }
     
-    # Specific product image overrides for better representation
-    product_specific_images = {
-        # Fire Detectors - Better smoke detector images
-        'FireProtect Jeweller': 'https://images.unsplash.com/photo-1609205807107-e8ec2120f9de?w=400&h=300&fit=crop&crop=center',
-        'FireProtect 2 RB (Heat/Smoke) Jeweller': 'https://images.unsplash.com/photo-1609205807107-e8ec2120f9de?w=400&h=300&fit=crop&crop=center',
-        'FireProtect 2 RB (Heat/Smoke/CO) Jeweller': 'https://images.unsplash.com/photo-1609205807107-e8ec2120f9de?w=400&h=300&fit=crop&crop=center',
-        'Manual Call Point (rot)': 'https://images.unsplash.com/photo-1562408590-e32931084e23?w=400&h=300&fit=crop&crop=center',
-        'Manual Call Point (blau)': 'https://images.unsplash.com/photo-1562408590-e32931084e23?w=400&h=300&fit=crop&crop=center',
-        
-        # Hubs - Professional smart home devices
-        'Hub 2 Plus Jeweller': 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=400&h=300&fit=crop&crop=center',
-        'Hub 2 (4G) Jeweller': 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=400&h=300&fit=crop&crop=center',
-        'EN54 Fire Hub Jeweller': 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=400&h=300&fit=crop&crop=center',
-        
-        # Motion Detectors - Professional motion sensors
-        'MotionProtect Jeweller': 'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=400&h=300&fit=crop&crop=center',
-        'MotionProtect Plus Jeweller': 'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=400&h=300&fit=crop&crop=center',
-        'MotionCam (PhOD) Jeweller': 'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=400&h=300&fit=crop&crop=center',
-        
-        # Door/Window Sensors
-        'DoorProtect Jeweller': 'https://images.unsplash.com/photo-1586864387967-d02ef85d93e8?w=400&h=300&fit=crop&crop=center',
-        'DoorProtect Plus Jeweller': 'https://images.unsplash.com/photo-1586864387967-d02ef85d93e8?w=400&h=300&fit=crop&crop=center',
-        
-        # Cameras - Professional security cameras
-        'TurretCam Fibra': 'https://images.unsplash.com/photo-1557804506-669a67965ba0?w=400&h=300&fit=crop&crop=center',
-        'BulletCam Fibra': 'https://images.unsplash.com/photo-1557804506-669a67965ba0?w=400&h=300&fit=crop&crop=center',
-        'DomeCam Fibra': 'https://images.unsplash.com/photo-1557804506-669a67965ba0?w=400&h=300&fit=crop&crop=center',
-        'IndoorCam (Wi-Fi)': 'https://images.unsplash.com/photo-1557804506-669a67965ba0?w=400&h=300&fit=crop&crop=center',
-        
-        # Keypads and Controls
-        'Keypad Plus Jeweller': 'https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=400&h=300&fit=crop&crop=center',
-        'KeyPad TouchScreen Plus Jeweller': 'https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=400&h=300&fit=crop&crop=center',
-        
-        # Sirens
-        'HomeSiren Jeweller': 'https://images.unsplash.com/photo-1557804506-669a67965ba0?w=400&h=300&fit=crop&crop=center',
-        'StreetSiren Jeweller': 'https://images.unsplash.com/photo-1557804506-669a67965ba0?w=400&h=300&fit=crop&crop=center',
-        'StreetSiren DoubleDeck Jeweller': 'https://images.unsplash.com/photo-1557804506-669a67965ba0?w=400&h=300&fit=crop&crop=center'
-    }
-    
-    # First check for product-specific image, then fallback to category
-    return product_specific_images.get(product_name) or category_images.get(category, 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=400&h=300&fit=crop&crop=center')
+    return category_images.get(category, 'https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fhub_256999a1dd%402.png&1688287078')
 
 async def init_products():
     # Check if products already exist

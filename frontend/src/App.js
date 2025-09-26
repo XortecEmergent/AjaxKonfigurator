@@ -669,19 +669,29 @@ function App() {
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                {devicesData.map((device) => (
-                  <div key={device.id} className="flex items-center gap-3 p-3 bg-gray-900/50 rounded-lg">
-                    <img 
-                      src={device.image_url} 
-                      alt={device.name}
-                      className="w-12 h-12 object-contain bg-gray-800 rounded p-1"
-                    />
-                    <div className="flex-1">
-                      <h5 className="text-white text-sm font-medium">{device.name}</h5>
-                      <p className="text-gray-400 text-xs">{device.short_description}</p>
+                {devicesData.map((device) => {
+                  const quantity = productQuantities[device.id] || 1;
+                  return (
+                    <div key={device.id} className="flex items-center gap-3 p-3 bg-gray-900/50 rounded-lg">
+                      <img 
+                        src={device.image_url} 
+                        alt={device.name}
+                        className="w-12 h-12 object-contain bg-gray-800 rounded p-1"
+                      />
+                      <div className="flex-1">
+                        <h5 className="text-white text-sm font-medium">
+                          {device.name} {quantity > 1 && <span className="text-orange-400">({quantity}x)</span>}
+                        </h5>
+                        <p className="text-gray-400 text-xs">{device.short_description}</p>
+                        {device.specifications.xortec_nr && (
+                          <p className="text-orange-400 text-xs">
+                            Xortec-Nr.: {device.specifications.xortec_nr}
+                          </p>
+                        )}
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </CardContent>
           </Card>

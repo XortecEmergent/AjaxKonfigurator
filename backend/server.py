@@ -1426,6 +1426,20 @@ async def get_product_lines():
         ]
     }
 
+@api_router.delete("/reset-products")
+async def reset_products():
+    """Reset and reinitialize products database with updated images"""
+    try:
+        # Drop existing products collection
+        await db.products.drop()
+        
+        # Reinitialize products with updated images
+        await init_products()
+        
+        return {"message": "Products database reset and reinitialized with updated images"}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error resetting products: {str(e)}")
+
 @api_router.get("/categories")
 async def get_categories():
     """Get product categories"""

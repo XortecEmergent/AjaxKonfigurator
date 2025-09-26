@@ -422,7 +422,7 @@ const LandingPage = ({ onStartConfigurator }) => {
                 <h3 className="text-white font-bold text-lg">Xortec GmbH</h3>
               </div>
               <p className="text-gray-400 text-sm">
-                Ihr Partner für Netzwerk- und Sicherheitstechnik mit über 30 Jahren Erfahrung.
+                Ihr Partner für Netzwerk- und Sicherheitstechnik mit über 18 Jahren Erfahrung.
               </p>
             </div>
 

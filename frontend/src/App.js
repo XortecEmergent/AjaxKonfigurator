@@ -14,6 +14,7 @@ const API = `${BACKEND_URL}/api`;
 
 function App() {
   // State Management
+  const [showLandingPage, setShowLandingPage] = useState(true);
   const [currentStep, setCurrentStep] = useState(1);
   const [productLines, setProductLines] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -21,7 +22,9 @@ function App() {
   const [selectedProductLine, setSelectedProductLine] = useState('');
   const [selectedHub, setSelectedHub] = useState(null);
   const [selectedProducts, setSelectedProducts] = useState([]);
+  const [productQuantities, setProductQuantities] = useState({});
   const [compatibleProducts, setCompatibleProducts] = useState([]);
+  const [capacityWarnings, setCapacityWarnings] = useState([]);
   const [loading, setLoading] = useState(false);
   const [configuration, setConfiguration] = useState({
     name: '',

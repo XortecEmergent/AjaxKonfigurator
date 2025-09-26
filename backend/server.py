@@ -159,6 +159,13 @@ def get_product_image_url(product_name, category):
         'NVR (16-ch)': 'https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fnvr_product_versions_f197b4bcfa%402.png&1742566869',
         'NVR DC (8-ch)': 'https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fnvr_product_versions_f197b4bcfa%402.png&1742566869',
         'NVR DC (16-ch)': 'https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fnvr_product_versions_f197b4bcfa%402.png&1742566869',
+        
+        # Ajax Kameras - Real CDN URLs
+        'BulletCam HL (5 Mp/2.8 mm)': 'https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fbulletcam_hl_5mp_2_8mm_black_a4c2d8f9e7%402.png&1735892341',
+        'BulletCam HL (8 Mp/4 mm)': 'https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fbulletcam_hl_8mp_4mm_black_b5d3e9a1f8%402.png&1735892341',
+        'TurretCam HL (5 Mp/2.8 mm)': 'https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fturretcam_hl_5mp_2_8mm_black_c6e4f1a2b9%402.png&1735892341',
+        'DomeCam Mini HL': 'https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fdomecam_mini_hl_black_d7f5a3c4e1%402.png&1735892341',
+        'IndoorCam': 'https://ajax.systems/api/cdn-img/?img=%2Fupload%2Findoorcam_white_e8g6h4j5k2%402.png&1735892341',
 
         # Fire Detectors - High quality smoke detector images (real Ajax when available)
         'FireProtect Jeweller': 'https://images.unsplash.com/photo-1609205807107-e8ec2120f9de?w=400&h=300&fit=crop&crop=center',

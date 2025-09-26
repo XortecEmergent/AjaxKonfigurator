@@ -9,6 +9,7 @@ import { Progress } from './components/ui/progress';
 import { ArrowRight, ArrowLeft, Settings, ShoppingCart, Download, CheckCircle2, Info, Zap, Shield, Wifi, Plus, Minus, AlertCircle, FileSpreadsheet } from 'lucide-react';
 import LandingPage from './components/LandingPage';
 import Impressum from './components/Impressum';
+import AccessoryModal from './components/AccessoryModal';
 import { downloadExcel, generateQuotePDF } from './utils/excelExport';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;

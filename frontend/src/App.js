@@ -800,7 +800,13 @@ function App() {
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-orange-900 to-gray-800">
+    <>
+      {showImpressum ? (
+        <Impressum onClose={() => setShowImpressum(false)} />
+      ) : showLandingPage ? (
+        <LandingPage onStartConfigurator={startConfigurator} />
+      ) : (
+        <div className="min-h-screen bg-gradient-to-br from-gray-900 via-orange-900 to-gray-800">
       {/* Header */}
       <header className="bg-black/20 backdrop-blur-sm border-b border-gray-700">
         <div className="container mx-auto px-4 py-4">

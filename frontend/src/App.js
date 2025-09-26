@@ -25,6 +25,7 @@ function App() {
   const [productLines, setProductLines] = useState([]);
   const [categories, setCategories] = useState([]);
   const [products, setProducts] = useState([]);
+  const [hubs, setHubs] = useState([]);
   const [selectedProductLine, setSelectedProductLine] = useState('');
   const [selectedHub, setSelectedHub] = useState(null);
   const [selectedProducts, setSelectedProducts] = useState([]);

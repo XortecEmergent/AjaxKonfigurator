@@ -210,12 +210,21 @@ function App() {
 
   const generatePDF = async () => {
     try {
-      // For now, show success message
-      alert('PDF-Export erfolgreich! In einer vollständigen Implementation würde hier ein PDF heruntergeladen werden.');
+      await generateQuotePDF(selectedProducts, productQuantities, products, selectedHub, configuration);
       console.log('PDF Generation for configuration');
     } catch (error) {
       console.error('Error generating PDF:', error);
       alert('Fehler beim Erstellen des PDF-Exports');
+    }
+  };
+
+  const generateExcel = async () => {
+    try {
+      downloadExcel(selectedProducts, productQuantities, products, selectedHub, configuration);
+      console.log('Excel Export for configuration');
+    } catch (error) {
+      console.error('Error generating Excel:', error);
+      alert('Fehler beim Erstellen des Excel-Exports');
     }
   };
 

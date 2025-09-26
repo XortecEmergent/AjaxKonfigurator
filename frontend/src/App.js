@@ -175,6 +175,11 @@ function App() {
     }
   };
 
+  // Start configurator from landing page
+  const startConfigurator = () => {
+    setShowLandingPage(false);
+  };
+
   // API Calls
   const fetchProductLines = async () => {
     try {

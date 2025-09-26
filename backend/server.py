@@ -154,9 +154,11 @@ def get_product_image_url(product_name, category):
         'Pass': 'https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fpass_5c971501a7%402.png&1688287078',
         'Tag': 'https://ajax.systems/api/cdn-img/?img=%2Fupload%2Ftag_cf7180faf3%402.png&1688287078',
 
-        # NVR Systems - Real Ajax CDN URLs
-        'NVR (8) Fibra': 'https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fnvr_8_black_4d7c9a3f12%402.png&1728394567',
-        'NVR (16) Fibra': 'https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fnvr_16_black_7f8e6b2d45%402.png&1728394567',
+        # NVR Systems - Real Ajax CDN URLs (korrekte Namen ohne Fibra)
+        'NVR (8-ch)': 'https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fnvr_product_versions_f197b4bcfa%402.png&1742566869',
+        'NVR (16-ch)': 'https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fnvr_product_versions_f197b4bcfa%402.png&1742566869',
+        'NVR DC (8-ch)': 'https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fnvr_product_versions_f197b4bcfa%402.png&1742566869',
+        'NVR DC (16-ch)': 'https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fnvr_product_versions_f197b4bcfa%402.png&1742566869',
 
         # Fire Detectors - High quality smoke detector images (real Ajax when available)
         'FireProtect Jeweller': 'https://images.unsplash.com/photo-1609205807107-e8ec2120f9de?w=400&h=300&fit=crop&crop=center',

@@ -31,13 +31,11 @@ const LandingPage = ({ onStartConfigurator }) => {
             <div className="flex items-center gap-6">
               {/* Xortec Logo */}
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-orange-600 rounded-lg flex items-center justify-center">
-                  <span className="text-white font-bold text-lg">X</span>
-                </div>
-                <div>
-                  <h1 className="text-xl font-bold text-white">Xortec GmbH</h1>
-                  <p className="text-xs text-orange-200">Ihr Ajax Partner</p>
-                </div>
+                <img 
+                  src="https://xortec.de/media/0e/72/fc/1691537632/03Logo_linksb%C3%BCndig.png" 
+                  alt="Xortec GmbH Logo"
+                  className="h-10 w-auto"
+                />
               </div>
 
               {/* Ajax Logo */}

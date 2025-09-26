@@ -513,10 +513,86 @@ function App() {
           ))}
         </Tabs>
 
+        {/* Capacity Warnings */}
+        {capacityWarnings.length > 0 && (
+          <Card className="bg-red-900/30 border-red-500">
+            <CardHeader>
+              <CardTitle className="text-red-400 flex items-center gap-2">
+                <AlertCircle className="w-5 h-5" />
+                Kapazitätswarnung
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-2">
+                {capacityWarnings.map((warning, idx) => (
+                  <p key={idx} className="text-red-300 text-sm">
+                    {warning.message}
+                  </p>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        )}
+
+        {/* Hub Capacity Information */}
+        {selectedHub && (
+          <Card className="bg-blue-900/30 border-blue-500">
+            <CardHeader>
+              <CardTitle className="text-blue-400 flex items-center gap-2">
+                <Info className="w-5 h-5" />
+                Hub-Kapazität: {selectedHub.name}
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              {(() => {
+                const hubCapacity = getHubCapacity(selectedHub.name);
+                const totalDevices = Object.values(productQuantities).reduce((sum, qty) => sum + qty, 0);
+                const totalCameras = Object.keys(productQuantities).reduce((sum, productId) => {
+                  const product = products.find(p => p.id === productId);
+                  const quantity = productQuantities[productId] || 0;
+                  if (product && (product.category === 'wired_cameras' || product.category === 'wifi_cameras')) {
+                    return sum + quantity;
+                  }
+                  return sum;
+                }, 0);
+                
+                return (
+                  <div className="grid grid-cols-2 gap-4 text-sm">
+                    <div>
+                      <p className="text-blue-300">Geräte: {totalDevices} / {hubCapacity.devices}</p>
+                      <Progress 
+                        value={(totalDevices / hubCapacity.devices) * 100} 
+                        className="h-2 mt-1"
+                      />
+                    </div>
+                    <div>
+                      <p className="text-blue-300">Kameras: {totalCameras} / {hubCapacity.cameras}</p>
+                      <Progress 
+                        value={(totalCameras / hubCapacity.cameras) * 100} 
+                        className="h-2 mt-1"
+                      />
+                    </div>
+                  </div>
+                );
+              })()}
+            </CardContent>
+          </Card>
+        )}
+
         <div className="flex justify-between items-center pt-6">
-          <p className="text-gray-300">
-            {selectedProducts.length - 1} Geräte ausgewählt (+ 1 Hub)
-          </p>
+          <div>
+            <p className="text-gray-300">
+              {Object.values(productQuantities).reduce((sum, qty) => sum + qty, 0)} Geräte ausgewählt
+            </p>
+            <Button
+              onClick={() => checkCapacityLimits()}
+              variant="outline"
+              size="sm"
+              className="mt-2 border-gray-600 text-white hover:bg-gray-700"
+            >
+              Kapazität prüfen
+            </Button>
+          </div>
           <Button 
             onClick={nextStep}
             disabled={selectedProducts.length < 2}

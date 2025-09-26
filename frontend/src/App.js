@@ -189,15 +189,16 @@ function App() {
         { id: 'tag_keyfobs_5pack', name: 'Tag Schlüsselanhänger (5er Pack)', xortec_nr: '600810206', required: false, description: 'Ajax Tag Schlüsselanhänger mit RFID' }
       ],
       
-      // IP-Kameras benötigen PoE und Montage-Zubehör
+      // IP-Kameras benötigen nur die beiden spezifischen Zubehörartikel
       'wired_cameras': [
-        { id: 'poe_injector_30w', name: 'PoE Injector 30W', xortec_nr: '600810207', required: true, description: 'Power over Ethernet für IP-Kameras' },
-        { id: 'camera_bracket_wall', name: 'Kamera Wandhalterung', xortec_nr: '600810208', required: false, description: 'Verstellbare Wandhalterung für Ajax Kameras' }
+        { id: 'mounting_bracket_600810375', name: 'Ajax Kamera-Halterung', xortec_nr: '600810375', required: false, description: 'Original Ajax Wandhalterung für IP-Kameras' },
+        { id: 'junction_box_600810374', name: 'Ajax Junction Box', xortec_nr: '600810374', required: false, description: 'Wetterfeste Ajax Anschlussbox für Kabelverbindungen' }
       ],
       
-      // WiFi-Kameras benötigen Netzteile
+      // WiFi-Kameras benötigen die gleichen Zubehörartikel
       'wifi_cameras': [
-        { id: 'camera_psu_12v', name: '12V Netzteil für Kamera', xortec_nr: '600810209', required: false, description: '12V Stromversorgung für WLAN-Kameras' }
+        { id: 'mounting_bracket_600810375', name: 'Ajax Kamera-Halterung', xortec_nr: '600810375', required: false, description: 'Original Ajax Wandhalterung für WLAN-Kameras' },
+        { id: 'junction_box_600810374', name: 'Ajax Junction Box', xortec_nr: '600810374', required: false, description: 'Wetterfeste Ajax Anschlussbox für Kabelverbindungen' }
       ],
       
       // NVRs benötigen HDDs und Zubehör

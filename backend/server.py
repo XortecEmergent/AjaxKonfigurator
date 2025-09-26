@@ -1594,27 +1594,35 @@ async def reset_products():
         raise HTTPException(status_code=500, detail=f"Error resetting products: {str(e)}")
 
 @api_router.get("/categories")
-async def get_categories():
-    """Get product categories"""
-    return {
-        "categories": [
-            {"id": "hubs", "name": "Hub-Zentralen", "description": "Systemzentralen"},
-            {"id": "motion_detectors", "name": "Bewegungsmelder", "description": "PIR und Mikrowellen-Sensoren"},
-            {"id": "opening_detectors", "name": "Öffnungsmelder", "description": "Tür- und Fensterkontakte"},
-            {"id": "glass_break_detectors", "name": "Glasbruchmelder", "description": "Akustische Glasbruchmelder"},
-            {"id": "keypads", "name": "Bedienteile", "description": "Tastaturen und Touchscreens"},
-            {"id": "sirens", "name": "Sirenen", "description": "Innen- und Außensirenen"},
-            {"id": "wired_cameras", "name": "Kabelgebundene Kameras", "description": "IP-Kameras mit PoE"},
-            {"id": "wifi_cameras", "name": "WLAN-Kameras", "description": "Drahtlose IP-Kameras"},
-            {"id": "doorbells", "name": "Türklingeln", "description": "Video-Türklingeln"},
-            {"id": "fire_detectors", "name": "Brandmelder", "description": "Rauch- und Wärmemelder"},
-            {"id": "buttons_keyfobs", "name": "Knöpfe & Handsender", "description": "Notfallknöpfe und Fernbedienungen"},
-            {"id": "range_extenders", "name": "Funk-Repeater", "description": "Reichweitenverlängerung"},
-            {"id": "relays", "name": "Relais", "description": "Schalt- und Steuerrelais"},
-            {"id": "integration_modules", "name": "Integrationsmodule", "description": "Drittanbieter-Integration"},
-            {"id": "power_supplies", "name": "Netzteile", "description": "Stromversorgung"}
-        ]
-    }
+async def get_categories(product_line: str = None):
+    """Get product categories, with special handling for video product line"""
+    try:
+        if product_line == "video":
+            # For video line, provide NVR category instead of hubs
+            categories = [
+                {"id": "nvr", "name": "NVR-Recorder", "description": "Network Video Recorder"},
+                {"id": "wired_cameras", "name": "Kabelgebundene Kameras", "description": "IP-Kameras mit PoE"},
+                {"id": "wifi_cameras", "name": "WLAN-Kameras", "description": "Drahtlose IP-Kameras"},
+                {"id": "doorbells", "name": "Türklingeln", "description": "Video-Türklingeln"}
+            ]
+        else:
+            # For other lines, provide standard categories
+            categories = [
+                {"id": "hubs", "name": "Hub-Zentralen", "description": "Systemzentralen"},
+                {"id": "motion_detectors", "name": "Bewegungsmelder", "description": "PIR und Mikrowellen-Sensoren"},
+                {"id": "opening_detectors", "name": "Öffnungsmelder", "description": "Tür- und Fensterkontakte"},
+                {"id": "glass_break_detectors", "name": "Glasbruchmelder", "description": "Akustische Glasbruchmelder"},
+                {"id": "keypads", "name": "Bedienteile", "description": "Tastaturen und Touchscreens"},
+                {"id": "sirens", "name": "Sirenen", "description": "Innen- und Außensirenen"},
+                {"id": "fire_detectors", "name": "Brandmelder", "description": "Rauch- und Wärmemelder"},
+                {"id": "buttons_keyfobs", "name": "Knöpfe & Handsender", "description": "Notfallknöpfe und Fernbedienungen"},
+                {"id": "range_extenders", "name": "Funk-Repeater", "description": "Reichweitenverlängerung"},
+                {"id": "relays", "name": "Relais", "description": "Schalt- und Steuerrelais"}
+            ]
+        
+        return {"categories": categories}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error fetching categories: {str(e)}")
 
 @api_router.get("/products")
 async def get_products(

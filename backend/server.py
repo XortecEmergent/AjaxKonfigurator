@@ -173,6 +173,7 @@ def get_product_image_url(product_name, category):
     # Fallback to category-specific high-quality images
     category_images = {
         'hubs': 'https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fhub_256999a1dd%402.png&1688287078',
+        'nvr': 'https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fnvr_8_black_4d7c9a3f12%402.png&1728394567',
         'motion_detectors': 'https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fmotionprotect_7e25a60ef8%402.png&1689152842',
         'opening_detectors': 'https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fdoorprotect_f565be9860%402.png&1689152842',
         'glass_break_detectors': 'https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fglassprotect_bb2a29da00%402.png&1689152842',

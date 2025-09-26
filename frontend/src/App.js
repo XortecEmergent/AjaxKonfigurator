@@ -17,6 +17,7 @@ const API = `${BACKEND_URL}/api`;
 function App() {
   // State Management
   const [showLandingPage, setShowLandingPage] = useState(true);
+  const [showImpressum, setShowImpressum] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
   const [productLines, setProductLines] = useState([]);
   const [categories, setCategories] = useState([]);

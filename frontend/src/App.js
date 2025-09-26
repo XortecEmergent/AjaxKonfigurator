@@ -242,7 +242,7 @@ function App() {
           axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/products?product_line=${productLine}`)
         ]);
         
-        setCategories(categoriesRes.data);
+        setCategories(categoriesRes.data.categories);
         setProducts(productsRes.data);
         
         // Get NVRs instead of hubs for video line
@@ -256,7 +256,7 @@ function App() {
           axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/hubs?product_line=${productLine}`)
         ]);
         
-        setCategories(categoriesRes.data);
+        setCategories(categoriesRes.data.categories);
         setProducts(productsRes.data);
         setHubs(hubsRes.data);
       }

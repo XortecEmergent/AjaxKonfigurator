@@ -86,6 +86,28 @@ class ConfigurationCreate(BaseModel):
     created_by: Optional[str] = None
 
 # Initialize products data with COMPLETE Ajax product list from Xortec
+
+# Improved product image mapping with proper placeholder images
+def get_product_image_url(product_name, category):
+    """Get appropriate product image URL based on product name and category"""
+    
+    # High-quality placeholder images for different Ajax product categories
+    category_images = {
+        'hubs': 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop&crop=center',
+        'motion_detectors': 'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=400&h=300&fit=crop&crop=center', 
+        'opening_detectors': 'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=400&h=300&fit=crop&crop=center',
+        'glass_break_detectors': 'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=400&h=300&fit=crop&crop=center',
+        'fire_detectors': 'https://images.unsplash.com/photo-1609205807107-e8ec2120f9de?w=400&h=300&fit=crop&crop=center',
+        'keypads': 'https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=400&h=300&fit=crop&crop=center',
+        'sirens': 'https://images.unsplash.com/photo-1609205807107-e8ec2120f9de?w=400&h=300&fit=crop&crop=center',
+        'buttons_keyfobs': 'https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=400&h=300&fit=crop&crop=center',
+        'range_extenders': 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop&crop=center',
+        'wired_cameras': 'https://images.unsplash.com/photo-1557804506-669a67965ba0?w=400&h=300&fit=crop&crop=center',
+        'wifi_cameras': 'https://images.unsplash.com/photo-1557804506-669a67965ba0?w=400&h=300&fit=crop&crop=center'
+    }
+    
+    return category_images.get(category, 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop&crop=center')
+
 async def init_products():
     # Check if products already exist
     existing_products = await db.products.count_documents({})

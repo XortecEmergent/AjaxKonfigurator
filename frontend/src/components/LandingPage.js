@@ -431,15 +431,15 @@ const LandingPage = ({ onStartConfigurator }) => {
               <div className="space-y-2 text-sm text-gray-400">
                 <div className="flex items-center gap-2">
                   <Phone className="w-4 h-4" />
-                  <span>+49 (0) XXX XXXXXXX</span>
+                  <span>+49 69 5069886 0</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Mail className="w-4 h-4" />
-                  <span>info@xortec.de</span>
+                  <span>home@xortec.de</span>
                 </div>
                 <div className="flex items-start gap-2">
                   <MapPin className="w-4 h-4 mt-1" />
-                  <span>Xortec GmbH<br />Deutschland</span>
+                  <span>Xortec GmbH<br />Berner Str. 79<br />60437 Frankfurt am Main<br />Deutschland</span>
                 </div>
               </div>
             </div>

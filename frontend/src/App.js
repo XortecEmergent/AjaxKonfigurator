@@ -105,13 +105,21 @@ function App() {
 
   // Check capacity limits and show warnings
   const checkCapacityLimits = () => {
-    if (!selectedHub) return [];
-    
-    const hubCapacity = getHubCapacity(selectedHub.name);
+    const totalCapacity = getTotalCapacity();
     const warnings = [];
     
-    // Count total devices and cameras
-    const totalDevices = Object.values(productQuantities).reduce((sum, qty) => sum + qty, 0);
+    // Count total devices and cameras (excluding NVRs from device count)
+    const totalDevices = Object.keys(productQuantities).reduce((sum, productId) => {
+      const product = products.find(p => p.id === productId);
+      const quantity = productQuantities[productId] || 0;
+      
+      // For video product line, don't count NVRs as devices
+      if (selectedProductLine === 'video' && product && product.category === 'nvr') {
+        return sum;
+      }
+      return sum + quantity;
+    }, 0);
+    
     const totalCameras = Object.keys(productQuantities).reduce((sum, productId) => {
       const product = products.find(p => p.id === productId);
       const quantity = productQuantities[productId] || 0;
@@ -121,17 +129,17 @@ function App() {
       return sum;
     }, 0);
     
-    if (totalDevices > hubCapacity.devices) {
+    if (selectedProductLine !== 'video' && totalDevices > totalCapacity.devices) {
       warnings.push({
         type: 'devices',
-        message: `Geräteanzahl (${totalDevices}) überschreitet Hub-Kapazität (${hubCapacity.devices})`
+        message: `Geräteanzahl (${totalDevices}) überschreitet Hub-Kapazität (${totalCapacity.devices})`
       });
     }
     
-    if (totalCameras > hubCapacity.cameras) {
+    if (totalCameras > totalCapacity.cameras) {
       warnings.push({
         type: 'cameras',
-        message: `Kameraanzahl (${totalCameras}) überschreitet Hub-Kapazität (${hubCapacity.cameras})`
+        message: `Kameraanzahl (${totalCameras}) überschreitet ${selectedProductLine === 'video' ? 'NVR' : 'Hub'}-Kapazität (${totalCapacity.cameras})`
       });
     }
     

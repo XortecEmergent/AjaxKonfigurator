@@ -77,14 +77,14 @@ const Impressum = ({ onClose }) => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <p className="text-gray-300">
                     <strong>Eintragung im Handelsregister:</strong><br />
-                    Registergericht: [Amtsgericht]<br />
-                    Registernummer: HRB XXXXX
+                    Registergericht: Amtsgericht Frankfurt am Main<br />
+                    Registernummer: HRB 79237
                   </p>
                   <p className="text-gray-300">
                     <strong>Umsatzsteuer-ID:</strong><br />
                     Umsatzsteuer-Identifikationsnummer<br />
                     gemäß §27a Umsatzsteuergesetz:<br />
-                    DE XXXXXXXXX
+                    DE252844047
                   </p>
                 </div>
               </div>

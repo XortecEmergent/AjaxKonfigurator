@@ -838,19 +838,29 @@ function App() {
           </Card>
         )}
 
-        {/* Hub Capacity Information */}
+        {/* Hub/NVR Capacity Information */}
         {selectedHub && (
           <Card className="bg-blue-900/30 border-blue-500">
             <CardHeader>
               <CardTitle className="text-blue-400 flex items-center gap-2">
                 <Info className="w-5 h-5" />
-                Hub-Kapazität: {selectedHub.name}
+                {selectedProductLine === 'video' ? 'NVR-Kapazität' : `Hub-Kapazität: ${selectedHub.name}`}
               </CardTitle>
             </CardHeader>
             <CardContent>
               {(() => {
-                const hubCapacity = getHubCapacity(selectedHub.name);
-                const totalDevices = Object.values(productQuantities).reduce((sum, qty) => sum + qty, 0);
+                const totalCapacity = getTotalCapacity();
+                const totalDevices = Object.keys(productQuantities).reduce((sum, productId) => {
+                  const product = products.find(p => p.id === productId);
+                  const quantity = productQuantities[productId] || 0;
+                  
+                  // For video product line, don't count NVRs as devices
+                  if (selectedProductLine === 'video' && product && product.category === 'nvr') {
+                    return sum;
+                  }
+                  return sum + quantity;
+                }, 0);
+                
                 const totalCameras = Object.keys(productQuantities).reduce((sum, productId) => {
                   const product = products.find(p => p.id === productId);
                   const quantity = productQuantities[productId] || 0;
@@ -861,21 +871,38 @@ function App() {
                 }, 0);
                 
                 return (
-                  <div className="grid grid-cols-2 gap-4 text-sm">
-                    <div>
-                      <p className="text-blue-300">Geräte: {totalDevices} / {hubCapacity.devices}</p>
-                      <Progress 
-                        value={(totalDevices / hubCapacity.devices) * 100} 
-                        className="h-2 mt-1"
-                      />
-                    </div>
-                    <div>
-                      <p className="text-blue-300">Kameras: {totalCameras} / {hubCapacity.cameras}</p>
-                      <Progress 
-                        value={(totalCameras / hubCapacity.cameras) * 100} 
-                        className="h-2 mt-1"
-                      />
-                    </div>
+                  <div className="space-y-4">
+                    {selectedProductLine === 'video' ? (
+                      // For video line, show only camera capacity
+                      <div>
+                        <p className="text-blue-300">Kameras: {totalCameras} / {totalCapacity.cameras}</p>
+                        <Progress 
+                          value={totalCapacity.cameras > 0 ? (totalCameras / totalCapacity.cameras) * 100 : 0} 
+                          className="h-2 mt-1"
+                        />
+                        <p className="text-xs text-blue-200 mt-1">
+                          {selectedProducts.filter(id => products.find(p => p.id === id && p.category === 'nvr')).length} NVR(s) ausgewählt
+                        </p>
+                      </div>
+                    ) : (
+                      // For other lines, show devices and cameras
+                      <div className="grid grid-cols-2 gap-4 text-sm">
+                        <div>
+                          <p className="text-blue-300">Geräte: {totalDevices} / {totalCapacity.devices}</p>
+                          <Progress 
+                            value={totalCapacity.devices > 0 ? (totalDevices / totalCapacity.devices) * 100 : 0} 
+                            className="h-2 mt-1"
+                          />
+                        </div>
+                        <div>
+                          <p className="text-blue-300">Kameras: {totalCameras} / {totalCapacity.cameras}</p>
+                          <Progress 
+                            value={totalCapacity.cameras > 0 ? (totalCameras / totalCapacity.cameras) * 100 : 0} 
+                            className="h-2 mt-1"
+                          />
+                        </div>
+                      </div>
+                    )}
                   </div>
                 );
               })()}

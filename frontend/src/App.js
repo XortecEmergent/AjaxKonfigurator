@@ -304,7 +304,7 @@ function App() {
 
   const generateExcel = async () => {
     try {
-      downloadExcel(selectedProducts, productQuantities, products, selectedHub, configuration);
+      downloadExcel(selectedProducts, productQuantities, products, selectedHub, configuration, selectedAccessories);
       console.log('Excel Export for configuration');
     } catch (error) {
       console.error('Error generating Excel:', error);

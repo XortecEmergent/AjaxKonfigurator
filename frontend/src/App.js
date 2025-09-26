@@ -593,7 +593,7 @@ function App() {
                             ))}
                           </div>
                           
-                          <div className="text-xs text-gray-400 space-y-1">
+                          <div className="text-xs text-gray-300 space-y-1">
                             {product.specifications.range && (
                               <div>Reichweite: {product.specifications.range}</div>
                             )}

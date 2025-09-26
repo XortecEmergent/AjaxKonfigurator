@@ -79,12 +79,13 @@ const formatSpecifications = (specs) => {
   return specItems.join(' | ');
 };
 
-export const downloadExcel = (selectedProducts, productQuantities, products, selectedHub, configuration) => {
-  const excelData = generateExcelData(selectedProducts, productQuantities, products, selectedHub, configuration);
+export const downloadExcel = (selectedProducts, productQuantities, products, selectedHub, configuration, selectedAccessories = {}) => {
+  const excelData = generateExcelData(selectedProducts, productQuantities, products, selectedHub, configuration, selectedAccessories);
   
   // Create CSV content (simple Excel-compatible format)
   const csvHeaders = [
     'Pos.',
+    'Typ',
     'Artikelnummer Xortec', 
     'Hersteller-Nr.',
     'Produktname',
@@ -104,6 +105,8 @@ export const downloadExcel = (selectedProducts, productQuantities, products, sel
     [`Datum: ${new Date().toLocaleDateString('de-DE')}`],
     [`Hub: ${selectedHub?.name || 'Nicht ausgewählt'}`],
     [`Beschreibung: ${configuration.description || 'Keine Beschreibung'}`],
+    [`Gesamt Artikel: ${excelData.length}`],
+    [`Gesamt Menge: ${excelData.reduce((sum, item) => sum + (item.Menge || 0), 0)}`],
     [],
     // Column headers
     csvHeaders,

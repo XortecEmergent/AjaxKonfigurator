@@ -576,6 +576,14 @@ class AjaxBackendTester:
         self.test_configurations()
         self.test_specific_ajax_products()
         
+        # NEW COMPREHENSIVE TESTS FOR FINAL REVIEW
+        print("\n" + "🔍 COMPREHENSIVE VIDEO & ACCESSORY TESTS")
+        print("=" * 60)
+        self.test_video_product_line()
+        self.test_hubs_endpoint_for_video()
+        self.test_accessory_system()
+        self.test_product_database_completeness()
+        
         # Summary
         print("\n" + "=" * 60)
         print("📊 TEST SUMMARY")

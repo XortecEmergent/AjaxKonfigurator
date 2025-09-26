@@ -95,7 +95,7 @@ const LandingPage = ({ onStartConfigurator }) => {
                 </div>
                 <div className="flex items-center gap-3 text-white">
                   <CheckCircle2 className="w-5 h-5 text-green-400" />
-                  <span>30+ Jahre Xortec Erfahrung</span>
+                  <span>18+ Jahre Xortec Erfahrung</span>
                 </div>
               </div>
 

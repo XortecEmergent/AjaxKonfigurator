@@ -330,7 +330,7 @@ function App() {
 
   const selectProductLine = (productLine) => {
     setSelectedProductLine(productLine.id);
-    fetchProducts(productLine.id);
+    fetchProductsByLine(productLine.id);
     nextStep();
   };
 

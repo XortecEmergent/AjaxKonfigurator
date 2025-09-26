@@ -741,6 +741,66 @@ function App() {
           </p>
         </div>
 
+        {/* Compatibility Check */}
+        {(() => {
+          const hubCapacity = selectedHub ? getHubCapacity(selectedHub.name) : null;
+          const totalDevices = Object.values(productQuantities).reduce((sum, qty) => sum + qty, 0);
+          const totalCameras = Object.keys(productQuantities).reduce((sum, productId) => {
+            const product = products.find(p => p.id === productId);
+            const quantity = productQuantities[productId] || 0;
+            if (product && (product.category === 'wired_cameras' || product.category === 'wifi_cameras')) {
+              return sum + quantity;
+            }
+            return sum;
+          }, 0);
+          
+          const isCompatible = hubCapacity && totalDevices <= hubCapacity.devices && totalCameras <= hubCapacity.cameras;
+          
+          return (
+            <Card className={`${isCompatible ? 'bg-green-900/30 border-green-500' : 'bg-red-900/30 border-red-500'}`}>
+              <CardHeader>
+                <CardTitle className={`${isCompatible ? 'text-green-400' : 'text-red-400'} flex items-center gap-2`}>
+                  <CheckCircle2 className="w-5 h-5" />
+                  Kompatibilitätsprüfung
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4">
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <p className={`${isCompatible ? 'text-green-300' : 'text-red-300'} text-sm`}>
+                        <strong>Geräte:</strong> {totalDevices} / {hubCapacity?.devices || 0}
+                      </p>
+                      <Progress 
+                        value={hubCapacity ? (totalDevices / hubCapacity.devices) * 100 : 0}
+                        className="h-2 mt-1"
+                      />
+                    </div>
+                    <div>
+                      <p className={`${isCompatible ? 'text-green-300' : 'text-red-300'} text-sm`}>
+                        <strong>Kameras:</strong> {totalCameras} / {hubCapacity?.cameras || 0}
+                      </p>
+                      <Progress 
+                        value={hubCapacity ? (totalCameras / hubCapacity.cameras) * 100 : 0}
+                        className="h-2 mt-1"
+                      />
+                    </div>
+                  </div>
+                  
+                  <div className={`p-3 rounded ${isCompatible ? 'bg-green-900/30' : 'bg-red-900/30'}`}>
+                    <p className={`${isCompatible ? 'text-green-300' : 'text-red-300'} text-sm font-medium`}>
+                      {isCompatible 
+                        ? '✅ Alle Produkte sind mit dem gewählten Hub kompatibel und die Kapazitätsgrenzen werden eingehalten.'
+                        : '⚠️ Warnung: Die Hub-Kapazität wird überschritten oder es gibt Kompatibilitätsprobleme.'
+                      }
+                    </p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          );
+        })()}
+
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Hub Section */}
           <Card className="lg:col-span-1 bg-gray-800/50 border-gray-700">

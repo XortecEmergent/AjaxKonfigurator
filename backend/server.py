@@ -1667,15 +1667,21 @@ async def get_hubs(product_line: Optional[str] = None):
 
 @api_router.get("/compatibility/{hub_id}")
 async def get_compatible_devices(hub_id: str):
-    """Get devices compatible with specific hub"""
+    """Get devices compatible with specific hub or NVR"""
+    # Try to find hub first
     hub = await db.products.find_one({"id": hub_id, "category": "hubs"})
-    if not hub:
-        raise HTTPException(status_code=404, detail="Hub not found")
     
-    # Get all products that are compatible with this hub
+    # If not found, try to find NVR
+    if not hub:
+        hub = await db.products.find_one({"id": hub_id, "category": "nvr"})
+    
+    if not hub:
+        raise HTTPException(status_code=404, detail="Hub or NVR not found")
+    
+    # Get all products that are compatible with this hub/NVR
     compatible_products = await db.products.find({
         "compatible_hubs": {"$in": [hub["name"], "self"]},
-        "category": {"$ne": "hubs"}
+        "category": {"$nin": ["hubs", "nvr"]}  # Exclude hubs and NVRs from results
     }).to_list(200)
     
     return [Product(**product) for product in compatible_products]

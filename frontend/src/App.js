@@ -968,8 +968,18 @@ function App() {
 
         {/* Compatibility Check */}
         {(() => {
-          const hubCapacity = selectedHub ? getHubCapacity(selectedHub.name) : null;
-          const totalDevices = Object.values(productQuantities).reduce((sum, qty) => sum + qty, 0);
+          const totalCapacity = getTotalCapacity();
+          const totalDevices = Object.keys(productQuantities).reduce((sum, productId) => {
+            const product = products.find(p => p.id === productId);
+            const quantity = productQuantities[productId] || 0;
+            
+            // For video product line, don't count NVRs as devices
+            if (selectedProductLine === 'video' && product && product.category === 'nvr') {
+              return sum;
+            }
+            return sum + quantity;
+          }, 0);
+          
           const totalCameras = Object.keys(productQuantities).reduce((sum, productId) => {
             const product = products.find(p => p.id === productId);
             const quantity = productQuantities[productId] || 0;
@@ -979,7 +989,9 @@ function App() {
             return sum;
           }, 0);
           
-          const isCompatible = hubCapacity && totalDevices <= hubCapacity.devices && totalCameras <= hubCapacity.cameras;
+          const deviceLimitOK = selectedProductLine === 'video' || totalDevices <= totalCapacity.devices;
+          const cameraLimitOK = totalCameras <= totalCapacity.cameras;
+          const isCompatible = deviceLimitOK && cameraLimitOK;
           
           return (
             <Card className={`${isCompatible ? 'bg-green-900/30 border-green-500' : 'bg-red-900/30 border-red-500'}`}>
@@ -991,22 +1003,24 @@ function App() {
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className={selectedProductLine === 'video' ? 'w-full' : 'grid grid-cols-2 gap-4'}>
+                    {selectedProductLine !== 'video' && (
+                      <div>
+                        <p className={`${deviceLimitOK ? 'text-green-300' : 'text-red-300'} text-sm`}>
+                          <strong>Geräte:</strong> {totalDevices} / {totalCapacity.devices}
+                        </p>
+                        <Progress 
+                          value={totalCapacity.devices > 0 ? (totalDevices / totalCapacity.devices) * 100 : 0}
+                          className="h-2 mt-1"
+                        />
+                      </div>
+                    )}
                     <div>
-                      <p className={`${isCompatible ? 'text-green-300' : 'text-red-300'} text-sm`}>
-                        <strong>Geräte:</strong> {totalDevices} / {hubCapacity?.devices || 0}
+                      <p className={`${cameraLimitOK ? 'text-green-300' : 'text-red-300'} text-sm`}>
+                        <strong>Kameras:</strong> {totalCameras} / {totalCapacity.cameras}
                       </p>
                       <Progress 
-                        value={hubCapacity ? (totalDevices / hubCapacity.devices) * 100 : 0}
-                        className="h-2 mt-1"
-                      />
-                    </div>
-                    <div>
-                      <p className={`${isCompatible ? 'text-green-300' : 'text-red-300'} text-sm`}>
-                        <strong>Kameras:</strong> {totalCameras} / {hubCapacity?.cameras || 0}
-                      </p>
-                      <Progress 
-                        value={hubCapacity ? (totalCameras / hubCapacity.cameras) * 100 : 0}
+                        value={totalCapacity.cameras > 0 ? (totalCameras / totalCapacity.cameras) * 100 : 0}
                         className="h-2 mt-1"
                       />
                     </div>
@@ -1015,8 +1029,8 @@ function App() {
                   <div className={`p-3 rounded ${isCompatible ? 'bg-green-900/30' : 'bg-red-900/30'}`}>
                     <p className={`${isCompatible ? 'text-green-300' : 'text-red-300'} text-sm font-medium`}>
                       {isCompatible 
-                        ? '✅ Alle Produkte sind mit dem gewählten Hub kompatibel und die Kapazitätsgrenzen werden eingehalten.'
-                        : '⚠️ Warnung: Die Hub-Kapazität wird überschritten oder es gibt Kompatibilitätsprobleme.'
+                        ? `✅ Alle Produkte sind mit ${selectedProductLine === 'video' ? 'dem gewählten NVR-System' : 'dem gewählten Hub'} kompatibel und die Kapazitätsgrenzen werden eingehalten.`
+                        : `⚠️ Warnung: Die ${selectedProductLine === 'video' ? 'NVR' : 'Hub'}-Kapazität wird überschritten oder es gibt Kompatibilitätsprobleme.`
                       }
                     </p>
                   </div>

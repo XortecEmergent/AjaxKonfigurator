@@ -170,6 +170,7 @@ function App() {
   const selectHub = (hub) => {
     setSelectedHub(hub);
     setSelectedProducts([hub.id]);
+    setProductQuantities({ [hub.id]: 1 }); // Hub quantity is always 1
     fetchCompatibleDevices(hub.id);
     nextStep();
   };
@@ -177,9 +178,15 @@ function App() {
   const toggleProduct = (product) => {
     const isSelected = selectedProducts.includes(product.id);
     if (isSelected) {
+      // Remove product
       setSelectedProducts(selectedProducts.filter(id => id !== product.id));
+      const newQuantities = { ...productQuantities };
+      delete newQuantities[product.id];
+      setProductQuantities(newQuantities);
     } else {
+      // Add product with quantity 1
       setSelectedProducts([...selectedProducts, product.id]);
+      setProductQuantities(prev => ({ ...prev, [product.id]: 1 }));
     }
   };
 

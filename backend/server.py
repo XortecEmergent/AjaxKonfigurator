@@ -1654,6 +1654,17 @@ async def get_product(product_id: str):
         raise HTTPException(status_code=404, detail="Product not found")
     return Product(**product)
 
+@api_router.get("/hubs")
+async def get_hubs(product_line: Optional[str] = None):
+    """Get hubs with optional filtering by product line"""
+    filter_query = {"category": "hubs", "in_stock": True}
+    
+    if product_line:
+        filter_query["product_line"] = product_line
+    
+    hubs = await db.products.find(filter_query).to_list(50)
+    return [Product(**hub) for hub in hubs]
+
 @api_router.get("/compatibility/{hub_id}")
 async def get_compatible_devices(hub_id: str):
     """Get devices compatible with specific hub"""

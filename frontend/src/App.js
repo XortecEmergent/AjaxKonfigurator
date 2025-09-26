@@ -571,13 +571,13 @@ function App() {
                         <CardTitle className="text-white text-base leading-tight">
                           {product.name}
                         </CardTitle>
-                        <CardDescription className="text-gray-300 text-sm">
+                        <CardDescription className="text-gray-200 text-sm">
                           {product.short_description}
                         </CardDescription>
                         
                         {/* Xortec Artikelnummer */}
                         {product.specifications.xortec_nr && (
-                          <p className="text-xs text-orange-400">
+                          <p className="text-xs text-orange-300 font-medium">
                             Xortec-Nr.: {product.specifications.xortec_nr}
                           </p>
                         )}

@@ -315,7 +315,7 @@ const LandingPage = ({ onStartConfigurator }) => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
               <Badge className="bg-orange-600 mb-4">
-                Über 30 Jahre Erfahrung
+                Über 18 Jahre Erfahrung
               </Badge>
               <h2 className="text-3xl font-bold text-white mb-6">
                 Warum Xortec GmbH als Ihr Ajax Partner?

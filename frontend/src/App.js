@@ -541,6 +541,11 @@ function App() {
                 {category.products.map((product) => {
                   const isSelected = selectedProducts.includes(product.id);
                   const quantity = productQuantities[product.id] || 0;
+                  const availableColors = getAvailableColors(product);
+                  const selectedColor = productColors[product.id] || availableColors[0] || 'black';
+                  const accessories = getProductAccessories(product.id);
+                  const hasAccessories = accessories.length > 0;
+                  
                   return (
                     <Card 
                       key={product.id}
@@ -597,6 +602,15 @@ function App() {
                             )}
                           </div>
 
+                          {/* Color Selection */}
+                          {availableColors.length > 1 && (
+                            <ColorSelector 
+                              selectedColor={selectedColor}
+                              onColorChange={(color) => updateProductColor(product.id, color)}
+                              availableColors={availableColors}
+                            />
+                          )}
+
                           {/* Product Selection and Quantity Controls */}
                           <div className="space-y-2 pt-2 border-t border-gray-600">
                             {!isSelected ? (
@@ -634,16 +648,18 @@ function App() {
                                   </div>
                                 </div>
                                 
-                                {/* Accessory Button */}
-                                <Button 
-                                  onClick={() => showProductAccessories(product.id)}
-                                  variant="outline"
-                                  size="sm"
-                                  className="w-full border-orange-600 text-orange-400 hover:bg-orange-900/30"
-                                >
-                                  <Settings className="w-3 h-3 mr-2" />
-                                  Zubehör ({getProductAccessories(product.id).length})
-                                </Button>
+                                {/* Conditional Accessory Button */}
+                                {hasAccessories && (
+                                  <Button 
+                                    onClick={() => showProductAccessories(product.id)}
+                                    variant="outline"
+                                    size="sm"
+                                    className="w-full border-orange-600 text-orange-400 hover:bg-orange-900/30"
+                                  >
+                                    <Settings className="w-3 h-3 mr-2" />
+                                    Zubehör ({accessories.length})
+                                  </Button>
+                                )}
                                 
                                 <Button 
                                   onClick={() => toggleProduct(product)}

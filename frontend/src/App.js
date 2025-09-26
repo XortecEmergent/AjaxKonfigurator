@@ -462,26 +462,34 @@ function App() {
   );
 
   const renderHubSelection = () => {
-    const hubs = products.filter(p => p.category === 'hubs');
-    
     return (
       <div className="space-y-6">
-        <div className="text-center">
+        <div className="text-center mb-8">
           <h2 className="text-3xl font-bold text-white mb-4">
-            Wählen Sie Ihre Hub-Zentrale
+            {selectedProductLine === 'video' ? 'NVR auswählen' : 'Hub auswählen'}
           </h2>
-          <p className="text-xl text-gray-300 mb-8">
-            Die Hub-Zentrale ist das Herzstück Ihres Ajax Systems
+          <p className="text-gray-300">
+            {selectedProductLine === 'video' 
+              ? 'Wählen Sie den passenden Network Video Recorder für Ihr System' 
+              : 'Wählen Sie die zentrale Steuereinheit für Ihr Ajax System'
+            }
           </p>
         </div>
+
+        {loading && (
+          <div className="text-center py-12">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-orange-500 mx-auto"></div>
+            <p className="text-gray-300 mt-4">Lade verfügbare {selectedProductLine === 'video' ? 'NVRs' : 'Hubs'}...</p>
+          </div>
+        )}
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {hubs.map((hub) => (
             <Card 
               key={hub.id}
-              className="cursor-pointer transition-all duration-300 hover:scale-105 bg-gray-800/50 border-gray-700 hover:border-green-500"
+              className="cursor-pointer transition-all duration-300 hover:scale-105 bg-gray-800/50 border-gray-700 hover:border-orange-500"
               onClick={() => selectHub(hub)}
-              data-testid={`hub-${hub.name.replace(/\s+/g, '-').toLowerCase()}`}
+              data-testid={`${selectedProductLine === 'video' ? 'nvr' : 'hub'}-${hub.name.replace(/\s+/g, '-').toLowerCase()}`}
             >
               <div className="relative">
                 <img 
@@ -489,42 +497,61 @@ function App() {
                   alt={hub.name}
                   className="w-full h-40 object-contain bg-gray-900 p-4"
                 />
-                <Badge className="absolute top-2 right-2 bg-green-600">
-                  Hub
-                </Badge>
               </div>
               
               <CardHeader>
-                <CardTitle className="text-white text-lg">{hub.name}</CardTitle>
-                <CardDescription className="text-gray-300">
+                <CardTitle className="text-white text-lg">
+                  {hub.name}
+                </CardTitle>
+                <CardDescription className="text-gray-200">
                   {hub.short_description}
                 </CardDescription>
+                
+                {/* Xortec Artikelnummer */}
+                {hub.specifications.xortec_nr && (
+                  <p className="text-xs text-orange-300 font-medium">
+                    Xortec-Nr.: {hub.specifications.xortec_nr}
+                  </p>
+                )}
               </CardHeader>
               
               <CardContent>
                 <div className="space-y-3">
                   <div className="flex flex-wrap gap-1">
                     {hub.usps.slice(0, 3).map((usp, idx) => (
-                      <Badge key={idx} variant="outline" className="text-xs border-gray-600">
+                      <Badge key={idx} variant="secondary" className="text-xs">
                         {usp}
                       </Badge>
                     ))}
                   </div>
                   
-                  <div className="space-y-2 text-sm text-gray-400">
-                    <div className="flex items-center gap-2">
-                      <Zap className="w-4 h-4" />
-                      <span>Max. {hub.specifications.max_devices} Geräte</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Wifi className="w-4 h-4" />
-                      <span>{hub.specifications.frequency}</span>
-                    </div>
+                  <div className="text-xs text-gray-300 space-y-1">
+                    {selectedProductLine === 'video' ? (
+                      <>
+                        {hub.specifications.channels && (
+                          <div>Kanäle: {hub.specifications.channels}</div>
+                        )}
+                        {hub.specifications.max_resolution && (
+                          <div>Auflösung: {hub.specifications.max_resolution}</div>
+                        )}
+                        {hub.specifications.storage && (
+                          <div>Speicher: {hub.specifications.storage}</div>
+                        )}
+                      </>
+                    ) : (
+                      <>
+                        {hub.specifications.max_devices && (
+                          <div>Max. Geräte: {hub.specifications.max_devices}</div>
+                        )}
+                        {hub.specifications.range && (
+                          <div>Reichweite: {hub.specifications.range}</div>
+                        )}
+                        {hub.specifications.connectivity && (
+                          <div>Konnektivität: {hub.specifications.connectivity}</div>
+                        )}
+                      </>
+                    )}
                   </div>
-                  
-                  <Button className="w-full bg-green-600 hover:bg-green-700">
-                    Hub auswählen
-                  </Button>
                 </div>
               </CardContent>
             </Card>

@@ -867,8 +867,14 @@ function App() {
               © 2024 Xortec GmbH. Alle Rechte vorbehalten. Ajax Systems Konfigurator.
             </p>
             <div className="flex items-center gap-4 text-sm text-gray-400">
+              <button 
+                onClick={() => setShowImpressum(true)}
+                className="hover:text-white transition-colors flex items-center gap-1"
+              >
+                <Info className="w-4 h-4" />
+                Impressum
+              </button>
               <a href="#" className="hover:text-white transition-colors">
-                <Info className="w-4 h-4 inline mr-1" />
                 Produktkatalog
               </a>
               <a href="#" className="hover:text-white transition-colors">
@@ -879,6 +885,8 @@ function App() {
         </div>
       </footer>
     </div>
+    )}
+    </>
   );
 }
 

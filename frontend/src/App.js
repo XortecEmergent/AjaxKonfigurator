@@ -475,18 +475,21 @@ function App() {
           </p>
         </div>
 
-        <Tabs defaultValue={Object.keys(productsByCategory)[0]} className="w-full">
-          <TabsList className="grid w-full grid-cols-4 lg:grid-cols-6 bg-gray-800">
-            {Object.values(productsByCategory).map((category) => (
-              <TabsTrigger 
-                key={category.id} 
-                value={category.id}
-                className="data-[state=active]:bg-orange-600 text-xs"
-              >
-                {category.name}
-              </TabsTrigger>
-            ))}
-          </TabsList>
+        <Tabs defaultValue={Object.keys(productsByCategory)[0]} className="w-full space-y-6">
+          <div className="bg-gray-900/50 rounded-lg p-4 border border-gray-700">
+            <TabsList className="grid w-full grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-2 bg-transparent h-auto p-2">
+              {Object.values(productsByCategory).map((category) => (
+                <TabsTrigger 
+                  key={category.id} 
+                  value={category.id}
+                  className="data-[state=active]:bg-orange-600 data-[state=active]:text-white text-gray-300 hover:text-white transition-colors p-3 rounded text-sm font-medium whitespace-nowrap"
+                  data-testid={`category-${category.id}`}
+                >
+                  {category.name}
+                </TabsTrigger>
+              ))}
+            </TabsList>
+          </div>
 
           {Object.entries(productsByCategory).map(([categoryId, category]) => (
             <TabsContent key={categoryId} value={categoryId} className="mt-6">

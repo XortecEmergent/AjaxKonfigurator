@@ -1269,20 +1269,20 @@ async def init_products():
 
         # ================== NVR NETWORK VIDEO RECORDER ==================
         {
-            "name": "NVR (8) Fibra",
+            "name": "NVR (8-ch)",
             "category": "nvr",
             "product_line": "video",
-            "description": "8-Kanal Network Video Recorder mit bis zu 4K Auflösung, unterstützt ONVIF Profile S/T und RTSP, bis zu 16 TB SATA 3.5\" HDD, Ethernet 100 Mbps, Bluetooth 2.4 GHz Setup",
+            "description": "8-Kanal Network Video Recorder mit bis zu 4K Auflösung, unterstützt ONVIF Profile S/T und RTSP, bis zu 16 TB SATA 3.5\" HDD, Ethernet Anschluss, 110-240V AC Stromversorgung",
             "short_description": "8-Kanal NVR für professionelle Videoüberwachung",
             "usps": ["Bis zu 4K Auflösung", "8 IP-Kamera Kanäle", "Bis zu 16 TB Speicher", "ONVIF kompatibel"],
-            "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fnvr_8_black_4d7c9a3f12%402.png&1728394567",
+            "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fnvr_product_versions_f197b4bcfa%402.png&1742566869",
             "specifications": {
                 "channels": "8",
                 "max_resolution": "4K (25/30 FPS)",
                 "protocols": "ONVIF Profile S/T, RTSP",
                 "storage": "SATA 3.5\" bis 16 TB",
                 "network": "Ethernet 100 Mbps",
-                "power": "110-240 V~",
+                "power": "110-240 V AC",
                 "max_cameras": "8",
                 "xortec_nr": "600810088",
                 "hersteller_nr": "39002.08.BL1"
@@ -1295,20 +1295,20 @@ async def init_products():
             "compatible_hubs": []
         },
         {
-            "name": "NVR (16) Fibra", 
+            "name": "NVR (16-ch)", 
             "category": "nvr",
             "product_line": "video",
-            "description": "16-Kanal Network Video Recorder mit bis zu 4K Auflösung, unterstützt ONVIF Profile S/T und RTSP, bis zu 16 TB SATA 3.5\" HDD, Ethernet 100 Mbps, Bluetooth 2.4 GHz Setup",
+            "description": "16-Kanal Network Video Recorder mit bis zu 4K Auflösung, unterstützt ONVIF Profile S/T und RTSP, bis zu 16 TB SATA 3.5\" HDD, Ethernet Anschluss, 110-240V AC Stromversorgung",
             "short_description": "16-Kanal NVR für große Videoüberwachungsanlagen",
             "usps": ["Bis zu 4K Auflösung", "16 IP-Kamera Kanäle", "Bis zu 16 TB Speicher", "ONVIF kompatibel"],
-            "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fnvr_16_black_7f8e6b2d45%402.png&1728394567",
+            "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fnvr_product_versions_f197b4bcfa%402.png&1742566869",
             "specifications": {
                 "channels": "16", 
                 "max_resolution": "4K (25/30 FPS)",
                 "protocols": "ONVIF Profile S/T, RTSP",
                 "storage": "SATA 3.5\" bis 16 TB",
                 "network": "Ethernet 100 Mbps", 
-                "power": "110-240 V~",
+                "power": "110-240 V AC",
                 "max_cameras": "16",
                 "xortec_nr": "600810089",
                 "hersteller_nr": "39003.16.BL1"
@@ -1316,6 +1316,58 @@ async def init_products():
             "features": [
                 {"name": "16 Kanäle", "description": "Unterstützt bis zu 16 IP-Kameras gleichzeitig"},
                 {"name": "4K Aufzeichnung", "description": "Ultra-hochauflösende Videoaufzeichnung"},
+                {"name": "Professional Grade", "description": "Für gewerbliche Videoüberwachungsanlagen"}
+            ],
+            "compatible_hubs": []
+        },
+        {
+            "name": "NVR DC (8-ch)",
+            "category": "nvr",
+            "product_line": "video",
+            "description": "8-Kanal Network Video Recorder mit Niederspannungsversorgung, bis zu 4K Auflösung, unterstützt ONVIF Profile S/T und RTSP, bis zu 16 TB SATA 3.5\" HDD",
+            "short_description": "8-Kanal NVR mit DC-Stromversorgung",
+            "usps": ["DC-Stromversorgung", "8 IP-Kamera Kanäle", "Bis zu 16 TB Speicher", "Fanless Design"],
+            "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fnvr_product_versions_f197b4bcfa%402.png&1742566869",
+            "specifications": {
+                "channels": "8",
+                "max_resolution": "4K (25/30 FPS)",
+                "protocols": "ONVIF Profile S/T, RTSP",
+                "storage": "SATA 3.5\" bis 16 TB",
+                "network": "Ethernet 100 Mbps",
+                "power": "12V DC",
+                "max_cameras": "8",
+                "xortec_nr": "600810090",
+                "hersteller_nr": "39002.08.DC1"
+            },
+            "features": [
+                {"name": "DC Power", "description": "Niederspannungsversorgung für flexible Installation"},
+                {"name": "Fanless Design", "description": "Geräuschloser Betrieb ohne Lüfter"},
+                {"name": "Compact Size", "description": "Platzsparende Bauweise"}
+            ],
+            "compatible_hubs": []
+        },
+        {
+            "name": "NVR DC (16-ch)",
+            "category": "nvr",
+            "product_line": "video", 
+            "description": "16-Kanal Network Video Recorder mit Niederspannungsversorgung, bis zu 4K Auflösung, unterstützt ONVIF Profile S/T und RTSP, bis zu 16 TB SATA 3.5\" HDD",
+            "short_description": "16-Kanal NVR mit DC-Stromversorgung",
+            "usps": ["DC-Stromversorgung", "16 IP-Kamera Kanäle", "Bis zu 16 TB Speicher", "Fanless Design"],
+            "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fnvr_product_versions_f197b4bcfa%402.png&1742566869",
+            "specifications": {
+                "channels": "16",
+                "max_resolution": "4K (25/30 FPS)", 
+                "protocols": "ONVIF Profile S/T, RTSP",
+                "storage": "SATA 3.5\" bis 16 TB",
+                "network": "Ethernet 100 Mbps",
+                "power": "12V DC",
+                "max_cameras": "16",
+                "xortec_nr": "600810091",
+                "hersteller_nr": "39003.16.DC1"
+            },
+            "features": [
+                {"name": "16 Kanäle", "description": "Unterstützt bis zu 16 IP-Kameras gleichzeitig"},
+                {"name": "DC Power", "description": "Niederspannungsversorgung für flexible Installation"},
                 {"name": "Professional Grade", "description": "Für gewerbliche Videoüberwachungsanlagen"}
             ],
             "compatible_hubs": []

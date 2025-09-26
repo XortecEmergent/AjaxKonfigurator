@@ -249,6 +249,9 @@ function App() {
   // Step Functions
   const nextStep = () => {
     if (currentStep < totalSteps) {
+      if (!completedSteps.includes(currentStep)) {
+        setCompletedSteps([...completedSteps, currentStep]);
+      }
       setCurrentStep(currentStep + 1);
     }
   };
@@ -257,6 +260,34 @@ function App() {
     if (currentStep > 1) {
       setCurrentStep(currentStep - 1);
     }
+  };
+
+  const goToStep = (stepNumber) => {
+    if (stepNumber <= currentStep || completedSteps.includes(stepNumber - 1)) {
+      setCurrentStep(stepNumber);
+    }
+  };
+
+  // Handle product color change
+  const updateProductColor = (productId, color) => {
+    setProductColors(prev => ({
+      ...prev,
+      [productId]: color
+    }));
+  };
+
+  // Get available colors for a product (Ajax products typically come in black and white)
+  const getAvailableColors = (product) => {
+    // Most Ajax products are available in black and white
+    if (product.category === 'hubs' || 
+        product.category === 'motion_detectors' || 
+        product.category === 'opening_detectors' ||
+        product.category === 'keypads' ||
+        product.category === 'sirens') {
+      return ['black', 'white'];
+    }
+    // Some products may only be available in one color
+    return ['black'];
   };
 
   const selectProductLine = (productLine) => {

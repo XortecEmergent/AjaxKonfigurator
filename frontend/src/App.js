@@ -111,34 +111,43 @@ function App() {
     const accessoryMap = {
       // Hubs need power supplies and mounting accessories
       'hubs': [
-        { id: 'psu_12v', name: '12V PSU für Hub', xortec_nr: '600810055', required: true },
-        { id: 'mounting_kit', name: 'Montage-Kit Hub', xortec_nr: '600810226', required: false },
-        { id: 'backup_battery', name: 'Backup Batterie', xortec_nr: '600810227', required: false }
+        { id: 'psu_12v', name: '12V PSU für Hub', xortec_nr: '600810055', required: true, description: 'Externes 12V Netzteil für stabile Stromversorgung' },
+        { id: 'mounting_kit', name: 'Montage-Kit Hub', xortec_nr: '600810226', required: false, description: 'Wandhalterung und Montagezubehör für Hub' },
+        { id: 'backup_battery', name: 'Backup Batterie', xortec_nr: '600810227', required: false, description: 'Notstromversorgung bei Stromausfall' }
       ],
       // Motion detectors need mounting brackets
       'motion_detectors': [
-        { id: 'bracket_motion', name: 'Halterung für Bewegungsmelder', xortec_nr: '600810228', required: false },
-        { id: 'pet_immune_lens', name: 'Haustier-Immunlinse', xortec_nr: '600810229', required: false }
+        { id: 'bracket_motion', name: 'Halterung für Bewegungsmelder', xortec_nr: '600810228', required: false, description: 'Verstellbare Wandhalterung für optimale Ausrichtung' },
+        { id: 'pet_immune_lens', name: 'Haustier-Immunlinse', xortec_nr: '600810229', required: false, description: 'Speziallinse zur Vermeidung von Fehlalarmen durch Haustiere' }
       ],
       // Door contacts need magnets and mounting
       'opening_detectors': [
-        { id: 'additional_magnet', name: 'Zusätzlicher Magnet', xortec_nr: '600810230', required: false },
-        { id: 'gap_sensor', name: 'Gap Sensor für große Spalte', xortec_nr: '600810231', required: false }
+        { id: 'additional_magnet', name: 'Zusätzlicher Magnet', xortec_nr: '600810230', required: false, description: 'Starker Zusatzmagnet für größere Spalte' },
+        { id: 'gap_sensor', name: 'Gap Sensor für große Spalte', xortec_nr: '600810231', required: false, description: 'Erweiterung für Spalte über 20mm' }
       ],
       // Sirens need backup batteries
       'sirens': [
-        { id: 'siren_battery', name: 'Backup Batterie für Sirene', xortec_nr: '600810232', required: true },
-        { id: 'siren_mount', name: 'Sirenen Wandhalterung', xortec_nr: '600810233', required: false }
+        { id: 'siren_battery', name: 'Backup Batterie für Sirene', xortec_nr: '600810232', required: true, description: 'Lithium Batterie für Notstromversorgung' },
+        { id: 'siren_mount', name: 'Sirenen Wandhalterung', xortec_nr: '600810233', required: false, description: 'Wetterfeste Wandhalterung für Außensirenen' }
       ],
       // Keypads need cards and keyfobs
       'keypads': [
-        { id: 'pass_cards', name: 'DESFire Karten (5er Pack)', xortec_nr: '600810234', required: false },
-        { id: 'keyfobs', name: 'Tag Schlüsselanhänger (5er Pack)', xortec_nr: '600810235', required: false }
+        { id: 'pass_cards', name: 'DESFire Karten (5er Pack)', xortec_nr: '600810234', required: false, description: 'Verschlüsselte Zugangsberechtigungen' },
+        { id: 'keyfobs', name: 'Tag Schlüsselanhänger (5er Pack)', xortec_nr: '600810235', required: false, description: 'Kompakte Schlüsselanhänger mit RFID-Chip' }
       ],
-      // Cameras need power and storage
+      // Wired cameras need power and storage + JunctionBox
       'wired_cameras': [
-        { id: 'poe_injector', name: 'PoE Injector 30W', xortec_nr: '600810236', required: true },
-        { id: 'sd_card', name: 'MicroSD 32GB', xortec_nr: '600810237', required: false }
+        { id: 'poe_injector', name: 'PoE Injector 30W', xortec_nr: '600810236', required: true, description: 'Power over Ethernet Injector für Stromversorgung' },
+        { id: 'junction_box', name: 'Junction Box Kamera', xortec_nr: '600810240', required: false, description: 'Wetterfeste Anschlussbox für Kabelverbindungen' },
+        { id: 'sd_card', name: 'MicroSD 64GB', xortec_nr: '600810237', required: false, description: 'Lokale Speichererweiterung für Aufzeichnungen' },
+        { id: 'camera_mount', name: 'Kamera Wandhalterung', xortec_nr: '600810238', required: false, description: 'Verstellbare Wandhalterung für optimale Positionierung' }
+      ],
+      // WiFi cameras need similar accessories
+      'wifi_cameras': [
+        { id: 'power_adapter', name: '12V Netzteil Kamera', xortec_nr: '600810239', required: true, description: '12V Stromversorgung für WLAN Kameras' },
+        { id: 'junction_box', name: 'Junction Box Kamera', xortec_nr: '600810240', required: false, description: 'Wetterfeste Anschlussbox für Kabelverbindungen' },
+        { id: 'sd_card', name: 'MicroSD 64GB', xortec_nr: '600810237', required: false, description: 'Lokale Speichererweiterung für Aufzeichnungen' },
+        { id: 'wifi_antenna', name: 'WLAN Antenne extern', xortec_nr: '600810241', required: false, description: 'Externe Antenne für verbesserte WLAN-Reichweite' }
       ]
     };
     

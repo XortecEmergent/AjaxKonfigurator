@@ -1099,6 +1099,14 @@ function App() {
 
       {/* Main Content */}
       <main className="container mx-auto px-4 py-8">
+        {/* Step Navigation */}
+        <StepNavigation 
+          currentStep={currentStep}
+          totalSteps={totalSteps}
+          onStepClick={goToStep}
+          completedSteps={completedSteps}
+        />
+        
         <div className="max-w-6xl mx-auto">
           {loading && (
             <div className="text-center py-12">

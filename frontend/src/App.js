@@ -399,15 +399,15 @@ function App() {
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {category.products.map((product) => {
                   const isSelected = selectedProducts.includes(product.id);
+                  const quantity = productQuantities[product.id] || 0;
                   return (
                     <Card 
                       key={product.id}
-                      className={`cursor-pointer transition-all duration-300 ${
+                      className={`transition-all duration-300 ${
                         isSelected 
                           ? 'ring-2 ring-orange-500 bg-orange-900/30' 
                           : 'hover:scale-105 bg-gray-800/50'
                       } border-gray-700`}
-                      onClick={() => toggleProduct(product)}
                       data-testid={`product-${product.name.replace(/\s+/g, '-').toLowerCase()}`}
                     >
                       <div className="relative">
@@ -428,10 +428,17 @@ function App() {
                         <CardDescription className="text-gray-300 text-sm">
                           {product.short_description}
                         </CardDescription>
+                        
+                        {/* Xortec Artikelnummer */}
+                        {product.specifications.xortec_nr && (
+                          <p className="text-xs text-orange-400">
+                            Xortec-Nr.: {product.specifications.xortec_nr}
+                          </p>
+                        )}
                       </CardHeader>
                       
                       <CardContent>
-                        <div className="space-y-2">
+                        <div className="space-y-3">
                           <div className="flex flex-wrap gap-1">
                             {product.usps.slice(0, 2).map((usp, idx) => (
                               <Badge key={idx} variant="secondary" className="text-xs">
@@ -446,6 +453,54 @@ function App() {
                             )}
                             {product.specifications.battery_life && (
                               <div>Batterie: {product.specifications.battery_life}</div>
+                            )}
+                          </div>
+
+                          {/* Product Selection and Quantity Controls */}
+                          <div className="space-y-2 pt-2 border-t border-gray-600">
+                            {!isSelected ? (
+                              <Button 
+                                onClick={() => toggleProduct(product)}
+                                className="w-full bg-orange-600 hover:bg-orange-700"
+                                size="sm"
+                              >
+                                <Plus className="w-4 h-4 mr-2" />
+                                Hinzufügen
+                              </Button>
+                            ) : (
+                              <div className="space-y-2">
+                                <div className="flex items-center justify-between">
+                                  <span className="text-white text-sm font-medium">Menge:</span>
+                                  <div className="flex items-center gap-2">
+                                    <Button
+                                      onClick={() => updateProductQuantity(product.id, quantity - 1)}
+                                      size="sm"
+                                      variant="outline"
+                                      className="w-8 h-8 p-0 border-gray-600"
+                                      disabled={quantity <= 1}
+                                    >
+                                      <Minus className="w-3 h-3" />
+                                    </Button>
+                                    <span className="text-white min-w-[2rem] text-center">{quantity}</span>
+                                    <Button
+                                      onClick={() => updateProductQuantity(product.id, quantity + 1)}
+                                      size="sm"
+                                      variant="outline"
+                                      className="w-8 h-8 p-0 border-gray-600"
+                                    >
+                                      <Plus className="w-3 h-3" />
+                                    </Button>
+                                  </div>
+                                </div>
+                                <Button 
+                                  onClick={() => toggleProduct(product)}
+                                  variant="destructive"
+                                  size="sm"
+                                  className="w-full"
+                                >
+                                  Entfernen
+                                </Button>
+                              </div>
                             )}
                           </div>
                         </div>

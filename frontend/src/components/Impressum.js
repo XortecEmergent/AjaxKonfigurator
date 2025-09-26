@@ -97,9 +97,9 @@ const Impressum = ({ onClose }) => {
               </h2>
               <div className="bg-gray-900/50 p-6 rounded-lg">
                 <p className="text-gray-300">
-                  [Name]<br />
-                  [Straße und Hausnummer]<br />
-                  [PLZ] [Stadt]
+                  Michael Schaller<br />
+                  Berner Str. 79<br />
+                  60437 Frankfurt am Main
                 </p>
               </div>
             </div>

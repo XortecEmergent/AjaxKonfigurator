@@ -38,23 +38,26 @@ const Impressum = ({ onClose }) => {
                   <div>
                     <p className="text-gray-300 mb-2">
                       <strong>Geschäftsführer:</strong><br />
-                      [Name des Geschäftsführers]
+                      Michael Schaller
                     </p>
                     <p className="text-gray-300 mb-2">
                       <strong>Adresse:</strong><br />
-                      [Straße und Hausnummer]<br />
-                      [PLZ] [Stadt]<br />
+                      Berner Str. 79<br />
+                      60437 Frankfurt am Main<br />
                       Deutschland
                     </p>
                   </div>
                   <div>
                     <p className="text-gray-300 mb-2 flex items-center gap-2">
                       <Phone className="w-4 h-4" />
-                      <strong>Telefon:</strong> +49 (0) XXX XXXXXXX
+                      <strong>Telefon:</strong> +49 69 5069886 0
+                    </p>
+                    <p className="text-gray-300 mb-2">
+                      <strong>Telefax:</strong> +49 69 5069886 29
                     </p>
                     <p className="text-gray-300 mb-2 flex items-center gap-2">
                       <Mail className="w-4 h-4" />
-                      <strong>E-Mail:</strong> info@xortec.de
+                      <strong>E-Mail:</strong> home@xortec.de
                     </p>
                     <p className="text-gray-300 flex items-center gap-2">
                       <Globe className="w-4 h-4" />

@@ -1153,9 +1153,11 @@ function App() {
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
-              <div className="w-10 h-10 bg-orange-600 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-lg">X</span>
-              </div>
+              <img 
+                src="https://xortec.de/media/0e/72/fc/1691537632/03Logo_linksb%C3%BCndig.png" 
+                alt="Xortec GmbH Logo"
+                className="h-10 w-auto"
+              />
               <div>
                 <h1 className="text-2xl font-bold text-white">
                   Ajax Systemkonfigurator

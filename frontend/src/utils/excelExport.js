@@ -1,14 +1,15 @@
 // Excel Export Utility für Ajax Konfigurator
 
-export const generateExcelData = (selectedProducts, productQuantities, products, selectedHub, configuration) => {
+export const generateExcelData = (selectedProducts, productQuantities, products, selectedHub, configuration, selectedAccessories = {}) => {
   // Filter selected products data
   const selectedProductsData = products.filter(p => selectedProducts.includes(p.id));
   
-  // Prepare Excel data
-  const excelData = selectedProductsData.map(product => {
+  // Prepare Excel data for main products
+  const mainProductsData = selectedProductsData.map(product => {
     const quantity = productQuantities[product.id] || 1;
     return {
       'Pos.': selectedProductsData.indexOf(product) + 1,
+      'Typ': 'Hauptprodukt',
       'Artikelnummer Xortec': product.specifications.xortec_nr || 'N/A',
       'Hersteller-Nr.': product.specifications.hersteller_nr || 'N/A',
       'Produktname': product.name,
@@ -22,7 +23,23 @@ export const generateExcelData = (selectedProducts, productQuantities, products,
     };
   });
 
-  return excelData;
+  // Prepare Excel data for accessories
+  const accessoryData = Object.entries(selectedAccessories).map(([key, accessory], index) => ({
+    'Pos.': selectedProductsData.length + index + 1,
+    'Typ': accessory.required ? 'Erforderliches Zubehör' : 'Optionales Zubehör',
+    'Artikelnummer Xortec': accessory.xortec_nr || 'N/A',
+    'Hersteller-Nr.': 'N/A',
+    'Produktname': accessory.name,
+    'Beschreibung': accessory.description || 'Ajax Systemzubehör',
+    'Menge': accessory.quantity || 1,
+    'Kategorie': 'Zubehör',
+    'Produktlinie': 'Ajax Zubehör',
+    'Spezifikationen': 'Kompatibles Ajax Zubehör',
+    'USPs': accessory.required ? 'Erforderlich für Betrieb' : 'Optional',
+    'Kompatibel mit Hub': 'Ja'
+  }));
+
+  return [...mainProductsData, ...accessoryData];
 };
 
 const getCategoryName = (categoryId) => {

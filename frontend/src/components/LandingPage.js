@@ -414,10 +414,11 @@ const LandingPage = ({ onStartConfigurator }) => {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div>
               <div className="flex items-center gap-3 mb-4">
-                <div className="w-8 h-8 bg-orange-600 rounded-lg flex items-center justify-center">
-                  <span className="text-white font-bold">X</span>
-                </div>
-                <h3 className="text-white font-bold text-lg">Xortec GmbH</h3>
+                <img 
+                  src="https://xortec.de/media/0e/72/fc/1691537632/03Logo_linksb%C3%BCndig.png" 
+                  alt="Xortec GmbH Logo"
+                  className="h-8 w-auto"
+                />
               </div>
               <p className="text-gray-400 text-sm">
                 Ihr Partner für Netzwerk- und Sicherheitstechnik mit über 18 Jahren Erfahrung.

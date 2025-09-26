@@ -26,6 +26,9 @@ function App() {
   const [selectedHub, setSelectedHub] = useState(null);
   const [selectedProducts, setSelectedProducts] = useState([]);
   const [productQuantities, setProductQuantities] = useState({});
+  const [accessoryProducts, setAccessoryProducts] = useState([]);
+  const [selectedAccessories, setSelectedAccessories] = useState({});
+  const [showAccessoryModal, setShowAccessoryModal] = useState(null);
   const [compatibleProducts, setCompatibleProducts] = useState([]);
   const [capacityWarnings, setCapacityWarnings] = useState([]);
   const [loading, setLoading] = useState(false);

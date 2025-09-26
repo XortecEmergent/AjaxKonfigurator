@@ -1244,29 +1244,143 @@ async def init_products():
             ],
             "compatible_hubs": ["Hub 2 Plus Jeweller", "Hub 2 (4G) Jeweller", "Hub (2G) Jeweller", "Hub BP Jeweller", "Superior Hub Hybrid (4G)"]
         },
-        # ================== WIFI KAMERAS ==================
+        # ================== WIRED KAMERAS (IP-POE) ==================
         {
-            "name": "IndoorCam (Wi-Fi)",
-            "category": "wifi_cameras",
+            "name": "BulletCam HL (5 Mp/2.8 mm)",
+            "category": "wired_cameras",
             "product_line": "video",
-            "description": "Indoor-Kamera mit Zwei-Wege-Audio, 110° Betrachtungswinkel, bis zu 1920 × 1080-Videoauflösung (2 MP), PIR-Sensor für die Bewegungserkennung, bis zu 10 m Reichweite, Objektiv: f/2.0, 110° Betrachtungswinkel",
-            "short_description": "WLAN-Kamera für Innenbereich mit Bewegungserkennung",
-            "usps": ["110° Betrachtungswinkel", "Zwei-Wege-Audio", "Sofortige Push-Benachrichtigungen", "Cloud-Aufzeichnung"],
-            "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Findoorcam_ca0b7e8c67%402.png&1689159200",
+            "description": "5 MP Bullet-Kamera mit Hybrid-Beleuchtung, KI-Objekterkennung für Menschen, Tiere und Fahrzeuge, bis zu 50m Nachtsicht, IP65/IK08 Schutzklasse, PoE/12V DC",
+            "short_description": "5MP Bullet-Kamera mit KI und Hybrid-Beleuchtung",
+            "usps": ["5 MP Auflösung", "KI-Objekterkennung", "Hybrid IR/Weißlicht bis 50m", "IP65 wetterfest"],
+            "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fbulletcam_hl_5mp_2_8mm_black_a4c2d8f9e7%402.png&1735892341",
             "specifications": {
-                "resolution": "1920 × 1080 (2 MP)",
+                "resolution": "5 MP (2880×1620)",
+                "lens": "2.8 mm",
                 "viewing_angle": "110°",
-                "connectivity": "Wi-Fi 2.4 GHz",
-                "night_vision": "bis zu 5m",
-                "xortec_nr": "600810087",
-                "hersteller_nr": "39001.52.WH1"
+                "night_vision": "bis 50m (Hybrid IR/Weiß)",
+                "ai_detection": "Menschen, Tiere, Fahrzeuge",
+                "power": "PoE/12V DC",
+                "protection": "IP65, IK08",
+                "protocols": "ONVIF, RTSP, JetSparrow",
+                "xortec_nr": "600810092",
+                "hersteller_nr": "39101.05.BL1"
             },
             "features": [
-                {"name": "PIR-Sensor", "description": "Zuverlässige Bewegungserkennung"},
-                {"name": "Zwei-Wege-Audio", "description": "Sprechen und hören über die App"},
+                {"name": "AI-Erkennung", "description": "Intelligente Objekterkennung für Menschen, Tiere und Fahrzeuge"},
+                {"name": "Hybrid-Beleuchtung", "description": "Kombiniert IR- und Weißlicht für Vollfarb-Nachtsicht"},
+                {"name": "True WDR", "description": "Wide Dynamic Range für optimale Bildqualität"}
+            ],
+            "compatible_hubs": ["NVR (8-ch)", "NVR (16-ch)", "NVR DC (8-ch)", "NVR DC (16-ch)"]
+        },
+        {
+            "name": "BulletCam HL (8 Mp/4 mm)",
+            "category": "wired_cameras",
+            "product_line": "video",
+            "description": "8 MP (4K UHD) Bullet-Kamera mit Hybrid-Beleuchtung, KI-Objekterkennung, bis zu 50m Nachtsicht, 4mm Objektiv für engeren Betrachtungswinkel, IP65/IK08",
+            "short_description": "8MP 4K Bullet-Kamera mit KI und Hybrid-Beleuchtung",
+            "usps": ["8 MP 4K Auflösung", "KI-Objekterkennung", "Hybrid IR/Weißlicht bis 50m", "85° Betrachtungswinkel"],
+            "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fbulletcam_hl_8mp_4mm_black_b5d3e9a1f8%402.png&1735892341",
+            "specifications": {
+                "resolution": "8 MP (3840×2160) 4K UHD",
+                "lens": "4 mm",
+                "viewing_angle": "85°",
+                "night_vision": "bis 50m (Hybrid IR/Weiß)",
+                "ai_detection": "Menschen, Tiere, Fahrzeuge",
+                "power": "PoE/12V DC",
+                "protection": "IP65, IK08",
+                "protocols": "ONVIF, RTSP, JetSparrow",
+                "xortec_nr": "600810093",
+                "hersteller_nr": "39101.08.BL1"
+            },
+            "features": [
+                {"name": "4K UHD", "description": "Ultra-hochauflösende 4K Videoaufzeichnung"},
+                {"name": "AI-Erkennung", "description": "Intelligente Objekterkennung mit KI-Verarbeitung"},
+                {"name": "Hybrid-Beleuchtung", "description": "IR- und Weißlicht für Vollfarb-Nachtsicht"}
+            ],
+            "compatible_hubs": ["NVR (8-ch)", "NVR (16-ch)", "NVR DC (8-ch)", "NVR DC (16-ch)"]
+        },
+        {
+            "name": "TurretCam HL (5 Mp/2.8 mm)",
+            "category": "wired_cameras",
+            "product_line": "video",
+            "description": "5 MP Turret-Kamera mit Hybrid-Beleuchtung, kompakte Kuppel-Bauform, KI-Objekterkennung, bis zu 50m Nachtsicht, flexible Wand-/Deckenmontage",
+            "short_description": "5MP Turret-Kamera mit KI und kompakter Bauform",
+            "usps": ["5 MP Auflösung", "Kompakte Turret-Bauform", "KI-Objekterkennung", "Wand-/Deckenmontage"],
+            "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fturretcam_hl_5mp_2_8mm_black_c6e4f1a2b9%402.png&1735892341",
+            "specifications": {
+                "resolution": "5 MP (2880×1620)",
+                "lens": "2.8 mm",
+                "viewing_angle": "100-110°",
+                "night_vision": "bis 50m (Hybrid IR/Weiß)",
+                "ai_detection": "Menschen, Tiere, Fahrzeuge",
+                "power": "PoE/12V DC",
+                "protection": "IP65, IK08",
+                "protocols": "ONVIF, RTSP, JetSparrow",
+                "xortec_nr": "600810094",
+                "hersteller_nr": "39102.05.BL1"
+            },
+            "features": [
+                {"name": "Turret-Design", "description": "Kompakte Kuppel-Bauform für diskrete Installation"},
+                {"name": "Flexible Montage", "description": "Wand- und Deckenmontage möglich"},
+                {"name": "Verschlüsselter Stream", "description": "JetSparrow Peer-to-Peer Verschlüsselung"}
+            ],
+            "compatible_hubs": ["NVR (8-ch)", "NVR (16-ch)", "NVR DC (8-ch)", "NVR DC (16-ch)"]
+        },
+        {
+            "name": "DomeCam Mini HL",
+            "category": "wired_cameras",
+            "product_line": "video",
+            "description": "Kompakte Dome-Kamera mit Hybrid-Beleuchtung, KI-Objekterkennung, diskrete Innen-/Außenmontage, robuste Bauweise für verschiedene Sicherheitsszenarien",
+            "short_description": "Kompakte Dome-Kamera für diskrete Überwachung",
+            "usps": ["Kompakte Dome-Bauform", "KI-Objekterkennung", "Diskrete Installation", "Innen-/Außenmontage"],
+            "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fdomecam_mini_hl_black_d7f5a3c4e1%402.png&1735892341",
+            "specifications": {
+                "resolution": "5 MP (2880×1620)",
+                "lens": "2.8 mm",
+                "viewing_angle": "100-110°",
+                "night_vision": "bis 50m (Hybrid IR/Weiß)",
+                "ai_detection": "Menschen, Tiere, Fahrzeuge",
+                "power": "PoE/12V DC",
+                "protection": "IP65, IK08",
+                "protocols": "ONVIF, RTSP, JetSparrow",
+                "xortec_nr": "600810095",
+                "hersteller_nr": "39103.05.BL1"
+            },
+            "features": [
+                {"name": "Mini-Design", "description": "Kompakte Bauweise für diskrete Überwachung"},
+                {"name": "Hybrid-Beleuchtung", "description": "IR- und Weißlicht für optimale Nachtsicht"},
+                {"name": "Vandalismusschutz", "description": "Robuste Dome-Konstruktion"}
+            ],
+            "compatible_hubs": ["NVR (8-ch)", "NVR (16-ch)", "NVR DC (8-ch)", "NVR DC (16-ch)"]
+        },
+
+        # ================== WIFI KAMERAS ==================
+        {
+            "name": "IndoorCam",
+            "category": "wifi_cameras",
+            "product_line": "video",
+            "description": "4 MP Indoor-Kamera mit PIR-Bewegungssensor, KI-Erkennung für Menschen, Haustiere und Fahrzeuge, Zwei-Wege-Audio, 110° Betrachtungswinkel, verschlüsselter JetSparrow-Protokoll",
+            "short_description": "4MP WLAN-Kamera für Innenbereich mit KI-Erkennung",
+            "usps": ["4 MP Auflösung", "PIR-Bewegungssensor", "KI für Menschen/Haustiere", "Zwei-Wege-Audio"],
+            "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Findoorcam_white_e8g6h4j5k2%402.png&1735892341",
+            "specifications": {
+                "resolution": "4 MP (2688×1520)",
+                "lens": "Fest (Weitwinkel)",
+                "viewing_angle": "110° horizontal, 60° vertikal",
+                "night_vision": "Smart IR bis 8m",
+                "ai_detection": "Menschen, Haustiere, Fahrzeuge",
+                "connectivity": "Wi-Fi 2.4/5 GHz",
+                "audio": "Zwei-Wege-Audio",
+                "protocols": "JetSparrow verschlüsselt",
+                "xortec_nr": "600810096",
+                "hersteller_nr": "39104.04.WH1"
+            },
+            "features": [
+                {"name": "PIR-Sensor", "description": "Zuverlässige Bewegungserkennung mit PIR-Technologie"},
+                {"name": "Zwei-Wege-Audio", "description": "Sprechen und hören über die Ajax App"},
                 {"name": "Privacy-Modus", "description": "Physisches Objektiv-Shutter für Privatsphäre"}
             ],
-            "compatible_hubs": ["Hub 2 Plus Jeweller", "Hub 2 (4G) Jeweller", "Superior Hub Hybrid (4G)", "NVR (8) Fibra", "NVR (16) Fibra"]
+            "compatible_hubs": ["Hub 2 Plus Jeweller", "Hub 2 (4G) Jeweller", "Superior Hub Hybrid (4G)", "NVR (8-ch)", "NVR (16-ch)", "NVR DC (8-ch)", "NVR DC (16-ch)"]
         },
 
         # ================== NVR NETWORK VIDEO RECORDER ==================

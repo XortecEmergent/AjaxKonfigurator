@@ -990,6 +990,18 @@ function App() {
           </div>
         </div>
       </footer>
+
+      {/* Accessory Modal */}
+      <AccessoryModal 
+        isOpen={!!showAccessoryModal}
+        onClose={() => setShowAccessoryModal(null)}
+        accessories={accessoryProducts}
+        selectedAccessories={selectedAccessories}
+        onToggleAccessory={toggleAccessory}
+        onUpdateQuantity={updateAccessoryQuantity}
+        productId={showAccessoryModal}
+        productName={products.find(p => p.id === showAccessoryModal)?.name || ''}
+      />
     </div>
     )}
     </>

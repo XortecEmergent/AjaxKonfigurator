@@ -585,6 +585,18 @@ function App() {
                                     </Button>
                                   </div>
                                 </div>
+                                
+                                {/* Accessory Button */}
+                                <Button 
+                                  onClick={() => showProductAccessories(product.id)}
+                                  variant="outline"
+                                  size="sm"
+                                  className="w-full border-orange-600 text-orange-400 hover:bg-orange-900/30"
+                                >
+                                  <Settings className="w-3 h-3 mr-2" />
+                                  Zubehör ({getProductAccessories(product.id).length})
+                                </Button>
+                                
                                 <Button 
                                   onClick={() => toggleProduct(product)}
                                   variant="destructive"

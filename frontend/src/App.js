@@ -6,8 +6,9 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './com
 import { Tabs, TabsContent, TabsList, TabsTrigger } from './components/ui/tabs';
 import { Badge } from './components/ui/badge';
 import { Progress } from './components/ui/progress';
-import { ArrowRight, ArrowLeft, Settings, ShoppingCart, Download, CheckCircle2, Info, Zap, Shield, Wifi, Plus, Minus, AlertCircle } from 'lucide-react';
+import { ArrowRight, ArrowLeft, Settings, ShoppingCart, Download, CheckCircle2, Info, Zap, Shield, Wifi, Plus, Minus, AlertCircle, FileSpreadsheet } from 'lucide-react';
 import LandingPage from './components/LandingPage';
+import { downloadExcel, generateQuotePDF } from './utils/excelExport';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;

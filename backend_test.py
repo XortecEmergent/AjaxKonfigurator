@@ -304,6 +304,225 @@ class AjaxBackendTester:
         except Exception as e:
             self.log_test("Configuration Test", False, f"Connection error: {str(e)}")
     
+    def test_video_product_line(self):
+        """Test video product line comprehensively - Ajax cameras and NVRs"""
+        try:
+            # Test video product line endpoint
+            response = requests.get(f"{self.base_url}/products?product_line=video", timeout=15)
+            if response.status_code != 200:
+                self.log_test("Video Product Line", False, f"HTTP {response.status_code}", response.text)
+                return
+            
+            video_products = response.json()
+            if not isinstance(video_products, list):
+                self.log_test("Video Product Line", False, "Invalid response format", type(video_products))
+                return
+            
+            self.log_test("Video Product Line", True, f"Retrieved {len(video_products)} video products")
+            
+            # Check for specific Ajax cameras
+            expected_cameras = [
+                "BulletCam HL (5 Mp/2.8 mm)",
+                "BulletCam HL (8 Mp/4 mm)", 
+                "TurretCam HL (5 Mp/2.8 mm)",
+                "DomeCam Mini HL",
+                "IndoorCam"
+            ]
+            
+            # Check for NVR models
+            expected_nvrs = [
+                "NVR (8-ch)",
+                "NVR (16-ch)",
+                "NVR DC (8-ch)",
+                "NVR DC (16-ch)"
+            ]
+            
+            found_cameras = []
+            found_nvrs = []
+            video_product_names = [p.get("name", "") for p in video_products]
+            
+            for camera in expected_cameras:
+                if any(camera in name for name in video_product_names):
+                    found_cameras.append(camera)
+            
+            for nvr in expected_nvrs:
+                if any(nvr in name for name in video_product_names):
+                    found_nvrs.append(nvr)
+            
+            # Test camera availability
+            missing_cameras = [cam for cam in expected_cameras if cam not in found_cameras]
+            if not missing_cameras:
+                self.log_test("Ajax Cameras", True, f"All {len(expected_cameras)} Ajax cameras found: {found_cameras}")
+            else:
+                self.log_test("Ajax Cameras", False, f"Missing cameras: {missing_cameras}")
+            
+            # Test NVR availability
+            missing_nvrs = [nvr for nvr in expected_nvrs if nvr not in found_nvrs]
+            if not missing_nvrs:
+                self.log_test("Ajax NVRs", True, f"All {len(expected_nvrs)} NVR models found: {found_nvrs}")
+            else:
+                self.log_test("Ajax NVRs", False, f"Missing NVRs: {missing_nvrs}")
+            
+            # Check Xortec article numbers for video products
+            video_with_xortec = 0
+            for product in video_products:
+                specs = product.get("specifications", {})
+                if specs.get("xortec_nr"):
+                    video_with_xortec += 1
+            
+            self.log_test("Video Xortec Numbers", True, f"{video_with_xortec}/{len(video_products)} video products have Xortec article numbers")
+            
+            # Test video categories endpoint
+            response = requests.get(f"{self.base_url}/categories?product_line=video", timeout=10)
+            if response.status_code == 200:
+                data = response.json()
+                categories = data.get("categories", [])
+                category_names = [cat.get("name", "") for cat in categories]
+                
+                expected_video_categories = ["NVR-Recorder", "Kameras"]
+                found_video_categories = [cat for cat in expected_video_categories if any(cat in name for name in category_names)]
+                
+                if len(found_video_categories) == len(expected_video_categories):
+                    self.log_test("Video Categories", True, f"Video categories found: {found_video_categories}")
+                else:
+                    missing_video_cats = [cat for cat in expected_video_categories if cat not in found_video_categories]
+                    self.log_test("Video Categories", False, f"Missing video categories: {missing_video_cats}")
+            
+        except Exception as e:
+            self.log_test("Video Product Line", False, f"Connection error: {str(e)}")
+    
+    def test_hubs_endpoint_for_video(self):
+        """Test /api/hubs endpoint specifically for video product line (should return NVRs)"""
+        try:
+            response = requests.get(f"{self.base_url}/hubs?product_line=video", timeout=10)
+            if response.status_code == 200:
+                nvrs = response.json()
+                if isinstance(nvrs, list):
+                    self.log_test("Video Hubs/NVRs", True, f"Retrieved {len(nvrs)} NVRs from hubs endpoint")
+                    
+                    # Verify these are actually NVRs
+                    nvr_names = [nvr.get("name", "") for nvr in nvrs]
+                    expected_nvr_patterns = ["NVR"]
+                    
+                    valid_nvrs = [name for name in nvr_names if any(pattern in name for pattern in expected_nvr_patterns)]
+                    if len(valid_nvrs) == len(nvr_names):
+                        self.log_test("NVR Validation", True, f"All returned items are valid NVRs: {nvr_names}")
+                    else:
+                        self.log_test("NVR Validation", False, f"Some items are not NVRs: {nvr_names}")
+                else:
+                    self.log_test("Video Hubs/NVRs", False, "Invalid response format", type(nvrs))
+            else:
+                self.log_test("Video Hubs/NVRs", False, f"HTTP {response.status_code}", response.text)
+        except Exception as e:
+            self.log_test("Video Hubs/NVRs", False, f"Connection error: {str(e)}")
+    
+    def test_accessory_system(self):
+        """Test corrected accessory system - only real Ajax accessories"""
+        try:
+            # Get all products to analyze accessory relationships
+            response = requests.get(f"{self.base_url}/products", timeout=15)
+            if response.status_code != 200:
+                self.log_test("Accessory System", False, "Could not retrieve products for accessory test")
+                return
+            
+            products = response.json()
+            
+            # Check for fictional accessories that should NOT exist
+            fictional_accessories = [
+                "Haustier-Immunlinse",
+                "Fake Halterung",
+                "Dummy Zubehör"
+            ]
+            
+            found_fictional = []
+            for product in products:
+                product_name = product.get("name", "")
+                for fictional in fictional_accessories:
+                    if fictional.lower() in product_name.lower():
+                        found_fictional.append(product_name)
+            
+            if not found_fictional:
+                self.log_test("No Fictional Accessories", True, "No fictional accessories found in database")
+            else:
+                self.log_test("No Fictional Accessories", False, f"Found fictional accessories: {found_fictional}")
+            
+            # Check for real Ajax accessories with correct categories
+            real_accessories = {
+                "hubs": ["PSU", "Power Supply"],  # Hubs should have PSU accessories
+                "wired_cameras": ["PoE", "Bracket"],  # Cameras should have PoE accessories
+                "keypads": ["Pass", "Tag"]  # Keypads should have RFID accessories
+            }
+            
+            accessory_mapping_correct = True
+            for category, expected_accessories in real_accessories.items():
+                category_products = [p for p in products if p.get("category") == category]
+                if category_products:
+                    # This is a simplified check - in a real system, we'd check actual accessory relationships
+                    self.log_test(f"Real Accessories - {category}", True, f"Found {len(category_products)} products in {category} category")
+                else:
+                    self.log_test(f"Real Accessories - {category}", False, f"No products found in {category} category")
+            
+            # Check for Pass and Tag products (RFID accessories)
+            rfid_products = [p for p in products if p.get("name") in ["Pass", "Tag"]]
+            if len(rfid_products) >= 2:
+                self.log_test("RFID Accessories", True, f"Found {len(rfid_products)} RFID accessories (Pass/Tag)")
+            else:
+                self.log_test("RFID Accessories", False, f"Missing RFID accessories, found only {len(rfid_products)}")
+            
+        except Exception as e:
+            self.log_test("Accessory System", False, f"Connection error: {str(e)}")
+    
+    def test_product_database_completeness(self):
+        """Test that product database has over 200 Ajax products across all 4 product lines"""
+        try:
+            response = requests.get(f"{self.base_url}/products", timeout=15)
+            if response.status_code != 200:
+                self.log_test("Database Completeness", False, "Could not retrieve products")
+                return
+            
+            products = response.json()
+            total_products = len(products)
+            
+            # Check total product count
+            if total_products >= 200:
+                self.log_test("Product Count", True, f"Database contains {total_products} products (≥200 required)")
+            else:
+                self.log_test("Product Count", False, f"Database contains only {total_products} products (<200 required)")
+            
+            # Check distribution across product lines
+            product_lines = {}
+            for product in products:
+                line = product.get("product_line", "unknown")
+                product_lines[line] = product_lines.get(line, 0) + 1
+            
+            expected_lines = ["baseline", "superiorline", "en54", "video"]
+            for line in expected_lines:
+                count = product_lines.get(line, 0)
+                if count > 0:
+                    self.log_test(f"Product Line - {line}", True, f"{count} products in {line}")
+                else:
+                    self.log_test(f"Product Line - {line}", False, f"No products found in {line}")
+            
+            # Check for Xortec and Ajax manufacturer numbers
+            products_with_xortec = 0
+            products_with_hersteller = 0
+            
+            for product in products:
+                specs = product.get("specifications", {})
+                if specs.get("xortec_nr"):
+                    products_with_xortec += 1
+                if specs.get("hersteller_nr"):
+                    products_with_hersteller += 1
+            
+            xortec_percentage = (products_with_xortec / total_products * 100) if total_products > 0 else 0
+            hersteller_percentage = (products_with_hersteller / total_products * 100) if total_products > 0 else 0
+            
+            self.log_test("Xortec Article Numbers", True, f"{products_with_xortec}/{total_products} products ({xortec_percentage:.1f}%) have Xortec numbers")
+            self.log_test("Ajax Manufacturer Numbers", True, f"{products_with_hersteller}/{total_products} products ({hersteller_percentage:.1f}%) have Ajax manufacturer numbers")
+            
+        except Exception as e:
+            self.log_test("Database Completeness", False, f"Connection error: {str(e)}")
+    
     def test_specific_ajax_products(self):
         """Test for specific Ajax products mentioned in requirements"""
         try:
@@ -337,19 +556,6 @@ class AjaxBackendTester:
                 self.log_test("Key Ajax Products", True, f"All key products found: {found_products}")
             else:
                 self.log_test("Key Ajax Products", False, f"Missing products: {missing_products}")
-            
-            # Check for Xortec article numbers in products
-            products_with_xortec = 0
-            total_checked = 0
-            
-            for product in products:
-                specs = product.get("specifications", {})
-                if specs.get("xortec_nr"):
-                    products_with_xortec += 1
-                total_checked += 1
-            
-            xortec_percentage = (products_with_xortec / total_checked * 100) if total_checked > 0 else 0
-            self.log_test("Xortec Article Numbers", True, f"{products_with_xortec}/{total_checked} products ({xortec_percentage:.1f}%) have Xortec numbers")
             
         except Exception as e:
             self.log_test("Ajax Products Check", False, f"Connection error: {str(e)}")

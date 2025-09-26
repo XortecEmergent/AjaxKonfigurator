@@ -45,18 +45,62 @@ function App() {
 
   const totalSteps = 5;
 
-  // Hub capacity limits based on Ajax specifications
+  // Hub/NVR capacity limits based on Ajax specifications
   const getHubCapacity = (hubName) => {
     const capacityMap = {
+      // Ajax Hubs
       'Hub (2G) Jeweller': { devices: 100, cameras: 10 },
       'Hub 2 (2G) Jeweller': { devices: 100, cameras: 25 },
       'Hub 2 (4G) Jeweller': { devices: 100, cameras: 25 },
       'Hub 2 Plus Jeweller': { devices: 200, cameras: 100 },
       'Hub BP Jeweller': { devices: 200, cameras: 25 },
       'Superior Hub Hybrid (4G)': { devices: 400, cameras: 100 },
-      'EN54 Fire Hub Jeweller': { devices: 200, cameras: 0 }
+      'EN54 Fire Hub Jeweller': { devices: 200, cameras: 0 },
+      
+      // Ajax NVRs - nur Kameras relevant
+      'NVR (8-ch)': { devices: 0, cameras: 8 },
+      'NVR (16-ch)': { devices: 0, cameras: 16 },
+      'NVR DC (8-ch)': { devices: 0, cameras: 8 },
+      'NVR DC (16-ch)': { devices: 0, cameras: 16 }
     };
     return capacityMap[hubName] || { devices: 100, cameras: 10 };
+  };
+
+  // Calculate total capacity when multiple hubs/NVRs are selected
+  const getTotalCapacity = () => {
+    if (!selectedHub) return { devices: 0, cameras: 0 };
+    
+    // For video product line, we might have multiple NVRs selected
+    if (selectedProductLine === 'video') {
+      // Count all selected NVRs and add their capacities
+      const selectedNVRs = selectedProducts.filter(productId => {
+        const product = products.find(p => p.id === productId);
+        return product && product.category === 'nvr';
+      });
+      
+      const totalCapacity = selectedNVRs.reduce((total, nvrId) => {
+        const nvr = products.find(p => p.id === nvrId);
+        if (nvr) {
+          const capacity = getHubCapacity(nvr.name);
+          const quantity = productQuantities[nvrId] || 1;
+          return {
+            devices: total.devices + (capacity.devices * quantity),
+            cameras: total.cameras + (capacity.cameras * quantity)
+          };
+        }
+        return total;
+      }, { devices: 0, cameras: 0 });
+      
+      return totalCapacity;
+    } else {
+      // For other product lines, use single hub capacity
+      const hubCapacity = getHubCapacity(selectedHub.name);
+      const hubQuantity = productQuantities[selectedHub.id] || 1;
+      return {
+        devices: hubCapacity.devices * hubQuantity,
+        cameras: hubCapacity.cameras * hubQuantity
+      };
+    }
   };
 
   // Check capacity limits and show warnings

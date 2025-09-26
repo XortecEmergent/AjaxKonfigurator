@@ -812,15 +812,24 @@ function App() {
             </CardHeader>
             <CardContent>
               {hubData && (
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-4 p-4 bg-gray-900/50 rounded-lg">
                   <img 
                     src={hubData.image_url} 
                     alt={hubData.name}
-                    className="w-16 h-16 object-contain bg-gray-900 rounded p-2"
+                    className="w-16 h-16 object-contain bg-gray-800 rounded p-2"
                   />
-                  <div>
-                    <h4 className="text-white font-medium">{hubData.name}</h4>
+                  <div className="flex-1">
+                    <h4 className="text-white text-lg font-medium">{hubData.name}</h4>
                     <p className="text-gray-400 text-sm">{hubData.short_description}</p>
+                    {hubData.specifications.xortec_nr && (
+                      <p className="text-orange-400 text-sm">
+                        Xortec-Nr.: {hubData.specifications.xortec_nr}
+                      </p>
+                    )}
+                    <div className="flex gap-4 mt-2 text-xs text-gray-400">
+                      <span>Max. Geräte: {hubData.specifications.max_devices || '100'}</span>
+                      <span>Reichweite: {hubData.specifications.range || 'bis zu 2000m'}</span>
+                    </div>
                   </div>
                 </div>
               )}

@@ -97,9 +97,82 @@ function App() {
     }));
   };
 
-  // Start configurator from landing page
-  const startConfigurator = () => {
-    setShowLandingPage(false);
+  // Get accessories for a specific product
+  const getProductAccessories = (productId) => {
+    const product = products.find(p => p.id === productId);
+    if (!product) return [];
+    
+    // Define accessories based on product type
+    const accessoryMap = {
+      // Hubs need power supplies and mounting accessories
+      'hubs': [
+        { id: 'psu_12v', name: '12V PSU für Hub', xortec_nr: '600810055', required: true },
+        { id: 'mounting_kit', name: 'Montage-Kit Hub', xortec_nr: '600810226', required: false },
+        { id: 'backup_battery', name: 'Backup Batterie', xortec_nr: '600810227', required: false }
+      ],
+      // Motion detectors need mounting brackets
+      'motion_detectors': [
+        { id: 'bracket_motion', name: 'Halterung für Bewegungsmelder', xortec_nr: '600810228', required: false },
+        { id: 'pet_immune_lens', name: 'Haustier-Immunlinse', xortec_nr: '600810229', required: false }
+      ],
+      // Door contacts need magnets and mounting
+      'opening_detectors': [
+        { id: 'additional_magnet', name: 'Zusätzlicher Magnet', xortec_nr: '600810230', required: false },
+        { id: 'gap_sensor', name: 'Gap Sensor für große Spalte', xortec_nr: '600810231', required: false }
+      ],
+      // Sirens need backup batteries
+      'sirens': [
+        { id: 'siren_battery', name: 'Backup Batterie für Sirene', xortec_nr: '600810232', required: true },
+        { id: 'siren_mount', name: 'Sirenen Wandhalterung', xortec_nr: '600810233', required: false }
+      ],
+      // Keypads need cards and keyfobs
+      'keypads': [
+        { id: 'pass_cards', name: 'DESFire Karten (5er Pack)', xortec_nr: '600810234', required: false },
+        { id: 'keyfobs', name: 'Tag Schlüsselanhänger (5er Pack)', xortec_nr: '600810235', required: false }
+      ],
+      // Cameras need power and storage
+      'wired_cameras': [
+        { id: 'poe_injector', name: 'PoE Injector 30W', xortec_nr: '600810236', required: true },
+        { id: 'sd_card', name: 'MicroSD 32GB', xortec_nr: '600810237', required: false }
+      ]
+    };
+    
+    return accessoryMap[product.category] || [];
+  };
+
+  // Show accessory modal for product
+  const showProductAccessories = (productId) => {
+    const accessories = getProductAccessories(productId);
+    setAccessoryProducts(accessories);
+    setShowAccessoryModal(productId);
+  };
+
+  // Add accessory to selection
+  const toggleAccessory = (productId, accessory) => {
+    const key = `${productId}_${accessory.id}`;
+    const isSelected = selectedAccessories[key];
+    
+    if (isSelected) {
+      const newAccessories = { ...selectedAccessories };
+      delete newAccessories[key];
+      setSelectedAccessories(newAccessories);
+    } else {
+      setSelectedAccessories(prev => ({
+        ...prev,
+        [key]: { ...accessory, quantity: 1, parentProduct: productId }
+      }));
+    }
+  };
+
+  // Update accessory quantity
+  const updateAccessoryQuantity = (productId, accessoryId, quantity) => {
+    const key = `${productId}_${accessoryId}`;
+    if (selectedAccessories[key]) {
+      setSelectedAccessories(prev => ({
+        ...prev,
+        [key]: { ...prev[key], quantity: Math.max(0, quantity) }
+      }));
+    }
   };
 
   // API Calls

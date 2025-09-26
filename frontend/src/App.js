@@ -167,6 +167,12 @@ function App() {
     }
   };
 
+  const prevStep = () => {
+    if (currentStep > 1) {
+      setCurrentStep(currentStep - 1);
+    }
+  };
+
   const selectProductLine = (productLine) => {
     setSelectedProductLine(productLine.id);
     fetchProducts(productLine.id);

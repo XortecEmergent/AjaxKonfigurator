@@ -152,7 +152,14 @@ def get_product_image_url(product_name, category):
 
         # RFID Access Control
         'Pass': 'https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fpass_5c971501a7%402.png&1688287078',
-        'Tag': 'https://ajax.systems/api/cdn-img/?img=%2Fupload%2Ftag_cf7180faf3%402.png&1688287078'
+        'Tag': 'https://ajax.systems/api/cdn-img/?img=%2Fupload%2Ftag_cf7180faf3%402.png&1688287078',
+
+        # Fire Detectors - High quality smoke detector images (real Ajax when available)
+        'FireProtect Jeweller': 'https://images.unsplash.com/photo-1609205807107-e8ec2120f9de?w=400&h=300&fit=crop&crop=center',
+        'FireProtect 2 RB (Heat/Smoke) Jeweller': 'https://images.unsplash.com/photo-1609205807107-e8ec2120f9de?w=400&h=300&fit=crop&crop=center',
+        'FireProtect 2 RB (Heat/Smoke/CO) Jeweller': 'https://images.unsplash.com/photo-1562408590-e32931084e23?w=400&h=300&fit=crop&crop=center',
+        'Manual Call Point (rot)': 'https://images.unsplash.com/photo-1562408590-e32931084e23?w=400&h=300&fit=crop&crop=center',
+        'Manual Call Point (blau)': 'https://images.unsplash.com/photo-1562408590-e32931084e23?w=400&h=300&fit=crop&crop=center'
     }
     
     # If we have a specific image for this product, use it

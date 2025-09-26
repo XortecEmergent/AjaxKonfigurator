@@ -229,6 +229,43 @@ function App() {
     }
   };
 
+  const fetchProductsByLine = async (productLine) => {
+    try {
+      setLoading(true);
+      
+      // Different endpoints based on product line
+      if (productLine === 'video') {
+        // For video line, get NVRs instead of hubs
+        const [categoriesRes, productsRes] = await Promise.all([
+          axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/categories?product_line=${productLine}`),
+          axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/products?product_line=${productLine}`)
+        ]);
+        
+        setCategories(categoriesRes.data);
+        setProducts(productsRes.data);
+        
+        // Get NVRs instead of hubs for video line
+        const nvrs = productsRes.data.filter(product => product.category === 'nvr');
+        setHubs(nvrs);
+      } else {
+        // For other lines, get hubs normally
+        const [categoriesRes, productsRes, hubsRes] = await Promise.all([
+          axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/categories?product_line=${productLine}`),
+          axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/products?product_line=${productLine}`),
+          axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/hubs?product_line=${productLine}`)
+        ]);
+        
+        setCategories(categoriesRes.data);
+        setProducts(productsRes.data);
+        setHubs(hubsRes.data);
+      }
+    } catch (error) {
+      console.error('Error fetching products:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const fetchCompatibleDevices = async (hubId) => {
     try {
       setLoading(true);

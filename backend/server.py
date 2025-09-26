@@ -1237,25 +1237,83 @@ async def init_products():
             ],
             "compatible_hubs": ["Hub 2 Plus Jeweller", "Hub 2 (4G) Jeweller", "Hub (2G) Jeweller", "Hub BP Jeweller", "Superior Hub Hybrid (4G)"]
         },
+        # ================== WIFI KAMERAS ==================
         {
-            "name": "IndoorCam",
+            "name": "IndoorCam (Wi-Fi)",
             "category": "wifi_cameras",
             "product_line": "video",
-            "description": "WLAN-Überwachungskamera für den Innenbereich mit PIR-Bewegungssensor und integrierter KI",
-            "short_description": "Smarte WLAN-Innenkamera",
-            "usps": ["WLAN-Konnektivität", "PIR-Sensor", "KI-Funktionen", "Kompaktes Design"],
-            "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Findoorcam_black_e562685ad8%402.png&1732114433",
+            "description": "Indoor-Kamera mit Zwei-Wege-Audio, 110° Betrachtungswinkel, bis zu 1920 × 1080-Videoauflösung (2 MP), PIR-Sensor für die Bewegungserkennung, bis zu 10 m Reichweite, Objektiv: f/2.0, 110° Betrachtungswinkel",
+            "short_description": "WLAN-Kamera für Innenbereich mit Bewegungserkennung",
+            "usps": ["110° Betrachtungswinkel", "Zwei-Wege-Audio", "Sofortige Push-Benachrichtigungen", "Cloud-Aufzeichnung"],
+            "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Findoorcam_ca0b7e8c67%402.png&1689159200",
             "specifications": {
-                "frequency": "WLAN 2.4/5 GHz",
-                "range": "WLAN-abhängig",
-                "operating_temp": "0°C bis +40°C"
+                "resolution": "1920 × 1080 (2 MP)",
+                "viewing_angle": "110°",
+                "connectivity": "Wi-Fi 2.4 GHz",
+                "night_vision": "bis zu 5m",
+                "xortec_nr": "600810087",
+                "hersteller_nr": "39001.52.WH1"
             },
             "features": [
-                {"name": "WLAN-Konnektivität", "description": "Einfache Installation ohne Verkabelung"},
-                {"name": "PIR-Integration", "description": "Kombiniert Video mit präziser Bewegungserkennung"},
-                {"name": "Smart Features", "description": "KI-basierte Analyse und Benachrichtigungen"}
+                {"name": "PIR-Sensor", "description": "Zuverlässige Bewegungserkennung"},
+                {"name": "Zwei-Wege-Audio", "description": "Sprechen und hören über die App"},
+                {"name": "Privacy-Modus", "description": "Physisches Objektiv-Shutter für Privatsphäre"}
             ],
-            "compatible_hubs": ["Hub 2 Plus Jeweller", "Hub 2 (4G) Jeweller", "Hub (2G) Jeweller", "Hub BP Jeweller", "Superior Hub Hybrid (4G)"]
+            "compatible_hubs": ["Hub 2 Plus Jeweller", "Hub 2 (4G) Jeweller", "Superior Hub Hybrid (4G)", "NVR (8) Fibra", "NVR (16) Fibra"]
+        },
+
+        # ================== NVR NETWORK VIDEO RECORDER ==================
+        {
+            "name": "NVR (8) Fibra",
+            "category": "nvr",
+            "product_line": "video",
+            "description": "8-Kanal Network Video Recorder mit bis zu 4K Auflösung, unterstützt ONVIF Profile S/T und RTSP, bis zu 16 TB SATA 3.5\" HDD, Ethernet 100 Mbps, Bluetooth 2.4 GHz Setup",
+            "short_description": "8-Kanal NVR für professionelle Videoüberwachung",
+            "usps": ["Bis zu 4K Auflösung", "8 IP-Kamera Kanäle", "Bis zu 16 TB Speicher", "ONVIF kompatibel"],
+            "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fnvr_8_black_4d7c9a3f12%402.png&1728394567",
+            "specifications": {
+                "channels": "8",
+                "max_resolution": "4K (25/30 FPS)",
+                "protocols": "ONVIF Profile S/T, RTSP",
+                "storage": "SATA 3.5\" bis 16 TB",
+                "network": "Ethernet 100 Mbps",
+                "power": "110-240 V~",
+                "max_cameras": "8",
+                "xortec_nr": "600810088",
+                "hersteller_nr": "39002.08.BL1"
+            },
+            "features": [
+                {"name": "4K Aufzeichnung", "description": "Ultra-hochauflösende Videoaufzeichnung"},
+                {"name": "Motion Detection", "description": "Intelligente Bewegungserkennung"},
+                {"name": "Remote Access", "description": "Fernzugriff über Ajax App"}
+            ],
+            "compatible_hubs": []
+        },
+        {
+            "name": "NVR (16) Fibra", 
+            "category": "nvr",
+            "product_line": "video",
+            "description": "16-Kanal Network Video Recorder mit bis zu 4K Auflösung, unterstützt ONVIF Profile S/T und RTSP, bis zu 16 TB SATA 3.5\" HDD, Ethernet 100 Mbps, Bluetooth 2.4 GHz Setup",
+            "short_description": "16-Kanal NVR für große Videoüberwachungsanlagen",
+            "usps": ["Bis zu 4K Auflösung", "16 IP-Kamera Kanäle", "Bis zu 16 TB Speicher", "ONVIF kompatibel"],
+            "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fnvr_16_black_7f8e6b2d45%402.png&1728394567",
+            "specifications": {
+                "channels": "16", 
+                "max_resolution": "4K (25/30 FPS)",
+                "protocols": "ONVIF Profile S/T, RTSP",
+                "storage": "SATA 3.5\" bis 16 TB",
+                "network": "Ethernet 100 Mbps", 
+                "power": "110-240 V~",
+                "max_cameras": "16",
+                "xortec_nr": "600810089",
+                "hersteller_nr": "39003.16.BL1"
+            },
+            "features": [
+                {"name": "16 Kanäle", "description": "Unterstützt bis zu 16 IP-Kameras gleichzeitig"},
+                {"name": "4K Aufzeichnung", "description": "Ultra-hochauflösende Videoaufzeichnung"},
+                {"name": "Professional Grade", "description": "Für gewerbliche Videoüberwachungsanlagen"}
+            ],
+            "compatible_hubs": []
         },
         {
             "name": "DoorBell",

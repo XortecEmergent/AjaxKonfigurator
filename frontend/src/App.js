@@ -35,6 +35,8 @@ function App() {
   const [compatibleProducts, setCompatibleProducts] = useState([]);
   const [capacityWarnings, setCapacityWarnings] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [productColors, setProductColors] = useState({});
+  const [completedSteps, setCompletedSteps] = useState([]);
   const [configuration, setConfiguration] = useState({
     name: '',
     description: ''

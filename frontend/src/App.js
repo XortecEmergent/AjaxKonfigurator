@@ -33,6 +33,69 @@ function App() {
 
   const totalSteps = 5;
 
+  // Hub capacity limits based on Ajax specifications
+  const getHubCapacity = (hubName) => {
+    const capacityMap = {
+      'Hub (2G) Jeweller': { devices: 100, cameras: 10 },
+      'Hub 2 (2G) Jeweller': { devices: 100, cameras: 25 },
+      'Hub 2 (4G) Jeweller': { devices: 100, cameras: 25 },
+      'Hub 2 Plus Jeweller': { devices: 200, cameras: 100 },
+      'Hub BP Jeweller': { devices: 200, cameras: 25 },
+      'Superior Hub Hybrid (4G)': { devices: 400, cameras: 100 },
+      'EN54 Fire Hub Jeweller': { devices: 200, cameras: 0 }
+    };
+    return capacityMap[hubName] || { devices: 100, cameras: 10 };
+  };
+
+  // Check capacity limits and show warnings
+  const checkCapacityLimits = () => {
+    if (!selectedHub) return [];
+    
+    const hubCapacity = getHubCapacity(selectedHub.name);
+    const warnings = [];
+    
+    // Count total devices and cameras
+    const totalDevices = Object.values(productQuantities).reduce((sum, qty) => sum + qty, 0);
+    const totalCameras = Object.keys(productQuantities).reduce((sum, productId) => {
+      const product = products.find(p => p.id === productId);
+      const quantity = productQuantities[productId] || 0;
+      if (product && (product.category === 'wired_cameras' || product.category === 'wifi_cameras')) {
+        return sum + quantity;
+      }
+      return sum;
+    }, 0);
+    
+    if (totalDevices > hubCapacity.devices) {
+      warnings.push({
+        type: 'devices',
+        message: `Geräteanzahl (${totalDevices}) überschreitet Hub-Kapazität (${hubCapacity.devices})`
+      });
+    }
+    
+    if (totalCameras > hubCapacity.cameras) {
+      warnings.push({
+        type: 'cameras',
+        message: `Kameraanzahl (${totalCameras}) überschreitet Hub-Kapazität (${hubCapacity.cameras})`
+      });
+    }
+    
+    setCapacityWarnings(warnings);
+    return warnings;
+  };
+
+  // Update product quantity
+  const updateProductQuantity = (productId, quantity) => {
+    setProductQuantities(prev => ({
+      ...prev,
+      [productId]: Math.max(0, quantity)
+    }));
+  };
+
+  // Start configurator from landing page
+  const startConfigurator = () => {
+    setShowLandingPage(false);
+  };
+
   // API Calls
   const fetchProductLines = async () => {
     try {

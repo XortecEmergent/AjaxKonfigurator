@@ -121,9 +121,9 @@ const LandingPage = ({ onStartConfigurator }) => {
             <div className="relative">
               <div className="absolute inset-0 bg-gradient-to-r from-orange-600 to-orange-400 rounded-2xl transform rotate-3"></div>
               <img 
-                src="https://images.unsplash.com/photo-1567167680325-2203584962b2?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2Nzh8MHwxfHNlYXJjaHwyfHxhamF4JTIwc2VjdXJpdHklMjBzeXN0ZW18ZW58MHx8fGJsYWNrX2FuZF93aGl0ZXwxNzU4ODY0MTMyfDA&ixlib=rb-4.1.0&q=85"
+                src="https://customer-assets.emergentagent.com/job_smart-security-8/artifacts/2d7jgrvk_image.png"
                 alt="Ajax Sicherheitssystem"
-                className="relative z-10 rounded-2xl shadow-2xl w-full h-96 object-cover"
+                className="relative z-10 rounded-2xl shadow-2xl w-full h-96 object-contain bg-white p-4"
               />
             </div>
           </div>

@@ -10,6 +10,8 @@ import { ArrowRight, ArrowLeft, Settings, ShoppingCart, Download, CheckCircle2, 
 import LandingPage from './components/LandingPage';
 import Impressum from './components/Impressum';
 import AccessoryModal from './components/AccessoryModal';
+import StepNavigation from './components/StepNavigation';
+import ColorSelector from './components/ColorSelector';
 import { downloadExcel, generateQuotePDF } from './utils/excelExport';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;

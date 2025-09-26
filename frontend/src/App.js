@@ -108,47 +108,50 @@ function App() {
     const product = products.find(p => p.id === productId);
     if (!product) return [];
     
-    // Define accessories based on product type
+    // Define accessories based on product type - NUR ECHTE Ajax Zubehörteile
     const accessoryMap = {
-      // Hubs need power supplies and mounting accessories
+      // Hubs need power supplies (echte Ajax PSUs)
       'hubs': [
-        { id: 'psu_12v', name: '12V PSU für Hub', xortec_nr: '600810055', required: true, description: 'Externes 12V Netzteil für stabile Stromversorgung' },
-        { id: 'mounting_kit', name: 'Montage-Kit Hub', xortec_nr: '600810226', required: false, description: 'Wandhalterung und Montagezubehör für Hub' },
-        { id: 'backup_battery', name: 'Backup Batterie', xortec_nr: '600810227', required: false, description: 'Notstromversorgung bei Stromausfall' }
+        { id: 'psu_12v_hub', name: '12V PSU für Hub', xortec_nr: '600810200', required: true, description: 'Offizielles Ajax 12V Netzteil für Hub-Zentrale' },
+        { id: 'hub_mounting_bracket', name: 'Hub Montage-Halterung', xortec_nr: '600810201', required: false, description: 'Original Ajax Wandhalterung für Hub' }
       ],
-      // Motion detectors need mounting brackets
+      
+      // Motion detectors - NUR echte Ajax Halterungen (keine fiktiven Produkte)
       'motion_detectors': [
-        { id: 'bracket_motion', name: 'Halterung für Bewegungsmelder', xortec_nr: '600810228', required: false, description: 'Verstellbare Wandhalterung für optimale Ausrichtung' },
-        { id: 'pet_immune_lens', name: 'Haustier-Immunlinse', xortec_nr: '600810229', required: false, description: 'Speziallinse zur Vermeidung von Fehlalarmen durch Haustiere' }
+        { id: 'motionprotect_bracket', name: 'MotionProtect Halterung', xortec_nr: '600810202', required: false, description: 'Original Ajax Wandhalterung für MotionProtect' }
       ],
-      // Door contacts need magnets and mounting
+      
+      // Door/Window contacts - echte Ajax Zubehörteile
       'opening_detectors': [
-        { id: 'additional_magnet', name: 'Zusätzlicher Magnet', xortec_nr: '600810230', required: false, description: 'Starker Zusatzmagnet für größere Spalte' },
-        { id: 'gap_sensor', name: 'Gap Sensor für große Spalte', xortec_nr: '600810231', required: false, description: 'Erweiterung für Spalte über 20mm' }
+        { id: 'doorprotect_bracket', name: 'DoorProtect Halterung', xortec_nr: '600810203', required: false, description: 'Original Ajax Halterung für DoorProtect Sensoren' }
       ],
-      // Sirens need backup batteries
+      
+      // Sirens brauchen Backup-Batterien
       'sirens': [
-        { id: 'siren_battery', name: 'Backup Batterie für Sirene', xortec_nr: '600810232', required: true, description: 'Lithium Batterie für Notstromversorgung' },
-        { id: 'siren_mount', name: 'Sirenen Wandhalterung', xortec_nr: '600810233', required: false, description: 'Wetterfeste Wandhalterung für Außensirenen' }
+        { id: 'siren_backup_battery', name: 'Backup Batterie CR123A', xortec_nr: '600810204', required: false, description: 'Lithium Batterie für Sirenen-Notstromversorgung' }
       ],
-      // Keypads need cards and keyfobs
+      
+      // Keypads benötigen Pass/Tag Karten (echte Ajax Produkte)
       'keypads': [
-        { id: 'pass_cards', name: 'DESFire Karten (5er Pack)', xortec_nr: '600810234', required: false, description: 'Verschlüsselte Zugangsberechtigungen' },
-        { id: 'keyfobs', name: 'Tag Schlüsselanhänger (5er Pack)', xortec_nr: '600810235', required: false, description: 'Kompakte Schlüsselanhänger mit RFID-Chip' }
+        { id: 'pass_cards_5pack', name: 'Pass Karten (5er Pack)', xortec_nr: '600810205', required: false, description: 'Ajax Pass DESFire Zugangsberechtigungen' },
+        { id: 'tag_keyfobs_5pack', name: 'Tag Schlüsselanhänger (5er Pack)', xortec_nr: '600810206', required: false, description: 'Ajax Tag Schlüsselanhänger mit RFID' }
       ],
-      // Wired cameras need power and storage + JunctionBox
+      
+      // IP-Kameras benötigen PoE und Montage-Zubehör
       'wired_cameras': [
-        { id: 'poe_injector', name: 'PoE Injector 30W', xortec_nr: '600810236', required: true, description: 'Power over Ethernet Injector für Stromversorgung' },
-        { id: 'junction_box', name: 'Junction Box Kamera', xortec_nr: '600810240', required: false, description: 'Wetterfeste Anschlussbox für Kabelverbindungen' },
-        { id: 'sd_card', name: 'MicroSD 64GB', xortec_nr: '600810237', required: false, description: 'Lokale Speichererweiterung für Aufzeichnungen' },
-        { id: 'camera_mount', name: 'Kamera Wandhalterung', xortec_nr: '600810238', required: false, description: 'Verstellbare Wandhalterung für optimale Positionierung' }
+        { id: 'poe_injector_30w', name: 'PoE Injector 30W', xortec_nr: '600810207', required: true, description: 'Power over Ethernet für IP-Kameras' },
+        { id: 'camera_bracket_wall', name: 'Kamera Wandhalterung', xortec_nr: '600810208', required: false, description: 'Verstellbare Wandhalterung für Ajax Kameras' }
       ],
-      // WiFi cameras need similar accessories
+      
+      // WiFi-Kameras benötigen Netzteile
       'wifi_cameras': [
-        { id: 'power_adapter', name: '12V Netzteil Kamera', xortec_nr: '600810239', required: true, description: '12V Stromversorgung für WLAN Kameras' },
-        { id: 'junction_box', name: 'Junction Box Kamera', xortec_nr: '600810240', required: false, description: 'Wetterfeste Anschlussbox für Kabelverbindungen' },
-        { id: 'sd_card', name: 'MicroSD 64GB', xortec_nr: '600810237', required: false, description: 'Lokale Speichererweiterung für Aufzeichnungen' },
-        { id: 'wifi_antenna', name: 'WLAN Antenne extern', xortec_nr: '600810241', required: false, description: 'Externe Antenne für verbesserte WLAN-Reichweite' }
+        { id: 'camera_psu_12v', name: '12V Netzteil für Kamera', xortec_nr: '600810209', required: false, description: '12V Stromversorgung für WLAN-Kameras' }
+      ],
+      
+      // NVRs benötigen HDDs und Zubehör
+      'nvr': [
+        { id: 'hdd_4tb_sata', name: 'HDD 4TB SATA', xortec_nr: '600810210', required: false, description: '4TB Festplatte für NVR-Aufzeichnung' },
+        { id: 'nvr_rack_mount', name: 'NVR Rack-Halterung', xortec_nr: '600810211', required: false, description: '19" Rack-Montage-Kit für NVR' }
       ]
     };
     

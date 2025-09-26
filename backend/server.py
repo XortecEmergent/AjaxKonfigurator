@@ -91,22 +91,62 @@ class ConfigurationCreate(BaseModel):
 def get_product_image_url(product_name, category):
     """Get appropriate product image URL based on product name and category"""
     
-    # High-quality placeholder images for different Ajax product categories
+    # High-quality stock images for different Ajax product categories
     category_images = {
-        'hubs': 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop&crop=center',
-        'motion_detectors': 'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=400&h=300&fit=crop&crop=center', 
-        'opening_detectors': 'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=400&h=300&fit=crop&crop=center',
-        'glass_break_detectors': 'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=400&h=300&fit=crop&crop=center',
-        'fire_detectors': 'https://images.unsplash.com/photo-1609205807107-e8ec2120f9de?w=400&h=300&fit=crop&crop=center',
-        'keypads': 'https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=400&h=300&fit=crop&crop=center',
-        'sirens': 'https://images.unsplash.com/photo-1609205807107-e8ec2120f9de?w=400&h=300&fit=crop&crop=center',
-        'buttons_keyfobs': 'https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=400&h=300&fit=crop&crop=center',
-        'range_extenders': 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop&crop=center',
-        'wired_cameras': 'https://images.unsplash.com/photo-1557804506-669a67965ba0?w=400&h=300&fit=crop&crop=center',
-        'wifi_cameras': 'https://images.unsplash.com/photo-1557804506-669a67965ba0?w=400&h=300&fit=crop&crop=center'
+        'hubs': 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=400&h=300&fit=crop&crop=center',  # Smart home hub
+        'motion_detectors': 'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=400&h=300&fit=crop&crop=center',  # Motion sensor
+        'opening_detectors': 'https://images.unsplash.com/photo-1586864387967-d02ef85d93e8?w=400&h=300&fit=crop&crop=center',  # Door sensor
+        'glass_break_detectors': 'https://images.unsplash.com/photo-1586864387967-d02ef85d93e8?w=400&h=300&fit=crop&crop=center',  # Glass sensor
+        'fire_detectors': 'https://images.unsplash.com/photo-1609205807107-e8ec2120f9de?w=400&h=300&fit=crop&crop=center',  # Smoke detector
+        'keypads': 'https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=400&h=300&fit=crop&crop=center',  # Keypad
+        'sirens': 'https://images.unsplash.com/photo-1557804506-669a67965ba0?w=400&h=300&fit=crop&crop=center',  # Security siren
+        'buttons_keyfobs': 'https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=400&h=300&fit=crop&crop=center',  # Button/keyfob
+        'range_extenders': 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=400&h=300&fit=crop&crop=center',  # Network device
+        'wired_cameras': 'https://images.unsplash.com/photo-1557804506-669a67965ba0?w=400&h=300&fit=crop&crop=center',  # Security camera
+        'wifi_cameras': 'https://images.unsplash.com/photo-1557804506-669a67965ba0?w=400&h=300&fit=crop&crop=center'  # WiFi camera
     }
     
-    return category_images.get(category, 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop&crop=center')
+    # Specific product image overrides for better representation
+    product_specific_images = {
+        # Fire Detectors - Better smoke detector images
+        'FireProtect Jeweller': 'https://images.unsplash.com/photo-1609205807107-e8ec2120f9de?w=400&h=300&fit=crop&crop=center',
+        'FireProtect 2 RB (Heat/Smoke) Jeweller': 'https://images.unsplash.com/photo-1609205807107-e8ec2120f9de?w=400&h=300&fit=crop&crop=center',
+        'FireProtect 2 RB (Heat/Smoke/CO) Jeweller': 'https://images.unsplash.com/photo-1609205807107-e8ec2120f9de?w=400&h=300&fit=crop&crop=center',
+        'Manual Call Point (rot)': 'https://images.unsplash.com/photo-1562408590-e32931084e23?w=400&h=300&fit=crop&crop=center',
+        'Manual Call Point (blau)': 'https://images.unsplash.com/photo-1562408590-e32931084e23?w=400&h=300&fit=crop&crop=center',
+        
+        # Hubs - Professional smart home devices
+        'Hub 2 Plus Jeweller': 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=400&h=300&fit=crop&crop=center',
+        'Hub 2 (4G) Jeweller': 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=400&h=300&fit=crop&crop=center',
+        'EN54 Fire Hub Jeweller': 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=400&h=300&fit=crop&crop=center',
+        
+        # Motion Detectors - Professional motion sensors
+        'MotionProtect Jeweller': 'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=400&h=300&fit=crop&crop=center',
+        'MotionProtect Plus Jeweller': 'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=400&h=300&fit=crop&crop=center',
+        'MotionCam (PhOD) Jeweller': 'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=400&h=300&fit=crop&crop=center',
+        
+        # Door/Window Sensors
+        'DoorProtect Jeweller': 'https://images.unsplash.com/photo-1586864387967-d02ef85d93e8?w=400&h=300&fit=crop&crop=center',
+        'DoorProtect Plus Jeweller': 'https://images.unsplash.com/photo-1586864387967-d02ef85d93e8?w=400&h=300&fit=crop&crop=center',
+        
+        # Cameras - Professional security cameras
+        'TurretCam Fibra': 'https://images.unsplash.com/photo-1557804506-669a67965ba0?w=400&h=300&fit=crop&crop=center',
+        'BulletCam Fibra': 'https://images.unsplash.com/photo-1557804506-669a67965ba0?w=400&h=300&fit=crop&crop=center',
+        'DomeCam Fibra': 'https://images.unsplash.com/photo-1557804506-669a67965ba0?w=400&h=300&fit=crop&crop=center',
+        'IndoorCam (Wi-Fi)': 'https://images.unsplash.com/photo-1557804506-669a67965ba0?w=400&h=300&fit=crop&crop=center',
+        
+        # Keypads and Controls
+        'Keypad Plus Jeweller': 'https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=400&h=300&fit=crop&crop=center',
+        'KeyPad TouchScreen Plus Jeweller': 'https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=400&h=300&fit=crop&crop=center',
+        
+        # Sirens
+        'HomeSiren Jeweller': 'https://images.unsplash.com/photo-1557804506-669a67965ba0?w=400&h=300&fit=crop&crop=center',
+        'StreetSiren Jeweller': 'https://images.unsplash.com/photo-1557804506-669a67965ba0?w=400&h=300&fit=crop&crop=center',
+        'StreetSiren DoubleDeck Jeweller': 'https://images.unsplash.com/photo-1557804506-669a67965ba0?w=400&h=300&fit=crop&crop=center'
+    }
+    
+    # First check for product-specific image, then fallback to category
+    return product_specific_images.get(product_name) or category_images.get(category, 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=400&h=300&fit=crop&crop=center')
 
 async def init_products():
     # Check if products already exist

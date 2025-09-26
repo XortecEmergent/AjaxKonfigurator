@@ -779,6 +779,14 @@ function App() {
           PDF-Angebot generieren
         </Button>
         <Button 
+          onClick={generateExcel}
+          className="bg-green-600 hover:bg-green-700"
+          data-testid="generate-excel"
+        >
+          <FileSpreadsheet className="w-4 h-4 mr-2" />
+          Excel-Liste herunterladen
+        </Button>
+        <Button 
           onClick={() => window.location.reload()}
           variant="outline"
           className="border-gray-600 text-white hover:bg-gray-700"

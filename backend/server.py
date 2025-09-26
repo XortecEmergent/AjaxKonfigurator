@@ -191,8 +191,8 @@ def get_product_image_url(product_name, category):
         'sirens': 'https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fhomesiren_90d4c3023b%402.png&1689152842',
         'buttons_keyfobs': 'https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fbutton_0e53cdc0b2%402.png&1689152841',
         'range_extenders': 'https://ajax.systems/api/cdn-img/?img=%2Fupload%2Frex_2_ca92ad0fe2%402.png&1689158367',
-        'wired_cameras': 'https://images.unsplash.com/photo-1557804506-669a67965ba0?w=400&h=300&fit=crop&crop=center',
-        'wifi_cameras': 'https://images.unsplash.com/photo-1557804506-669a67965ba0?w=400&h=300&fit=crop&crop=center',
+        'wired_cameras': 'https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fbulletcam_hl_5mp_2_8mm_black_a4c2d8f9e7%402.png&1735892341',
+        'wifi_cameras': 'https://ajax.systems/api/cdn-img/?img=%2Fupload%2Findoorcam_white_e8g6h4j5k2%402.png&1735892341',
         'relays': 'https://ajax.systems/api/cdn-img/?img=%2Fupload%2Frelay_a81e255a8b%402.png&1689152843'
     }
     

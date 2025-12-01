@@ -243,7 +243,7 @@ def get_ajax_products_2025_complete():
         {
             "name": "Superior MotionProtect Jeweller",
             "category": "motion_detectors",
-            "product_line": "superiorline",
+            "product_line": "intrusion_superior",
             "description": "Wireless IR motion detector. Superior edition",
             "short_description": "Professional PIR-Bewegungsmelder",
             "usps": ["Grade 3 Zertifizierung", "Erweiterte Anti-Sabotage", "Professional Grade", "12m Erfassung"],
@@ -268,7 +268,7 @@ def get_ajax_products_2025_complete():
         {
             "name": "Superior MotionCam HD (PhOD) Jeweller",
             "category": "motion_detectors",
-            "product_line": "superiorline", 
+            "product_line": "intrusion_superior", 
             "description": "Wireless PIR motion detector with extended photo verification possibilities. Supports HD resolution.",
             "short_description": "NEU: Professional HD PIR mit Foto-Verifikation",
             "usps": ["NEU", "HD Auflösung", "Grade 3", "Professional"],

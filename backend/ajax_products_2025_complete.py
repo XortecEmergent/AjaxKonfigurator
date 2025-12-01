@@ -9,7 +9,7 @@ def get_ajax_products_2025_complete():
         {
             "name": "Hub 2 Plus Jeweller",
             "category": "hubs",
-            "product_line": "baseline",
+            "product_line": "intrusion_baseline",
             "description": "Wireless control panel with support for photo verification. Connectable via Wi-Fi, Ethernet, and two SIM cards (2G/3G/LTE)",
             "short_description": "Kabellose Alarmzentrale mit Foto-Verifikation",
             "usps": ["Foto-Verifikation", "4 Kommunikationswege", "Bis zu 200 Geräte", "Grade 2"],

@@ -225,16 +225,6 @@ async def get_product_lines():
     """Get available product lines"""
     return {
         "product_lines": get_ajax_product_lines_2025()
-            },
-            {
-                "id": "video",
-                "name": "Video",
-                "description": "Videoüberwachungsprodukte",
-                "target_group": "Videoüberwachung, Monitoring", 
-                "features": ["IP-Kameras", "WLAN-Kameras", "NVRs", "KI-Features"],
-                "image": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fvideo_surveillance_lg_c57510a21e%402.jpg&1744716097"
-            }
-        ]
     }
 
 @api_router.delete("/reset-products")

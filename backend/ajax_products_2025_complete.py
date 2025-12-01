@@ -104,7 +104,6 @@ def get_ajax_products_2025_complete():
                 "communication": ["Wi-Fi", "Ethernet", "2G/3G/LTE"],
                 "max_fire_detectors": 200,
                 "max_cameras": 100,
-                "max_fire_detectors": 200,
                 "operating_temp": "0°C bis +50°C",
                 "xortec_nr": "600810437",
                 "hersteller_nr": "25338.60.WH1"

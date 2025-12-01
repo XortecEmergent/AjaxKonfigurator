@@ -243,32 +243,18 @@ async def reset_products():
 
 @api_router.get("/categories")
 async def get_categories(product_line: str = None):
-    """Get product categories, with special handling for video product line"""
+    """Get product categories"""
     try:
-        if product_line == "video":
-            # For video line, provide NVR category instead of hubs
-            categories = [
-                {"id": "nvr", "name": "NVR-Recorder", "description": "Network Video Recorder"},
-                {"id": "wired_cameras", "name": "Kabelgebundene Kameras", "description": "IP-Kameras mit PoE"},
-                {"id": "wifi_cameras", "name": "WLAN-Kameras", "description": "Drahtlose IP-Kameras"},
-                {"id": "doorbells", "name": "Türklingeln", "description": "Video-Türklingeln"}
-            ]
-        else:
-            # For other lines, provide standard categories
-            categories = [
-                {"id": "hubs", "name": "Hub-Zentralen", "description": "Systemzentralen"},
-                {"id": "motion_detectors", "name": "Bewegungsmelder", "description": "PIR und Mikrowellen-Sensoren"},
-                {"id": "opening_detectors", "name": "Öffnungsmelder", "description": "Tür- und Fensterkontakte"},
-                {"id": "glass_break_detectors", "name": "Glasbruchmelder", "description": "Akustische Glasbruchmelder"},
-                {"id": "keypads", "name": "Bedienteile", "description": "Tastaturen und Touchscreens"},
-                {"id": "sirens", "name": "Sirenen", "description": "Innen- und Außensirenen"},
-                {"id": "fire_detectors", "name": "Brandmelder", "description": "Rauch- und Wärmemelder"},
-                {"id": "buttons_keyfobs", "name": "Knöpfe & Handsender", "description": "Notfallknöpfe und Fernbedienungen"},
-                {"id": "range_extenders", "name": "Funk-Repeater", "description": "Reichweitenverlängerung"},
-                {"id": "relays", "name": "Relais", "description": "Schalt- und Steuerrelais"}
-            ]
+        all_categories = get_ajax_categories_2025()
         
-        return {"categories": categories}
+        if product_line == "video":
+            # For video line, filter relevant categories
+            video_categories = [cat for cat in all_categories if cat["id"] in ["cameras", "wifi_cameras", "doorbells", "nvrs"]]
+            return {"categories": video_categories}
+        else:
+            # For other lines, exclude video-specific categories
+            other_categories = [cat for cat in all_categories if cat["id"] not in ["cameras", "wifi_cameras", "doorbells", "nvrs"]]
+            return {"categories": other_categories}
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error fetching categories: {str(e)}")
 

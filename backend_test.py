@@ -440,7 +440,7 @@ class AjaxBackendTester:
             # Check for real Ajax accessories with correct categories
             real_accessories = {
                 "hubs": ["PSU", "Power Supply"],  # Hubs should have PSU accessories
-                "wired_cameras": ["PoE", "Bracket"],  # Cameras should have PoE accessories
+                "cameras": ["PoE", "Bracket"],  # Cameras should have PoE accessories (note: category is "cameras" not "wired_cameras")
                 "keypads": ["Pass", "Tag"]  # Keypads should have RFID accessories
             }
             

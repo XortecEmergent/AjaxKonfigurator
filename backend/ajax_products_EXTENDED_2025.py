@@ -322,7 +322,7 @@ def get_ajax_products_complete():
             "description": "Wireless curtain motion detector for perimeter protection",
             "short_description": "Vorhang-Bewegungsmelder für Perimeterüberwachung",
             "usps": ["Schmaler Erfassungsbereich", "15m Reichweite", "Haustierimmun", "7 Jahre Batterie"],
-            "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fmotionprotect_curtain_4f5ecbfe15%402.png&1689152842",
+            "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fmotion_protect_curtain_xl_a58f136c0b%402.jpg&1755768877",
             "colors": ["Black", "White"],
             "specifications": {
                 "frequency": "868 MHz (Jeweller)",

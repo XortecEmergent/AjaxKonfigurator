@@ -224,30 +224,7 @@ async def root():
 async def get_product_lines():
     """Get available product lines"""
     return {
-        "product_lines": [
-            {
-                "id": "baseline",
-                "name": "Baseline",
-                "description": "Für einfachere Anwendungen und Wohnimmobilien",
-                "target_group": "Wohnbereich, kleine Geschäfte",
-                "features": ["Drahtlose Jeweller-Geräte", "Einfache Installation", "Grundlegende Sicherheit"],
-                "image": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fbaseline_lg_bc7460aa05%402.jpg&1731779933"
-            },
-            {
-                "id": "superiorline", 
-                "name": "Superior",
-                "description": "Für Fachleute und anspruchsvolle Projekte",
-                "target_group": "Kommerzielle Objekte, Hochsicherheitsbereiche",
-                "features": ["Jeweller + Fibra Geräte", "Grade 3 Zertifizierung", "Höchste Sicherheitsstandards"],
-                "image": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fsuperior_lg_7b3c7741db%402.jpg&1731780001"
-            },
-            {
-                "id": "en54",
-                "name": "EN54",
-                "description": "Spezielle Produktlinie für Brandwarnanlagen",
-                "target_group": "Kommerzielle Brandschutzanlagen",
-                "features": ["EN 54 zertifiziert", "Brandschutz + Einbruchschutz", "CIE Touchscreen"],
-                "image": "https://ajax.systems/api/cdn-img/?img=%2Fproduct-categories%2Ffire-and-life-safety.lg.jpg&1751882727"
+        "product_lines": get_ajax_product_lines_2025()
             },
             {
                 "id": "video",

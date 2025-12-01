@@ -56,7 +56,9 @@ class Product(BaseModel):
     image_url: str
     specifications: ProductSpecification
     features: List[ProductFeature]
-    compatible_hubs: List[str]
+    compatible_hubs: Optional[List[str]] = None
+    compatible_nvrs: Optional[List[str]] = None
+    accessories: Optional[List[str]] = None
     price: Optional[float] = None
     in_stock: bool = True
     created_at: datetime = Field(default_factory=datetime.utcnow)

@@ -246,7 +246,7 @@ async def reset_products():
 async def get_categories(product_line: str = None):
     """Get product categories"""
     try:
-        all_categories = get_ajax_categories_2025_complete()
+        all_categories = get_ajax_categories_complete()
         
         if product_line in ["video_baseline", "video_superior"]:
             # For video lines, filter relevant categories

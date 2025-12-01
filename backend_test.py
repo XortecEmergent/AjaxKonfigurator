@@ -11,7 +11,7 @@ from typing import Dict, List, Any
 import sys
 
 # Get backend URL from environment
-BACKEND_URL = "https://smart-security-8.preview.emergentagent.com/api"
+BACKEND_URL = "https://xortec-ajax-tool.preview.emergentagent.com/api"
 
 class AjaxBackendTester:
     def __init__(self):

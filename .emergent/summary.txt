@@ -1,72 +1,76 @@
 <analysis>
-The AI engineer's work trajectory involved iteratively building an Ajax Systems configurator based on user requirements. Initially, the focus was on understanding the product lines through web scraping and then implementing a basic React frontend with a FastAPI backend to serve product data. Critical early issues included correcting  attributes for testing and integrating PDF export functionality. Throughout the process, the AI frequently declared the task complete, only for the user to highlight missing product data or incorrect branding. This led to multiple cycles of re-researching product details, particularly from Xortec GmbH's website, and updating the backend product database and frontend branding. The work demonstrates an iterative development approach, with a clear dependency on extensive data gathering and user-driven refinement of product completeness and corporate identity. The final state indicates an ongoing effort to ensure *all* products are accurately represented.
+The AI engineer's work trajectory involved iteratively building an Ajax Systems configurator, continuously refining it based on extensive user feedback. Initially, a basic React/FastAPI application was established to serve product data. Subsequent work focused heavily on accurate data gathering from  and  for over 200 Ajax products, implementing a step-by-step wizard, dynamic quantity selection, Hub/NVR capacity limits, and crucial features like Excel export and a legal Impressum. Significant effort was directed towards correct branding (Xortec GmbH CI, logos), product image accuracy, and relevant accessory integration, often requiring the AI to correct previous implementations like generic images or fictitious accessories. The latest phase involved refining NVR-specific logic, including additive capacity calculation for multiple NVRs and strict accessory filtering for cameras. This process highlights an iterative development cycle, with a strong emphasis on data validation and user-driven feature expansion.
 </analysis>
 
 <product_requirements>
-The primary goal is to build an Ajax Systems Systemkonfigurator (system configurator). This application must differentiate between Ajax's Superiorline, Baseline, EN54, and Video product lines. It needs to accurately link all system parameters inherent to Ajax products. For easier product selection, the items should be visually presented with images, concise USPs (Unique Selling Propositions), and descriptions. A crucial constraint is that products can only be combined according to Ajax's specific compatibility prerequisites.
-
-Key requirements clarified by the user include:
-1.  **Product Data:** Must contain all genuine, current Ajax product data and implement a mechanism for regular, automatic updates.
-2.  **Product Line Definitions:**
-    *   **Superiorline:** For professional installers and specialists.
-    *   **Baseline:** For simpler applications.
-    *   **EN54:** A specialized product line for fire alarm systems.
-    *   **Video:** Ajax's video surveillance product line.
-3.  **Compatibility:** Compatibility rules are to be discovered by researching .
-4.  **User Experience:** A step-by-step wizard is preferred for ease of use.
-5.  **Reporting:** A PDF export function is required.
-6.  **Branding:** The configurator's author must be Xortec GmbH, not Ajax, and the corporate identity (CI) should align with Xortec GmbH.
+The primary goal is to develop an Ajax Systems Systemkonfigurator for Xortec GmbH, distinguishing between Ajax's Superiorline, Baseline, EN54, and Video product lines. The application must accurately link system parameters and visually present products with images, USPs, and descriptions, adhering to Ajax compatibility prerequisites. Key evolving requirements include:
+-   **Product Data:** Comprehensive, current Ajax product data (200+ items), with a mechanism for automatic updates. Specific attention to correct images for all products (especially smoke detectors and NVRs). Camera products exclusively in the Video category.
+-   **User Experience:** A step-by-step wizard with backward navigation. Quantity selection for products and accessories, respecting Hub/NVR capacities (NVR16: 16 cameras, NVR8: 8 cameras, additive capacity for multiple NVRs). Conditional accessory buttons, an accessory modal, and product color selection (black/white for products and NVRs).
+-   **Reporting:** PDF and Excel export (with Xortec article numbers and selected accessories).
+-   **Branding/Legal:** Xortec GmbH authorship, Xortec CI (orange color scheme, correct Xortec and Ajax logos), and a legally complete Impressum.
+-   **UI/UX:** A landing page before the configurator with product information, Xortec/Ajax benefits, logos, and Xortec CI. UI improvements for category tabs and overall readability.
+-   **Accessories:** Real Ajax accessories only, including JunctionBox for cameras, and specific restrictions for camera accessories (600810375, 600810374).
+-   **Video Line:** NVR selection instead of Hubs for the Video product line, with correct NVR products and images.
 </product_requirements>
 
 <key_technical_concepts>
--   **Full-stack Application:** React.js for the frontend, FastAPI for the backend, and MongoDB for the database.
--   **UI/UX:** Shadcn UI components, Tailwind CSS for styling,  for toast notifications.
--   **Data Handling:** Web scraping (implicit) for gathering product data,  for API calls, Pydantic for data validation in FastAPI.
+-   **Full-stack Application:** React.js (frontend), FastAPI (backend), MongoDB (database).
+-   **UI/UX:** Shadcn UI components, Tailwind CSS for styling,  for notifications.
+-   **Data Handling:** Web scraping (implicit) for product data,  for API calls, Pydantic for data validation,  for Excel export.
 -   **Routing:**  for client-side navigation.
--   **Testing:**  attributes for UI testing,  for comprehensive testing.
--   **PDF Generation:** Client-side PDF export functionality.
+-   **Tooling:**  for image assistance.
 </key_technical_concepts>
 
 <code_architecture>
 
 
--   **/app/backend/server.py**: This is the core FastAPI application file.
-    -   **Importance:** It defines the backend API endpoints for retrieving product data, handling product categories, and potentially processing PDF export requests. It integrates with MongoDB (via ) for data storage (though currently, data seems to be hardcoded/scraped into the file directly).
-    -   **Changes Made:**
-        -   Initial implementation to serve product data for different Ajax lines.
-        -   Added logic for PDF generation (though the exact mechanism isn't fully detailed in the trajectory, it was updated for this feature).
-        -   Updated extensively multiple times to incorporate a more comprehensive list of Ajax products, especially after user feedback regarding missing items and branding corrections.
+-   ****:
+    -   **Importance:** Core FastAPI application, defines API endpoints for product data, categories, and handles product data management.
+    -   **Changes Made:** Extensively updated product database with comprehensive Ajax products (Hubs, detectors, NVRs, cameras), including  for dynamic image fetching. Implemented  endpoint for database reinitialization. Corrected NVR names, images, and category assignments for the Video product line (e.g., NVR-Recorder category). Refined accessory data to include only real Ajax accessories.
 
--   **/app/frontend/src/App.js**: This is the main React component responsible for the entire user interface and application logic.
-    -   **Importance:** It orchestrates the step-by-step configurator wizard, displays product categories and individual products, manages user selections, makes API calls to the FastAPI backend, and triggers the PDF export.
-    -   **Changes Made:**
-        -   Initial setup of the configurator UI, including displaying product categories (Superiorline, Baseline, EN54, Video).
-        -   Extensive modifications to add  attributes to various interactive and display elements for testing purposes.
-        -   Implemented the step-by-step wizard flow for product selection.
-        -   Integrated client-side PDF export functionality.
-        -   Updated to correct branding from Ajax Systems to Xortec GmbH in the UI.
-        -   Continuously refined to display the expanding list of Ajax products as sourced from the backend.
+-   ****:
+    -   **Importance:** Main React component managing the configurator's UI, state, step navigation, and API interactions.
+    -   **Changes Made:** Integrated , , , , and  components. Implemented multi-step navigation with backward functionality. Added quantity selection, Hub/NVR capacity checks with warnings (including additive NVR capacity). Adjusted UI for Video product line to display NVR auswählen. Integrated conditional accessory buttons and product color selection. Improved UI for category tabs and overall readability. Corrected Xortec experience years to 18+. Restricted camera accessories to specific Xortec article numbers.
 
--   **/app/frontend/src/components/ui/**: This directory contains pre-built Shadcn UI components.
-    -   **Importance:** Provides a consistent, modern, and accessible set of UI elements (e.g., Button, Input, Card, Dialog) that are used throughout the  to build the configurator's interface.
+-   ****:
+    -   **Importance:** Serves as the introductory page for the configurator.
+    -   **Changes Made:** Created to showcase Xortec and Ajax branding, benefits, and a call-to-action button, incorporating a user-provided hero image.
 
--   **/.env files (frontend/.env, backend/.env)**: These files store environment-specific variables.
-    -   **Importance:** Crucial for configuring backend and frontend URLs ( for frontend,  for backend) without hardcoding, ensuring easy deployment and adherence to Kubernetes ingress rules.
+-   ****:
+    -   **Importance:** Provides legal information for Xortec GmbH.
+    -   **Changes Made:** Created and populated with complete Xortec company details and contact information.
+
+-   ****:
+    -   **Importance:** Facilitates the selection and quantity management of product accessories.
+    -   **Changes Made:** Created to display and allow selection of compatible accessories.
+
+-   ****:
+    -   **Importance:** Offers a visual representation of the configurator's progress and allows direct step navigation.
+    -   **Changes Made:** Created to provide a dynamic step-by-step navigation bar.
+
+-   ****:
+    -   **Importance:** Enables users to choose product colors where applicable.
+    -   **Changes Made:** Created to offer black/white color options for products and NVRs.
+
+-   ****:
+    -   **Importance:** Handles the logic for exporting the configured system details to an Excel file.
+    -   **Changes Made:** Created to export selected products, quantities, and associated accessories with Xortec article numbers.
 </code_architecture>
 
 <pending_tasks>
--   **Complete Product Data:** Ensure *all* genuine and current Ajax products are accurately included and displayed in the configurator, cross-referencing with  and other Ajax resources.
--   **Automatic Updates:** Implement a mechanism for regularly and automatically updating the product data.
--   **Compatibility Rules:** Thoroughly define and enforce Ajax product compatibility rules within the configurator logic.
--   **PDF Export Verification:** Fully verify the PDF export function to ensure it correctly captures all selected system parameters and adheres to Xortec GmbH branding.
+- Conduct the Finaler umfassender Test der NVR-Kapazitäten und Kamera-Zubehör (final comprehensive test of NVR capacities and camera accessories) to verify the latest implementations.
 </pending_tasks>
 
 <current_work>
-Immediately before this summary request, the AI engineer was addressing a critical bug report from the user regarding the incompleteness of Ajax product data. The user explicitly stated that very many Ajax products are still missing and directed the AI to cross-reference with .
+Immediately before this summary request, the AI engineer was implementing the user's latest specific requirements concerning the Video product line and camera accessories. The user requested to:
+1.  **Adjust NVR Capacity:** Configure NVR16 for a maximum of 16 cameras and NVR8 for 8 cameras, with capacities adding up if multiple NVRs are selected.
+2.  **Restrict Camera Accessories:** Only offer specific Xortec article numbers  or  as accessories for cameras.
 
-The AI engineer acknowledged this, researched the Xortec website, confirmed the missing products, and identified the need to build a complete product database. Consequently, the  file in the backend was updated (). This update was specifically aimed at incorporating a more comprehensive list of products. The very last action taken was initiating a final screenshot () to verify if the updated  successfully loaded and presented all the previously missing products on the frontend.
+The AI engineer implemented these changes primarily within . The NVR capacity logic was updated to reflect the specified limits and to sum capacities when multiple NVRs are chosen. The capacity checking functions, the display of available/used camera capacity in the summary, and the compatibility checks were all adapted to this new NVR-specific, additive logic. Additionally, the accessory selection for cameras was modified to strictly filter and present only the two specified Xortec articles.
+
+Following these code modifications, the frontend server was restarted. The very last action taken in the trajectory was initiating a screenshot to verify the changes, signifying the start of a Finaler umfassender Test der NVR-Kapazitäten und Kamera-Zubehör. The product is currently in a state where these critical NVR capacity and camera accessory restrictions have been implemented, and the system is undergoing final verification.
 </current_work>
 
 <optional_next_step>
-Analyze the screenshot to confirm that all products are correctly loaded and displayed in the configurator.
+Complete the comprehensive function test for NVR capacities and camera accessory restrictions.
 </optional_next_step>

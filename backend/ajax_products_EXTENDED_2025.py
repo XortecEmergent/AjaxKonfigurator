@@ -1454,6 +1454,34 @@ def get_ajax_products_complete():
             "compatible_hubs": ["Hub 2 Plus Jeweller", "Hub 2 (2G) Jeweller", "Hub 2 (4G) Jeweller", "Hub BP Jeweller"]
         },
         {
+            "name": "Curtain Outdoor Jeweller",
+            "category": "motion_detectors",
+            "product_line": "intrusion_baseline",
+            "description": "Wireless dual-technology curtain motion detector for outdoor and indoor use. First line of defense for perimeter protection",
+            "short_description": "Outdoor Vorhang-Melder für Perimeter-Schutz",
+            "usps": ["Perimeter-Schutz", "Dual-Tech", "39 ft Reichweite", "Outdoor IP55"],
+            "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fco_xl_031082deba%402.jpg&1722925558",
+            "colors": ["Black", "White"],
+            "specifications": {
+                "frequency": "868 MHz (Jeweller + Wings)",
+                "range": "bis zu 1700m",
+                "detection_range": "39 ft (ca. 12m)",
+                "battery_life": "bis zu 3 Jahre",
+                "operating_temp": "-13°F bis +140°F (-25°C bis +60°C)",
+                "ip_rating": "IP55",
+                "viewing_angle_horizontal": "8°",
+                "viewing_angle_vertical": "85° / 15°",
+                "xortec_nr": "600810067/600810068",
+                "hersteller_nr": "CO.Y.J.BL/CO.Y.J.WH"
+            },
+            "features": [
+                {"name": "Schmaler Erfassungsbereich", "description": "8° horizontal für präzisen Perimeter-Schutz"},
+                {"name": "Dual-Technologie", "description": "PIR + K-band Mikrowelle"},
+                {"name": "Anti-Masking Hood", "description": "Schutz vor Regen und Schnee"}
+            ],
+            "compatible_hubs": ["Hub 2 Plus Jeweller", "Hub 2 (2G) Jeweller", "Hub 2 (4G) Jeweller", "Hub BP Jeweller"]
+        },
+        {
             "name": "Curtain Outdoor Mini Jeweller",
             "category": "motion_detectors",
             "product_line": "intrusion_baseline",

@@ -34,7 +34,7 @@ def get_ajax_products_2025_complete():
         {
             "name": "Hub BP Jeweller",
             "category": "hubs", 
-            "product_line": "baseline",
+            "product_line": "intrusion_baseline",
             "description": "Wireless battery-powered control panel. Supports photo verification. Connectable via two SIM cards (2G/3G/LTE)",
             "short_description": "Batteriebetriebene Alarmzentrale",
             "usps": ["NEU", "Batteriebetrieben", "Mobil einsetzbar", "Bis zu 200 Geräte"],
@@ -117,7 +117,7 @@ def get_ajax_products_2025_complete():
         {
             "name": "MotionProtect Jeweller",
             "category": "motion_detectors",
-            "product_line": "baseline",
+            "product_line": "intrusion_baseline",
             "description": "Wireless IR motion detector",
             "short_description": "Standard PIR-Bewegungsmelder",
             "usps": ["12m Erfassung", "Grade 2", "7 Jahre Batterie", "Haustierimmun"],
@@ -142,7 +142,7 @@ def get_ajax_products_2025_complete():
         {
             "name": "MotionProtect Plus Jeweller",
             "category": "motion_detectors",
-            "product_line": "baseline",
+            "product_line": "intrusion_baseline",
             "description": "Wireless IR motion detector with an additional K-band microwave sensor",
             "short_description": "Dual-Technologie Bewegungsmelder",
             "usps": ["Duale Sensorik", "Grade 2", "Anti-Masking", "Falschalarmsicher"],
@@ -167,7 +167,7 @@ def get_ajax_products_2025_complete():
         {
             "name": "MotionCam Jeweller",
             "category": "motion_detectors",
-            "product_line": "baseline",
+            "product_line": "intrusion_baseline",
             "description": "Wireless IR motion detector supporting photo by alarm feature",
             "short_description": "PIR-Bewegungsmelder mit Kamera",
             "usps": ["Foto-Verifikation", "Grade 2", "Anti-Sabotage", "Haustierimmun"],
@@ -191,7 +191,7 @@ def get_ajax_products_2025_complete():
         {
             "name": "Curtain Outdoor Jeweller",
             "category": "motion_detectors",
-            "product_line": "baseline",
+            "product_line": "intrusion_baseline",
             "description": "Wireless dual technology curtain motion detector for outdoor and indoor use",
             "short_description": "NEU: Outdoor Vorhang-Bewegungsmelder",
             "usps": ["NEU", "Outdoor", "Dual-Technologie", "15m Reichweite"],
@@ -216,7 +216,7 @@ def get_ajax_products_2025_complete():
         {
             "name": "MotionCam Outdoor HighMount (PhOD) Jeweller",
             "category": "motion_detectors",
-            "product_line": "baseline",
+            "product_line": "intrusion_baseline",
             "description": "Wireless PIR motion detector with extended photo verification possibilities. For outdoor installation at a height of 2–4 m.",
             "short_description": "NEU: Outdoor High-Mount PIR mit Foto",
             "usps": ["NEU", "High-Mount 2-4m", "Erweiterte Foto-Verifikation", "Professional"],
@@ -294,7 +294,7 @@ def get_ajax_products_2025_complete():
         {
             "name": "DoorProtect Jeweller",
             "category": "opening_detectors",
-            "product_line": "baseline",
+            "product_line": "intrusion_baseline",
             "description": "Wireless opening detector with reed switch",
             "short_description": "Standard Öffnungsmelder",
             "usps": ["Reed-Schalter", "7 Jahre Batterie", "Compact Design", "Grade 2"],
@@ -317,7 +317,7 @@ def get_ajax_products_2025_complete():
         {
             "name": "DoorProtect Plus Jeweller",
             "category": "opening_detectors",
-            "product_line": "baseline",
+            "product_line": "intrusion_baseline",
             "description": "Wireless combined opening, shock and tilt detector with reed switch and accelerometer",
             "short_description": "Multifunktions-Öffnungsmelder",
             "usps": ["3-in-1 Funktion", "Reed + Accelerometer", "Erschütterung + Neigung", "Grade 2"],
@@ -342,7 +342,7 @@ def get_ajax_products_2025_complete():
         {
             "name": "GlassProtect Jeweller",
             "category": "glass_break_detectors",
-            "product_line": "baseline",
+            "product_line": "intrusion_baseline",
             "description": "Wireless glass break detector with a microphone",
             "short_description": "Akustischer Glasbruchmelder",
             "usps": ["9m Erfassung", "Akustische Analyse", "Grade 2", "Adjustierbar"],
@@ -368,7 +368,7 @@ def get_ajax_products_2025_complete():
         {
             "name": "KeyPad TouchScreen Jeweller",
             "category": "keypads",
-            "product_line": "baseline", 
+            "product_line": "intrusion_baseline", 
             "description": "Wireless keypad with a touch screen that supports authentication with smartphones, Pass, Tag, and codes",
             "short_description": "NEU: Touchscreen-Tastatur mit Smartphone-Auth",
             "usps": ["NEU", "Touchscreen", "Smartphone-Auth", "Pass & Tag"],
@@ -394,7 +394,7 @@ def get_ajax_products_2025_complete():
         {
             "name": "BulletCam HL (5 Mp/2.8 mm)",
             "category": "cameras",
-            "product_line": "baseline",
+            "product_line": "intrusion_baseline",
             "description": "Wired AI-powered security IP camera with a 110° viewing angle, hybrid illumination, TrueWDR, microphone, and PoE/12 V. For outdoor and indoor use.",
             "short_description": "NEU: KI-Kamera mit Hybrid-Beleuchtung",
             "usps": ["NEU", "Hybrid-Beleuchtung", "KI-Powered", "5MP/110°"],
@@ -420,7 +420,7 @@ def get_ajax_products_2025_complete():
         {
             "name": "BulletCam HL (8 Mp/2.8 mm)",
             "category": "cameras", 
-            "product_line": "baseline",
+            "product_line": "intrusion_baseline",
             "description": "Wired AI-powered security IP camera with a 110° viewing angle, hybrid illumination, TrueWDR, microphone, and PoE/12 V. For outdoor and indoor use.",
             "short_description": "NEU: 8MP KI-Kamera mit Hybrid-Beleuchtung",
             "usps": ["NEU", "8MP Ultra HD", "Hybrid-Beleuchtung", "KI-Powered"],
@@ -446,7 +446,7 @@ def get_ajax_products_2025_complete():
         {
             "name": "DomeCam Mini HL (5 Mp/2.8 mm)",
             "category": "cameras",
-            "product_line": "baseline",
+            "product_line": "intrusion_baseline",
             "description": "Wired AI-powered security IP camera with a 110° viewing angle, hybrid illumination, TrueWDR, microphone, and PoE/12 V. For outdoor and indoor use.",
             "short_description": "NEU: Kompakte Dome-Kamera mit Hybrid-Beleuchtung",
             "usps": ["NEU", "Kompaktes Design", "Hybrid-Beleuchtung", "Vandalismusschutz"],
@@ -472,7 +472,7 @@ def get_ajax_products_2025_complete():
         {
             "name": "TurretCam HL (5 Mp/2.8 mm)",
             "category": "cameras",
-            "product_line": "baseline",
+            "product_line": "intrusion_baseline",
             "description": "Wired AI-powered security IP camera with a 110° viewing angle, hybrid illumination, TrueWDR, microphone, and PoE/12 V. For outdoor and indoor use.",
             "short_description": "NEU: Turret-Kamera mit Hybrid-Beleuchtung",
             "usps": ["NEU", "Turret-Design", "Hybrid-Beleuchtung", "Flexible Montage"],
@@ -500,7 +500,7 @@ def get_ajax_products_2025_complete():
         {
             "name": "IndoorCam",
             "category": "wifi_cameras",
-            "product_line": "baseline",
+            "product_line": "intrusion_baseline",
             "description": "Indoor Wi-Fi security camera with a PIR motion sensor and built-in AI",
             "short_description": "NEU: Wi-Fi Indoor-Kamera mit PIR",
             "usps": ["NEU", "Wi-Fi", "PIR-Sensor", "KI-Analyse"],
@@ -526,7 +526,7 @@ def get_ajax_products_2025_complete():
         {
             "name": "DoorBell",
             "category": "doorbells",
-            "product_line": "baseline",
+            "product_line": "intrusion_baseline",
             "description": "Video doorbell with built-in AI, PIR sensor, and control via apps",
             "short_description": "NEU: Smart Video-Türklingel",
             "usps": ["NEU", "Video-Türklingel", "PIR-Sensor", "App-Steuerung"],
@@ -553,7 +553,7 @@ def get_ajax_products_2025_complete():
         {
             "name": "NVR (8-ch)",
             "category": "nvrs", 
-            "product_line": "baseline",
+            "product_line": "intrusion_baseline",
             "description": "Network video recorder for 8 channels",
             "short_description": "Standard 8-Kanal NVR",
             "usps": ["8 Kanäle", "Standard Features", "Zuverlässig", "Kosteneffizient"],
@@ -578,7 +578,7 @@ def get_ajax_products_2025_complete():
         {
             "name": "NVR (16-ch)",
             "category": "nvrs",
-            "product_line": "baseline",
+            "product_line": "intrusion_baseline",
             "description": "Network video recorder for 16 channels",
             "short_description": "Standard 16-Kanal NVR",
             "usps": ["16 Kanäle", "Erweiterte Kapazität", "4K Recording", "RAID Support"],
@@ -603,7 +603,7 @@ def get_ajax_products_2025_complete():
         {
             "name": "NVR DC (8-ch)",
             "category": "nvrs",
-            "product_line": "baseline",
+            "product_line": "intrusion_baseline",
             "description": "Network video recorder for 8 channels powered by a low-voltage power supply",
             "short_description": "NEU: DC-betriebener 8-Kanal NVR",
             "usps": ["NEU", "DC-Betrieb", "8 Kanäle", "Niederspannung"],
@@ -628,7 +628,7 @@ def get_ajax_products_2025_complete():
         {
             "name": "NVR DC (16-ch)",
             "category": "nvrs",
-            "product_line": "baseline",
+            "product_line": "intrusion_baseline",
             "description": "Network video recorder for 16 channels powered by a low-voltage power supply",
             "short_description": "NEU: DC-betriebener 16-Kanal NVR",
             "usps": ["NEU", "DC-Betrieb", "16 Kanäle", "Erweiterte Kapazität"],
@@ -653,7 +653,7 @@ def get_ajax_products_2025_complete():
         {
             "name": "NVR H2D8PAC (8-ch)",
             "category": "nvrs",
-            "product_line": "baseline",
+            "product_line": "intrusion_baseline",
             "description": "8-channel network video recorder with 4K HDMI output, 8 PoE ports, and support for 2 hot-swappable HDDs",
             "short_description": "Kommend: Professional 8-Kanal NVR mit PoE",
             "usps": ["Kommend", "8 PoE Ports", "Hot-Swap HDDs", "4K HDMI"],
@@ -678,7 +678,7 @@ def get_ajax_products_2025_complete():
         {
             "name": "NVR H2D8PAC (16-ch)",
             "category": "nvrs",
-            "product_line": "baseline",
+            "product_line": "intrusion_baseline",
             "description": "16-channel network video recorder with 4K HDMI output, 8 PoE ports, and support for 2 hot-swappable HDDs",
             "short_description": "Kommend: Professional 16-Kanal NVR mit PoE",
             "usps": ["Kommend", "16 Kanäle", "8 PoE Ports", "Hot-Swap HDDs"],

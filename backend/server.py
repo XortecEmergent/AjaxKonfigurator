@@ -38,12 +38,33 @@ class ProductSpecification(BaseModel):
     battery_life: Optional[str] = None
     operating_temp: Optional[str] = None
     ip_rating: Optional[str] = None
+    ik_rating: Optional[str] = None
     dimensions: Optional[str] = None
     weight: Optional[str] = None
     max_devices: Optional[int] = None
+    max_cameras: Optional[int] = None
+    max_fire_detectors: Optional[int] = None
     communication: Optional[List[str]] = None
     xortec_nr: Optional[str] = None
     hersteller_nr: Optional[str] = None
+    channels: Optional[int] = None
+    resolution: Optional[str] = None
+    storage: Optional[str] = None
+    network: Optional[str] = None
+    power: Optional[str] = None
+    poe_ports: Optional[int] = None
+    night_vision: Optional[str] = None
+    viewing_angle: Optional[str] = None
+    connectivity: Optional[str] = None
+    detection_range: Optional[str] = None
+    contact_type: Optional[str] = None
+    max_voltage: Optional[str] = None
+    max_load: Optional[str] = None
+    plug_type: Optional[str] = None
+    inputs: Optional[str] = None
+    sensors: Optional[List[str]] = None
+    valve_size: Optional[str] = None
+    voltage: Optional[str] = None
 
 class Product(BaseModel):
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))

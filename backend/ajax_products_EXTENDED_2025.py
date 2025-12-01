@@ -372,7 +372,7 @@ def get_ajax_products_complete():
             "description": "Wireless outdoor motion detector with dual PIR sensors and anti-masking",
             "short_description": "Outdoor Bewegungsmelder mit Dual-PIR",
             "usps": ["Outdoor", "Dual-PIR", "Anti-Masking", "IP55"],
-            "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fmotionprotect_outdoor_black_f8b5c7d4e2%402.png&1689152842",
+            "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fmotion_protect_outdoor_xl_78c5dfdbb3%402.jpg&1755764733",
             "colors": ["Black", "White"],
             "specifications": {
                 "frequency": "868 MHz (Jeweller)",

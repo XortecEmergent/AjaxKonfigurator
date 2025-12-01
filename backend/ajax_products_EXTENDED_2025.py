@@ -347,7 +347,7 @@ def get_ajax_products_complete():
             "description": "Wireless combined motion and glass break detector",
             "short_description": "NEU: Kombi-Melder Bewegung + Glasbruch",
             "usps": ["NEU", "2-in-1 Sensor", "Bewegung + Glasbruch", "Grade 2"],
-            "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fcombiprotect_black_9a8f5c6d43%402.png&1689152842",
+            "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fcp_j_xl_ea6b727647%402.jpg&1718012539",
             "colors": ["Black", "White"],
             "specifications": {
                 "frequency": "868 MHz (Jeweller)",

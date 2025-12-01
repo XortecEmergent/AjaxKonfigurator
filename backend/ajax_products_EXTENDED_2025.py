@@ -1617,6 +1617,149 @@ def get_ajax_products_complete():
             ],
             "compatible_hubs": ["Hub 2 Plus Jeweller", "Hub 2 (2G) Jeweller", "Hub 2 (4G) Jeweller"],
             "accessories": ["Terminal Adapter"]
+        },
+        {
+            "name": "6V PSU (type A) for Hub 2/Hub 2 Plus/ReX",
+            "category": "power_supplies",
+            "product_line": "intrusion_baseline",
+            "description": "Power supply unit for operation of the device from portable battery. With an alternative 6 V power supply, hub can operate from an external battery for years",
+            "short_description": "6V Netzteil für Batteriebetrieb",
+            "usps": ["6V Betrieb", "Jahrelanger Betrieb", "Portable Batterien", "Netzunabhängig"],
+            "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fpsu_6v_xl_e2d789457a%402.jpg&1717581250",
+            "colors": ["White"],
+            "specifications": {
+                "voltage": "6V DC",
+                "operating_temp": "-10°C bis +40°C",
+                "xortec_nr": "600811015",
+                "hersteller_nr": "6V.H2R2.Y"
+            },
+            "features": [
+                {"name": "Batteriebetrieb", "description": "Betrieb mit externen Batterien für jahrelangen Einsatz"},
+                {"name": "Netzunabhängig", "description": "Ideal für Objekte ohne Stromversorgung"},
+                {"name": "Schützt leerstehende Immobilien", "description": "Perfekt für Baustellenüberwachung"}
+            ],
+            "compatible_hubs": ["Hub 2 Plus Jeweller", "Hub 2 (2G) Jeweller", "Hub 2 (4G) Jeweller"],
+            "accessories": ["Terminal Adapter"]
+        },
+        {
+            "name": "12-24V PSU (type A) for Hub 2/ReX 2",
+            "category": "power_supplies",
+            "product_line": "intrusion_baseline",
+            "description": "Power supply unit for the device operation on a low-voltage power source. Ideal for trailers, yachts, and warehouses",
+            "short_description": "12-24V Netzteil für Niederspannung",
+            "usps": ["12-24V Betrieb", "Mobile Einsätze", "Fahrzeuge & Yachten", "Flexibel"],
+            "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fpsu_12_type_a_xl_9a7028a264%402.jpg&1717766385",
+            "colors": ["White"],
+            "specifications": {
+                "voltage": "12-24V DC",
+                "operating_temp": "-10°C bis +40°C",
+                "xortec_nr": "600811016",
+                "hersteller_nr": "24V.H2R2.Y"
+            },
+            "features": [
+                {"name": "12-24V Betrieb", "description": "Flexibler Einsatz mit verschiedenen Spannungsquellen"},
+                {"name": "Mobile Sicherheit", "description": "Ideal für Wohnmobile, LKW und Yachten"},
+                {"name": "Lagerh allen", "description": "Perfekt für Objekte mit instabiler Stromversorgung"}
+            ],
+            "compatible_hubs": ["Hub 2 (2G) Jeweller", "Hub 2 (4G) Jeweller"],
+            "accessories": ["Terminal Adapter"]
+        },
+
+        # ========================================================================
+        # CASES / GEHÄUSE
+        # ========================================================================
+        {
+            "name": "Case A (106)",
+            "category": "cases",
+            "product_line": "intrusion_superior",
+            "description": "Casing for secure wired connection of one Ajax device. Dimensions: 106 × 168 × 56 mm",
+            "short_description": "Gehäuse für 1 Ajax-Modul",
+            "usps": ["1 Modul", "Kompakt", "Kabelmanagement", "Tamper-Schutz"],
+            "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fcase_a_ca1bb298fb%402.jpg&1700147006",
+            "colors": ["White", "Black"],
+            "specifications": {
+                "dimensions": "106 × 168 × 56 mm",
+                "mounting_type": "Wall-mount",
+                "ip_rating": "IP20",
+                "xortec_nr": "600811020/600811021",
+                "hersteller_nr": "CASE.A.WH/CASE.A.BL"
+            },
+            "features": [
+                {"name": "1 Geräte-Slot", "description": "Für LineSplit, LineProtect oder MultiRelay"},
+                {"name": "Kabelmanagement", "description": "Perforierte Zonen für organisierte Verkabelung"},
+                {"name": "Tamper-Schutz", "description": "Integrierter Sabotageschutz"}
+            ]
+        },
+        {
+            "name": "Case B (175)",
+            "category": "cases",
+            "product_line": "intrusion_superior",
+            "description": "Casing for secure wired connection of up to two Ajax devices. Dimensions: 175 × 225 × 57 mm",
+            "short_description": "Gehäuse für bis zu 2 Ajax-Module",
+            "usps": ["2 Module", "Flexibel", "Kabelmanagement", "Tamper-Schutz"],
+            "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fcase_b_33af16f0b5%402.jpg&1700147006",
+            "colors": ["White", "Black"],
+            "specifications": {
+                "dimensions": "175 × 225 × 57 mm",
+                "device_slots": 2,
+                "mounting_type": "Wall-mount",
+                "ip_rating": "IP20",
+                "xortec_nr": "600811022/600811023",
+                "hersteller_nr": "CASE.B.WH/CASE.B.BL"
+            },
+            "features": [
+                {"name": "2 Geräte-Slots", "description": "Für 2 Fibra-Module gleichzeitig"},
+                {"name": "Organisiert", "description": "Professionelles Kabelmanagement"},
+                {"name": "Erweiterbar", "description": "Flexible Gerätekombinationen"}
+            ]
+        },
+        {
+            "name": "Case C (260)",
+            "category": "cases",
+            "product_line": "intrusion_superior",
+            "description": "Casing for one Ajax device and a 7 Ah battery. Dimensions: 260 × 195 × 93 mm",
+            "short_description": "Gehäuse für 1 Modul + 7 Ah Batterie",
+            "usps": ["1 Modul + Batterie", "7 Ah", "Backup-Power", "Kompakt"],
+            "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fcase_c_b2b90717f1%402.jpg&1700147005",
+            "colors": ["White", "Black"],
+            "specifications": {
+                "dimensions": "260 × 195 × 93 mm",
+                "battery_capacity": "7 Ah",
+                "device_slots": 1,
+                "mounting_type": "Wall-mount",
+                "ip_rating": "IP20",
+                "xortec_nr": "600811024/600811025",
+                "hersteller_nr": "CASE.C.WH/CASE.C.BL"
+            },
+            "features": [
+                {"name": "Batterie-Slot", "description": "Platz für 7 Ah Backup-Batterie"},
+                {"name": "LineSupply", "description": "Für LineSupply (45W oder 75W) Fibra"},
+                {"name": "Backup-Power", "description": "Autonome Stromversorgung"}
+            ]
+        },
+        {
+            "name": "Case D (430)",
+            "category": "cases",
+            "product_line": "intrusion_superior",
+            "description": "Casing for up to eight Ajax devices and two 18 Ah batteries. Dimensions: 430 × 400 × 133 mm",
+            "short_description": "Gehäuse für bis zu 8 Module + 2x 18 Ah Batterien",
+            "usps": ["Bis zu 8 Module", "2x 18 Ah", "Enterprise", "Maximum"],
+            "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fcase_update_xl_093103f5d9%401.jpg&1696582570",
+            "colors": ["White", "Black"],
+            "specifications": {
+                "dimensions": "430 × 400 × 133 mm",
+                "device_slots": 8,
+                "battery_capacity": "2x 18 Ah",
+                "mounting_type": "Wall-mount",
+                "ip_rating": "IP20",
+                "xortec_nr": "600811026/600811027",
+                "hersteller_nr": "CASE.D.WH/CASE.D.BL"
+            },
+            "features": [
+                {"name": "Bis zu 8 Module", "description": "Maximale Kapazität für große Installationen"},
+                {"name": "2x 18 Ah Batterien", "description": "Lange Backup-Zeit"},
+                {"name": "Professionell", "description": "Für Enterprise-Projekte"}
+            ]
         }
     ]
 

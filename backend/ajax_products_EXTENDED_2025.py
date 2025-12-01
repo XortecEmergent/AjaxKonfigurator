@@ -1171,6 +1171,380 @@ def get_ajax_products_complete():
         },
 
         # ========================================================================
+        # VIDEO SUPERIOR - NVRs
+        # ========================================================================
+        {
+            "name": "Superior NVR H2DAI8PAC (8-ch)",
+            "category": "nvrs",
+            "product_line": "video_superior",
+            "description": "8-channel AI-powered network video recorder with 4K HDMI output, Gigabit Ethernet interface, eight PoE ports, and support for two hot-swappable HDDs",
+            "short_description": "8-Kanal AI-NVR mit PoE",
+            "usps": ["Onboard AI", "8 Kanäle", "8 PoE Ports", "2x 24TB HDD Support", "4K HDMI"],
+            "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fsuperior_nvr_h2dai_black_e75a5cf41c%402.png&1763471607",
+            "colors": ["Black"],
+            "specifications": {
+                "channels": 8,
+                "max_cameras": 8,
+                "poe_ports": 8,
+                "hdd_support": "2x 24TB",
+                "ethernet": "1x Gigabit",
+                "hdmi": "4K",
+                "usb_ports": "1x USB 3.0, 2x USB 2.0",
+                "onboard_ai": "Yes",
+                "compression": "H.264, H.265",
+                "operating_temp": "0°C bis +50°C"
+            },
+            "features": [
+                {"name": "Onboard AI", "description": "Erweitert bestehende Kameras mit AI-Erkennung"},
+                {"name": "Hot-Swap HDDs", "description": "Festplatten im laufenden Betrieb austauschbar"},
+                {"name": "Redundanter Speicher", "description": "2 Aufnahmemodi für erhöhte Datensicherheit"}
+            ],
+            "compatible_nvrs": []
+        },
+        {
+            "name": "Superior NVR H2DAI8PAC (16-ch)",
+            "category": "nvrs",
+            "product_line": "video_superior",
+            "description": "16-channel AI-powered network video recorder with 4K HDMI output, Gigabit Ethernet interface, eight PoE ports, and support for two hot-swappable HDDs",
+            "short_description": "16-Kanal AI-NVR mit PoE",
+            "usps": ["Onboard AI", "16 Kanäle", "8 PoE Ports", "2x 24TB HDD Support", "4K HDMI"],
+            "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fsuperior_nvr_h2dai_black_e75a5cf41c%402.png&1763471607",
+            "colors": ["Black"],
+            "specifications": {
+                "channels": 16,
+                "max_cameras": 16,
+                "poe_ports": 8,
+                "hdd_support": "2x 24TB",
+                "ethernet": "1x Gigabit",
+                "hdmi": "4K",
+                "usb_ports": "1x USB 3.0, 2x USB 2.0",
+                "onboard_ai": "Yes",
+                "compression": "H.264, H.265",
+                "operating_temp": "0°C bis +50°C"
+            },
+            "features": [
+                {"name": "Onboard AI", "description": "Erweitert bestehende Kameras mit AI-Erkennung"},
+                {"name": "Hot-Swap HDDs", "description": "Festplatten im laufenden Betrieb austauschbar"},
+                {"name": "Redundanter Speicher", "description": "2 Aufnahmemodi für erhöhte Datensicherheit"}
+            ],
+            "compatible_nvrs": []
+        },
+        {
+            "name": "Superior NVR H2DAI16PAC (16-ch)",
+            "category": "nvrs",
+            "product_line": "video_superior",
+            "description": "16-channel AI-powered network video recorder with 4K HDMI output, Gigabit Ethernet interface, 16 PoE ports, and support for 2 hot-swappable HDDs",
+            "short_description": "16-Kanal AI-NVR mit 16 PoE",
+            "usps": ["Onboard AI", "16 Kanäle", "16 PoE Ports", "2x 24TB HDD Support", "4K HDMI"],
+            "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fsuperior_nvr_h2dai_black_e75a5cf41c%402.png&1763471607",
+            "colors": ["Black"],
+            "specifications": {
+                "channels": 16,
+                "max_cameras": 16,
+                "poe_ports": 16,
+                "hdd_support": "2x 24TB",
+                "ethernet": "1x Gigabit",
+                "hdmi": "4K",
+                "usb_ports": "1x USB 3.0, 2x USB 2.0",
+                "onboard_ai": "Yes",
+                "compression": "H.264, H.265",
+                "operating_temp": "0°C bis +50°C"
+            },
+            "features": [
+                {"name": "Onboard AI", "description": "Erweitert bestehende Kameras mit AI-Erkennung"},
+                {"name": "Hot-Swap HDDs", "description": "Festplatten im laufenden Betrieb austauschbar"},
+                {"name": "16 PoE Ports", "description": "Bis zu 16 Kameras direkt anschließen und mit Strom versorgen"}
+            ],
+            "compatible_nvrs": []
+        },
+        {
+            "name": "Superior NVR H2DAI16PAC (32-ch)",
+            "category": "nvrs",
+            "product_line": "video_superior",
+            "description": "32-channel AI-powered network video recorder with 4K HDMI output, Gigabit Ethernet interface, 16 PoE ports, and support for 2 hot-swappable HDDs",
+            "short_description": "32-Kanal AI-NVR mit 16 PoE",
+            "usps": ["Onboard AI", "32 Kanäle", "16 PoE Ports", "2x 24TB HDD Support", "4K HDMI"],
+            "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fsuperior_nvr_h2dai_black_e75a5cf41c%402.png&1763471607",
+            "colors": ["Black"],
+            "specifications": {
+                "channels": 32,
+                "max_cameras": 32,
+                "poe_ports": 16,
+                "hdd_support": "2x 24TB",
+                "ethernet": "1x Gigabit",
+                "hdmi": "4K",
+                "usb_ports": "1x USB 3.0, 2x USB 2.0",
+                "onboard_ai": "Yes",
+                "compression": "H.264, H.265",
+                "operating_temp": "0°C bis +50°C"
+            },
+            "features": [
+                {"name": "Onboard AI", "description": "Erweitert bestehende Kameras mit AI-Erkennung"},
+                {"name": "32 Kanäle", "description": "Unterstützung für bis zu 32 Kameras"},
+                {"name": "16 PoE Ports", "description": "Bis zu 16 Kameras direkt anschließen und mit Strom versorgen"}
+            ],
+            "compatible_nvrs": []
+        },
+        {
+            "name": "Superior NVR H2DAI2GAC (8-ch)",
+            "category": "nvrs",
+            "product_line": "video_superior",
+            "description": "8-channel AI-powered network video recorder with 4K HDMI output, two Gigabit Ethernet interfaces, and support for two hot-swappable HDDs",
+            "short_description": "8-Kanal AI-NVR mit 2x Ethernet",
+            "usps": ["Onboard AI", "8 Kanäle", "2x Gigabit Ethernet", "2x 24TB HDD Support", "4K HDMI"],
+            "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fsuperior_nvr_h2dai2gac_black_25085a5aee%402.png&1763471554",
+            "colors": ["Black"],
+            "specifications": {
+                "channels": 8,
+                "max_cameras": 8,
+                "poe_ports": 0,
+                "hdd_support": "2x 24TB",
+                "ethernet": "2x Gigabit",
+                "hdmi": "4K",
+                "usb_ports": "1x USB 3.0, 2x USB 2.0",
+                "onboard_ai": "Yes",
+                "compression": "H.264, H.265",
+                "operating_temp": "0°C bis +50°C"
+            },
+            "features": [
+                {"name": "Onboard AI", "description": "Erweitert bestehende Kameras mit AI-Erkennung"},
+                {"name": "Dual Ethernet", "description": "2 Gigabit Ethernet Interfaces für erweiterte Netzwerkanforderungen"},
+                {"name": "Hot-Swap HDDs", "description": "Festplatten im laufenden Betrieb austauschbar"}
+            ],
+            "compatible_nvrs": []
+        },
+        {
+            "name": "Superior NVR H2DAI2GAC (16-ch)",
+            "category": "nvrs",
+            "product_line": "video_superior",
+            "description": "16-channel AI-powered network video recorder with 4K HDMI output, two Gigabit Ethernet interfaces, and support for two hot-swappable HDDs",
+            "short_description": "16-Kanal AI-NVR mit 2x Ethernet",
+            "usps": ["Onboard AI", "16 Kanäle", "2x Gigabit Ethernet", "2x 24TB HDD Support", "4K HDMI"],
+            "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fsuperior_nvr_h2dai2gac_black_25085a5aee%402.png&1763471554",
+            "colors": ["Black"],
+            "specifications": {
+                "channels": 16,
+                "max_cameras": 16,
+                "poe_ports": 0,
+                "hdd_support": "2x 24TB",
+                "ethernet": "2x Gigabit",
+                "hdmi": "4K",
+                "usb_ports": "1x USB 3.0, 2x USB 2.0",
+                "onboard_ai": "Yes",
+                "compression": "H.264, H.265",
+                "operating_temp": "0°C bis +50°C"
+            },
+            "features": [
+                {"name": "Onboard AI", "description": "Erweitert bestehende Kameras mit AI-Erkennung"},
+                {"name": "Dual Ethernet", "description": "2 Gigabit Ethernet Interfaces für erweiterte Netzwerkanforderungen"},
+                {"name": "Hot-Swap HDDs", "description": "Festplatten im laufenden Betrieb austauschbar"}
+            ],
+            "compatible_nvrs": []
+        },
+        {
+            "name": "Superior NVR H2DAI2GAC (32-ch)",
+            "category": "nvrs",
+            "product_line": "video_superior",
+            "description": "32-channel AI-powered network video recorder with 4K HDMI output, two Gigabit Ethernet interfaces, and support for two hot-swappable HDDs",
+            "short_description": "32-Kanal AI-NVR mit 2x Ethernet",
+            "usps": ["Onboard AI", "32 Kanäle", "2x Gigabit Ethernet", "2x 24TB HDD Support", "4K HDMI"],
+            "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fsuperior_nvr_h2dai2gac_black_25085a5aee%402.png&1763471554",
+            "colors": ["Black"],
+            "specifications": {
+                "channels": 32,
+                "max_cameras": 32,
+                "poe_ports": 0,
+                "hdd_support": "2x 24TB",
+                "ethernet": "2x Gigabit",
+                "hdmi": "4K",
+                "usb_ports": "1x USB 3.0, 2x USB 2.0",
+                "onboard_ai": "Yes",
+                "compression": "H.264, H.265",
+                "operating_temp": "0°C bis +50°C"
+            },
+            "features": [
+                {"name": "Onboard AI", "description": "Erweitert bestehende Kameras mit AI-Erkennung"},
+                {"name": "32 Kanäle", "description": "Unterstützung für bis zu 32 Kameras"},
+                {"name": "Dual Ethernet", "description": "2 Gigabit Ethernet Interfaces für erweiterte Netzwerkanforderungen"}
+            ],
+            "compatible_nvrs": []
+        },
+
+        # ========================================================================
+        # VIDEO SUPERIOR - CAMERAS
+        # ========================================================================
+        {
+            "name": "Superior BulletCam HLVF (4 Mp)",
+            "category": "cameras",
+            "product_line": "video_superior",
+            "description": "Wired AI-powered security IP camera with a 2.8-12 mm motorized varifocal P-Iris lens, hybrid illumination, True WDR, built-in microphone and speaker, audio and alarm inputs/outputs, and PoE/12 V. For outdoor and indoor use.",
+            "short_description": "4MP AI-Kamera mit Varifocal Lens",
+            "usps": ["4MP Auflösung", "Varifocal 2.8-12mm", "P-Iris Lens", "Hybrid Illumination", "2-Wege Audio"],
+            "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fs_bulletcam_hlvf_black_3b73a11495%402.png&1762265032",
+            "colors": ["Black"],
+            "specifications": {
+                "resolution": "4MP (2560x1440)",
+                "lens": "2.8-12mm motorized varifocal P-Iris",
+                "night_vision": "Hybrid illumination (IR + White light)",
+                "ir_range": "bis zu 60m",
+                "white_light_range": "bis zu 40m",
+                "wdr": "True WDR",
+                "audio": "2x Mikrofon, 1x Lautsprecher",
+                "connectivity": "PoE/12V DC",
+                "operating_temp": "-40°C bis +60°C",
+                "ip_rating": "IP67"
+            },
+            "features": [
+                {"name": "Enhanced AI", "description": "4x leistungsfähigere KI-Hardware für präzise Erkennung von Personen, Tieren und Fahrzeugen"},
+                {"name": "P-Iris Objektiv", "description": "Automatische Blendensteuerung für optimale Belichtung"},
+                {"name": "Varifocal Zoom", "description": "Motorisierte Brennweitenverstellung 2.8-12mm mit Autofokus"}
+            ],
+            "compatible_nvrs": ["Superior NVR H2DAI8PAC (8-ch)", "Superior NVR H2DAI8PAC (16-ch)", "Superior NVR H2DAI16PAC (16-ch)", "Superior NVR H2DAI16PAC (32-ch)", "Superior NVR H2DAI2GAC (8-ch)", "Superior NVR H2DAI2GAC (16-ch)", "Superior NVR H2DAI2GAC (32-ch)"]
+        },
+        {
+            "name": "Superior BulletCam HLVF (8 Mp)",
+            "category": "cameras",
+            "product_line": "video_superior",
+            "description": "Wired AI-powered security IP camera with a 2.8-12 mm motorized varifocal P-Iris lens, hybrid illumination, True WDR, built-in microphone and speaker, audio and alarm inputs/outputs, and PoE/12 V. For outdoor and indoor use.",
+            "short_description": "8MP AI-Kamera mit Varifocal Lens",
+            "usps": ["8MP Auflösung", "Varifocal 2.8-12mm", "P-Iris Lens", "Hybrid Illumination", "2-Wege Audio"],
+            "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fs_bulletcam_hlvf_black_3b73a11495%402.png&1762265032",
+            "colors": ["Black"],
+            "specifications": {
+                "resolution": "8MP (3840x2160)",
+                "lens": "2.8-12mm motorized varifocal P-Iris",
+                "night_vision": "Hybrid illumination (IR + White light)",
+                "ir_range": "bis zu 60m",
+                "white_light_range": "bis zu 40m",
+                "wdr": "True WDR",
+                "audio": "2x Mikrofon, 1x Lautsprecher",
+                "connectivity": "PoE/12V DC",
+                "operating_temp": "-40°C bis +60°C",
+                "ip_rating": "IP67"
+            },
+            "features": [
+                {"name": "Enhanced AI", "description": "4x leistungsfähigere KI-Hardware für präzise Erkennung von Personen, Tieren und Fahrzeugen"},
+                {"name": "P-Iris Objektiv", "description": "Automatische Blendensteuerung für optimale Belichtung"},
+                {"name": "8MP Auflösung", "description": "4K Ultra HD Bildqualität für maximale Detailgenauigkeit"}
+            ],
+            "compatible_nvrs": ["Superior NVR H2DAI8PAC (8-ch)", "Superior NVR H2DAI8PAC (16-ch)", "Superior NVR H2DAI16PAC (16-ch)", "Superior NVR H2DAI16PAC (32-ch)", "Superior NVR H2DAI2GAC (8-ch)", "Superior NVR H2DAI2GAC (16-ch)", "Superior NVR H2DAI2GAC (32-ch)"]
+        },
+        {
+            "name": "Superior DomeCam HLVF (4 Mp)",
+            "category": "cameras",
+            "product_line": "video_superior",
+            "description": "Wired AI-powered security IP camera with a 2.8-12 mm motorized varifocal P-Iris lens, hybrid illumination, True WDR, built-in microphone and speaker, audio and alarm inputs/outputs, and PoE/12 V. For outdoor and indoor use.",
+            "short_description": "4MP AI Dome-Kamera mit Varifocal Lens",
+            "usps": ["4MP Auflösung", "Varifocal 2.8-12mm", "P-Iris Lens", "Hybrid Illumination", "Vandalismusgeschützt"],
+            "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fs_domecam_hlvf_black_6459f31e3d%402.png&1762265033",
+            "colors": ["Black"],
+            "specifications": {
+                "resolution": "4MP (2560x1440)",
+                "lens": "2.8-12mm motorized varifocal P-Iris",
+                "night_vision": "Hybrid illumination (IR + White light)",
+                "ir_range": "bis zu 60m",
+                "white_light_range": "bis zu 40m",
+                "wdr": "True WDR",
+                "audio": "2x Mikrofon, 1x Lautsprecher",
+                "connectivity": "PoE/12V DC",
+                "operating_temp": "-40°C bis +60°C",
+                "ip_rating": "IP67",
+                "ik_rating": "IK10"
+            },
+            "features": [
+                {"name": "Enhanced AI", "description": "4x leistungsfähigere KI-Hardware für präzise Erkennung"},
+                {"name": "Vandalismusschutz", "description": "IK10-zertifiziertes Gehäuse gegen Vandalismus"},
+                {"name": "P-Iris Objektiv", "description": "Automatische Blendensteuerung für optimale Belichtung"}
+            ],
+            "compatible_nvrs": ["Superior NVR H2DAI8PAC (8-ch)", "Superior NVR H2DAI8PAC (16-ch)", "Superior NVR H2DAI16PAC (16-ch)", "Superior NVR H2DAI16PAC (32-ch)", "Superior NVR H2DAI2GAC (8-ch)", "Superior NVR H2DAI2GAC (16-ch)", "Superior NVR H2DAI2GAC (32-ch)"]
+        },
+        {
+            "name": "Superior DomeCam HLVF (8 Mp)",
+            "category": "cameras",
+            "product_line": "video_superior",
+            "description": "Wired AI-powered security IP camera with a 2.8-12 mm motorized varifocal P-Iris lens, hybrid illumination, True WDR, built-in microphone and speaker, audio and alarm inputs/outputs, and PoE/12 V. For outdoor and indoor use.",
+            "short_description": "8MP AI Dome-Kamera mit Varifocal Lens",
+            "usps": ["8MP Auflösung", "Varifocal 2.8-12mm", "P-Iris Lens", "Hybrid Illumination", "Vandalismusgeschützt"],
+            "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fs_domecam_hlvf_black_6459f31e3d%402.png&1762265033",
+            "colors": ["Black"],
+            "specifications": {
+                "resolution": "8MP (3840x2160)",
+                "lens": "2.8-12mm motorized varifocal P-Iris",
+                "night_vision": "Hybrid illumination (IR + White light)",
+                "ir_range": "bis zu 60m",
+                "white_light_range": "bis zu 40m",
+                "wdr": "True WDR",
+                "audio": "2x Mikrofon, 1x Lautsprecher",
+                "connectivity": "PoE/12V DC",
+                "operating_temp": "-40°C bis +60°C",
+                "ip_rating": "IP67",
+                "ik_rating": "IK10"
+            },
+            "features": [
+                {"name": "Enhanced AI", "description": "4x leistungsfähigere KI-Hardware für präzise Erkennung"},
+                {"name": "8MP Auflösung", "description": "4K Ultra HD Bildqualität für maximale Detailgenauigkeit"},
+                {"name": "Vandalismusschutz", "description": "IK10-zertifiziertes Gehäuse gegen Vandalismus"}
+            ],
+            "compatible_nvrs": ["Superior NVR H2DAI8PAC (8-ch)", "Superior NVR H2DAI8PAC (16-ch)", "Superior NVR H2DAI16PAC (16-ch)", "Superior NVR H2DAI16PAC (32-ch)", "Superior NVR H2DAI2GAC (8-ch)", "Superior NVR H2DAI2GAC (16-ch)", "Superior NVR H2DAI2GAC (32-ch)"]
+        },
+        {
+            "name": "Superior TurretCam HLVF (4 Mp)",
+            "category": "cameras",
+            "product_line": "video_superior",
+            "description": "Wired AI-powered security IP camera with a 2.8-12 mm motorized varifocal P-Iris lens, hybrid illumination, True WDR, built-in microphone and speaker, audio and alarm inputs/outputs, and PoE/12 V. For outdoor and indoor use.",
+            "short_description": "4MP AI Turret-Kamera mit Varifocal Lens",
+            "usps": ["4MP Auflösung", "Varifocal 2.8-12mm", "P-Iris Lens", "Hybrid Illumination", "Kompaktes Design"],
+            "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fs_turretcam_hlvf_black_484e6470ab%402.png&1762265032",
+            "colors": ["Black"],
+            "specifications": {
+                "resolution": "4MP (2560x1440)",
+                "lens": "2.8-12mm motorized varifocal P-Iris",
+                "night_vision": "Hybrid illumination (IR + White light)",
+                "ir_range": "bis zu 60m",
+                "white_light_range": "bis zu 40m",
+                "wdr": "True WDR",
+                "audio": "2x Mikrofon, 1x Lautsprecher",
+                "connectivity": "PoE/12V DC",
+                "operating_temp": "-40°C bis +60°C",
+                "ip_rating": "IP67"
+            },
+            "features": [
+                {"name": "Enhanced AI", "description": "4x leistungsfähigere KI-Hardware für präzise Erkennung"},
+                {"name": "Kompaktes Design", "description": "Unauffälliges Turret-Design für dezente Installation"},
+                {"name": "P-Iris Objektiv", "description": "Automatische Blendensteuerung für optimale Belichtung"}
+            ],
+            "compatible_nvrs": ["Superior NVR H2DAI8PAC (8-ch)", "Superior NVR H2DAI8PAC (16-ch)", "Superior NVR H2DAI16PAC (16-ch)", "Superior NVR H2DAI16PAC (32-ch)", "Superior NVR H2DAI2GAC (8-ch)", "Superior NVR H2DAI2GAC (16-ch)", "Superior NVR H2DAI2GAC (32-ch)"]
+        },
+        {
+            "name": "Superior TurretCam HLVF (8 Mp)",
+            "category": "cameras",
+            "product_line": "video_superior",
+            "description": "Wired AI-powered security IP camera with a 2.8-12 mm motorized varifocal P-Iris lens, hybrid illumination, True WDR, built-in microphone and speaker, audio and alarm inputs/outputs, and PoE/12 V. For outdoor and indoor use.",
+            "short_description": "8MP AI Turret-Kamera mit Varifocal Lens",
+            "usps": ["8MP Auflösung", "Varifocal 2.8-12mm", "P-Iris Lens", "Hybrid Illumination", "Kompaktes Design"],
+            "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fs_turretcam_hlvf_black_484e6470ab%402.png&1762265032",
+            "colors": ["Black"],
+            "specifications": {
+                "resolution": "8MP (3840x2160)",
+                "lens": "2.8-12mm motorized varifocal P-Iris",
+                "night_vision": "Hybrid illumination (IR + White light)",
+                "ir_range": "bis zu 60m",
+                "white_light_range": "bis zu 40m",
+                "wdr": "True WDR",
+                "audio": "2x Mikrofon, 1x Lautsprecher",
+                "connectivity": "PoE/12V DC",
+                "operating_temp": "-40°C bis +60°C",
+                "ip_rating": "IP67"
+            },
+            "features": [
+                {"name": "Enhanced AI", "description": "4x leistungsfähigere KI-Hardware für präzise Erkennung"},
+                {"name": "8MP Auflösung", "description": "4K Ultra HD Bildqualität für maximale Detailgenauigkeit"},
+                {"name": "Kompaktes Design", "description": "Unauffälliges Turret-Design für dezente Installation"}
+            ],
+            "compatible_nvrs": ["Superior NVR H2DAI8PAC (8-ch)", "Superior NVR H2DAI8PAC (16-ch)", "Superior NVR H2DAI16PAC (16-ch)", "Superior NVR H2DAI16PAC (32-ch)", "Superior NVR H2DAI2GAC (8-ch)", "Superior NVR H2DAI2GAC (16-ch)", "Superior NVR H2DAI2GAC (32-ch)"]
+        },
+
+        # ========================================================================
         # COMFORT & AUTOMATION
         # ========================================================================
         {

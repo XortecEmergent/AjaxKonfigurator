@@ -1313,6 +1313,226 @@ def get_ajax_products_complete():
                 {"name": "Dimmer-kompatibel", "description": "Unterstützt dimmbare Leuchtmittel"}
             ],
             "compatible_hubs": ["Hub 2 Plus Jeweller", "Hub 2 (2G) Jeweller", "Hub 2 (4G) Jeweller", "Hub BP Jeweller"]
+        },
+
+        # ========================================================================
+        # INTRUSION BASELINE - MOTION DETECTORS (ADDITIONAL)
+        # ========================================================================
+        {
+            "name": "MotionCam (PhOD) Jeweller",
+            "category": "motion_detectors",
+            "product_line": "intrusion_baseline",
+            "description": "Wireless IR motion detector with Photo on Demand and Photo by Script functions",
+            "short_description": "PIR-Bewegungsmelder mit Foto on Demand",
+            "usps": ["Foto on Demand", "Foto nach Zeitplan", "Foto nach Szenario", "Grade 2"],
+            "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fmotioncam_phod_xl_30e7426296%402.jpg&1709543488",
+            "colors": ["Black", "White"],
+            "specifications": {
+                "frequency": "868 MHz (Jeweller + Wings)",
+                "range": "bis zu 1700m",
+                "detection_range": "12m",
+                "battery_life": "bis zu 4 Jahre",
+                "operating_temp": "-10°C bis +55°C",
+                "xortec_nr": "600810065/600810066",
+                "hersteller_nr": "8020.55.BL1/8020.55.WH1"
+            },
+            "features": [
+                {"name": "Photo on Demand", "description": "Fotos auf Anfrage jederzeit möglich"},
+                {"name": "Photo by Script", "description": "Automatische Fotos nach Szenarien"},
+                {"name": "Haustierimmunität", "description": "Ignoriert Haustiere bis 20kg"}
+            ],
+            "compatible_hubs": ["Hub 2 Plus Jeweller", "Hub 2 (2G) Jeweller", "Hub 2 (4G) Jeweller", "Hub BP Jeweller"]
+        },
+        {
+            "name": "MotionCam Outdoor HighMount (PhOD) Jeweller",
+            "category": "motion_detectors",
+            "product_line": "intrusion_baseline",
+            "description": "Wireless IR motion detector with extended photo verification possibilities. For outdoor installation at a 2-4 m height from the ground",
+            "short_description": "Outdoor PIR mit erweiterter Foto-Verifikation (2-4m Höhe)",
+            "usps": ["NEU", "2-4m Montagehöhe", "Foto-Verifikation", "Outdoor IP55"],
+            "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fmc_outdoor_high_mount_phod_jeweller_xl_7b09da9d88%402.jpg&1732142253",
+            "colors": ["Black", "White"],
+            "specifications": {
+                "frequency": "868 MHz (Jeweller + Wings)",
+                "range": "bis zu 1700m",
+                "detection_range": "15m",
+                "battery_life": "bis zu 3 Jahre",
+                "operating_temp": "-25°C bis +60°C",
+                "ip_rating": "IP55",
+                "xortec_nr": "600810067/600810068",
+                "hersteller_nr": "8020.60.BL1/8020.60.WH1"
+            },
+            "features": [
+                {"name": "Hohe Montage", "description": "Speziell für 2-4m Montagehöhe entwickelt"},
+                {"name": "Erweiterte Foto-Verifikation", "description": "8 Foto-Verifikationstypen"},
+                {"name": "Outdoor", "description": "IP55 Schutz für raue Bedingungen"}
+            ],
+            "compatible_hubs": ["Hub 2 Plus Jeweller", "Hub 2 (2G) Jeweller", "Hub 2 (4G) Jeweller", "Hub BP Jeweller"]
+        },
+        {
+            "name": "Curtain Outdoor Mini Jeweller",
+            "category": "motion_detectors",
+            "product_line": "intrusion_baseline",
+            "description": "Wireless dual-technology curtain motion detector in a more compact body for easy placement. For outdoor and indoor use",
+            "short_description": "NEU: Kompakter Outdoor Vorhang-Melder",
+            "usps": ["NEU", "Kompakt", "Dual-Tech", "Outdoor IP55"],
+            "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fco_mini_jeweller_xl_d86bc61b07%402.jpg&1758023655",
+            "colors": ["Black", "White"],
+            "specifications": {
+                "frequency": "868 MHz (Jeweller + Wings)",
+                "range": "bis zu 1700m",
+                "detection_range": "16 ft (ca. 5m)",
+                "battery_life": "bis zu 3 Jahre",
+                "operating_temp": "-13°F bis +140°F (-25°C bis +60°C)",
+                "ip_rating": "IP55",
+                "xortec_nr": "600810069/600810070",
+                "hersteller_nr": "CO.M.J.BL/CO.M.J.WH"
+            },
+            "features": [
+                {"name": "Kompakte Bauweise", "description": "Kleinere Größe für unauffällige Montage"},
+                {"name": "Dual-Technologie", "description": "PIR + K-band Mikrowelle"},
+                {"name": "2 Erkennungsmodi", "description": "Main und Pet Mode"}
+            ],
+            "compatible_hubs": ["Hub 2 Plus Jeweller", "Hub 2 (2G) Jeweller", "Hub 2 (4G) Jeweller", "Hub BP Jeweller"]
+        },
+        {
+            "name": "CurtainCam Outdoor HighMount (PhOD) Jeweller",
+            "category": "motion_detectors",
+            "product_line": "intrusion_baseline",
+            "description": "Wireless dual-technology curtain motion detector with extended photo verification possibilities. For outdoor installation at a height of 2-4 m",
+            "short_description": "NEU: Vorhang-Melder mit Kamera (2-4m Höhe)",
+            "usps": ["NEU", "2-4m Montagehöhe", "Foto-Verifikation", "Vorhang-Schutz"],
+            "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fcurtaincamoutdoor_phod_j_xl_db29859dc6%402.jpg&1761136204",
+            "colors": ["Black", "White"],
+            "specifications": {
+                "frequency": "868 MHz (Jeweller + Wings)",
+                "range": "bis zu 1700m",
+                "detection_range": "49 ft (ca. 15m)",
+                "battery_life": "bis zu 3 Jahre",
+                "operating_temp": "-13°F bis +140°F (-25°C bis +60°C)",
+                "ip_rating": "IP55",
+                "xortec_nr": "600810071/600810072",
+                "hersteller_nr": "CC.OHMP.J.BL/CC.OHMP.J.WH"
+            },
+            "features": [
+                {"name": "Schmaler Erfassungswinkel", "description": "7° horizontal für präzise Perimeter-Überwachung"},
+                {"name": "Foto-Verifikation", "description": "8 Foto-Verifikationstypen inkl. Pre-Alarm"},
+                {"name": "HDR Technologie", "description": "Klare Fotos auch bei schwierigen Lichtverhältnissen"}
+            ],
+            "compatible_hubs": ["Hub 2 Plus Jeweller", "Hub 2 (2G) Jeweller", "Hub 2 (4G) Jeweller", "Hub BP Jeweller"]
+        },
+
+        # ========================================================================
+        # INTRUSION BASELINE - KEYPADS (ADDITIONAL)
+        # ========================================================================
+        {
+            "name": "KeyPad Outdoor Jeweller",
+            "category": "keypads",
+            "product_line": "intrusion_baseline",
+            "description": "Keypad for outdoor and indoor use, featuring authentication via smartphones, Pass, Tag, and codes",
+            "short_description": "NEU: Outdoor-Tastatur für Außeneinsatz",
+            "usps": ["NEU", "Outdoor IP54", "Smartphone-Auth", "RFID"],
+            "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fkeypad_outdoor_jeweller_xl_0e3f5ac928%402.jpg&1716796181",
+            "colors": ["Black", "White"],
+            "specifications": {
+                "frequency": "868 MHz (Jeweller)",
+                "range": "bis zu 1700m",
+                "battery_life": "bis zu 3.5 Jahre",
+                "operating_temp": "-25°C bis +60°C",
+                "ip_rating": "IP54",
+                "xortec_nr": "600810073/600810074",
+                "hersteller_nr": "KP.O.J.BL/KP.O.J.WH"
+            },
+            "features": [
+                {"name": "Outdoor-fähig", "description": "IP54 Schutz für Außenmontage"},
+                {"name": "Smartphone-Authentifizierung", "description": "DESFire-kompatible NFC-Karten"},
+                {"name": "Vielfältige Auth-Methoden", "description": "Code, Pass, Tag, Smartphone"}
+            ],
+            "compatible_hubs": ["Hub 2 Plus Jeweller", "Hub 2 (2G) Jeweller", "Hub 2 (4G) Jeweller", "Hub BP Jeweller"]
+        },
+
+        # ========================================================================
+        # INTRUSION BASELINE - VOICE MODULE
+        # ========================================================================
+        {
+            "name": "SpeakerPhone Jeweller",
+            "category": "voice_modules",
+            "product_line": "intrusion_baseline",
+            "description": "Wireless voice module for alarm verification by monitoring or security companies for filtering false alarms",
+            "short_description": "NEU: Voice-Modul zur Alarmverifikation",
+            "usps": ["NEU", "Zwei-Wege-Audio", "Alarmverifikation", "VoRF Protokoll"],
+            "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fspeakerphone_jeweller_xl_7e8c5a9d32%402.jpg&1716796195",
+            "colors": ["White"],
+            "specifications": {
+                "frequency": "868 MHz (Jeweller + VoRF)",
+                "range": "bis zu 1700m",
+                "battery_life": "bis zu 2 Jahre",
+                "operating_temp": "-10°C bis +40°C",
+                "xortec_nr": "600810075",
+                "hersteller_nr": "SP.J.WH"
+            },
+            "features": [
+                {"name": "Zwei-Wege-Audio", "description": "Kommunikation zwischen Alarmzentrale und Objekt"},
+                {"name": "VoRF Protokoll", "description": "Ajax proprietäres Audio-Streaming-Protokoll"},
+                {"name": "Alarmverifikation", "description": "Reduziert Fehlalarme durch Sprachüberprüfung"}
+            ],
+            "compatible_hubs": ["Hub 2 Plus Jeweller", "Hub 2 (2G) Jeweller", "Hub 2 (4G) Jeweller", "Hub BP Jeweller"]
+        },
+
+        # ========================================================================
+        # COMFORT & AUTOMATION - INTEGRATION MODULES (ADDITIONAL)
+        # ========================================================================
+        {
+            "name": "vhfBridge Jeweller",
+            "category": "integration_modules",
+            "product_line": "comfort_automation",
+            "description": "Wireless module for connecting an Ajax system to third-party VHF transmitters",
+            "short_description": "VHF-Integrationsmodul für Fernübertragung",
+            "usps": ["VHF-Integration", "Bis zu 75h Batterie", "8 Ausgänge", "Große Reichweite"],
+            "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fvhf_bridge_xl_e2702205cc%402.jpg&1755765199",
+            "colors": ["White"],
+            "specifications": {
+                "frequency": "868 MHz (Jeweller)",
+                "range": "bis zu 1800m",
+                "outputs": "8 Transistor-Ausgänge",
+                "operating_temp": "-10°C bis +40°C",
+                "backup_battery": "7 Ah (optional)",
+                "xortec_nr": "600811013",
+                "hersteller_nr": "VHF.B.J"
+            },
+            "features": [
+                {"name": "VHF-Kommunikation", "description": "Verbindet Ajax mit VHF-Transmittern für große Reichweiten"},
+                {"name": "8 konfigurierbare Ausgänge", "description": "Flexible Ereigniszuordnung"},
+                {"name": "Bis zu 75h Autonomie", "description": "Mit 7 Ah Backup-Batterie"}
+            ],
+            "compatible_hubs": ["Hub 2 Plus Jeweller", "Hub 2 (2G) Jeweller", "Hub 2 (4G) Jeweller", "Hub BP Jeweller"]
+        },
+
+        # ========================================================================
+        # POWER SUPPLIES
+        # ========================================================================
+        {
+            "name": "12V PSU for Hub/Hub Plus/ReX",
+            "category": "power_supplies",
+            "product_line": "intrusion_baseline",
+            "description": "A power supply unit, connecting Hub/Hub Plus control panels and ReX radio signal range extender to low-voltage power sources",
+            "short_description": "12V Netzteil für Hub/ReX",
+            "usps": ["12V Betrieb", "Für mobile Einsätze", "Batteriebetrieb möglich", "Kompakt"],
+            "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fpsu_12v_hub_plus_xl_155bff7118%402.jpg&1755765055",
+            "colors": ["White"],
+            "specifications": {
+                "voltage": "12V DC",
+                "operating_temp": "-10°C bis +40°C",
+                "xortec_nr": "600811014",
+                "hersteller_nr": "12V.PSU"
+            },
+            "features": [
+                {"name": "12V Betrieb", "description": "Ermöglicht Betrieb mit Autobatterie oder Solaranlagen"},
+                {"name": "Mobile Einsätze", "description": "Ideal für Wohnmobile, Yachten, Baustellen"},
+                {"name": "Einfache Installation", "description": "Ersetzt das Standard-Netzteil im Hub"}
+            ],
+            "compatible_hubs": ["Hub 2 Plus Jeweller", "Hub 2 (2G) Jeweller", "Hub 2 (4G) Jeweller"],
+            "accessories": ["Terminal Adapter"]
         }
     ]
 

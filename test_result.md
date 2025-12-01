@@ -102,7 +102,7 @@
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
 
-user_problem_statement: "Bitte teste das Ajax Konfigurator Backend vollständig. Das System sollte folgende API-Endpunkte haben: 1. /api/product-lines - Sollte Ajax Produktlinien zurückgeben (baseline, superiorline, en54, video) 2. /api/categories - Sollte Produktkategorien zurückgeben (hubs, motion_detectors, etc.) 3. /api/products - Sollte alle Ajax Produkte mit vollständigen Informationen zurückgeben 4. /api/compatibility/{hub_id} - Sollte kompatible Geräte für einen Hub zurückgeben 5. /api/configurations - POST zum Speichern von Konfigurationen"
+user_problem_statement: "Teste den vollständig überarbeiteten Ajax Systems Konfigurator Backend mit neuen 2025 Produktdaten: 1. Neue Produktdatenbank 2025 mit 21 Ajax-Produkten 2. Video Product Line Integration mit NVRs 3. Neue Produkte: Hub 2 Plus Jeweller, Hub BP Jeweller, BulletCam HL, DomeCam Mini HL, TurretCam HL, NVRs, KeyPad TouchScreen 4. Produktspezifikationen mit korrekten specifications, features, usps 5. Image URLs von ajax.systems mit get_product_image_url() Funktion"
 
 backend:
   - task: "API Root Endpoint"

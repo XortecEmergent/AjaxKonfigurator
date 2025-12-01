@@ -209,6 +209,9 @@ async def init_products():
     products_data = get_ajax_products_2025()
     
     # Insert products into database
+    for product_data in products_data:
+        # Update image URL using our improved function
+        product_data['image_url'] = get_product_image_url(product_data['name'], product_data['category'])
         product = Product(**product_data)
         await db.products.insert_one(product.dict())
 

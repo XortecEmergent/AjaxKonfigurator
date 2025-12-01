@@ -207,7 +207,8 @@ async def init_products():
     
     # Load new 2025 Ajax products data
     products_data = get_ajax_products_2025()
-        # ================== HUB-ZENTRALEN (Alle Modelle) ==================
+    
+    # Insert products into database
         {
             "name": "Hub 2 Plus Jeweller",
             "category": "hubs",

@@ -526,7 +526,7 @@ def get_ajax_products_2025_complete():
         {
             "name": "DoorBell",
             "category": "doorbells",
-            "product_line": "intrusion_baseline",
+            "product_line": "video_baseline",
             "description": "Video doorbell with built-in AI, PIR sensor, and control via apps",
             "short_description": "NEU: Smart Video-Türklingel",
             "usps": ["NEU", "Video-Türklingel", "PIR-Sensor", "App-Steuerung"],

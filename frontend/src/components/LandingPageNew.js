@@ -219,17 +219,13 @@ const LandingPageNew = ({ onStart }) => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="flex items-center space-x-6 mb-4 md:mb-0">
-              <img
-                src="https://xortec.de/media/image/c6/55/58/xortec_logo_ohne_zusatz200x34.png"
-                alt="Xortec GmbH"
-                className="h-6"
-              />
+              <div className="h-6 px-3 py-1 bg-orange-500 text-white font-bold text-sm rounded">
+                XORTEC
+              </div>
               <span className="text-gray-400">×</span>
-              <img
-                src="https://ajax.systems/assets/img/logo/ajax-logo.svg"
-                alt="Ajax Systems"
-                className="h-5 filter brightness-0"
-              />
+              <div className="h-5 px-2 py-1 bg-black text-white font-bold text-xs rounded">
+                AJAX
+              </div>
             </div>
             <div className="text-sm text-gray-600">
               © 2024 Xortec GmbH · Ajax Systems Authorized Partner

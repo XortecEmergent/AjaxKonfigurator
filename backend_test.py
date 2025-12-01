@@ -522,13 +522,13 @@ class AjaxBackendTester:
             products = response.json()
             product_names = [p.get("name", "") for p in products]
             
-            # Check for key Ajax products
+            # Check for key Ajax products (updated to match actual 2025 products)
             key_products = [
                 "Hub 2 Plus Jeweller",
+                "Hub BP Jeweller",
                 "MotionProtect Jeweller", 
                 "DoorProtect Jeweller",
-                "FireProtect 2 RB (Heat/Smoke)",
-                "EN54 Fire Hub Jeweller"
+                "KeyPad Plus Jeweller"
             ]
             
             found_products = []

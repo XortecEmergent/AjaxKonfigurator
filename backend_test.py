@@ -52,35 +52,42 @@ class AjaxBackendTester:
             self.log_test("API Root", False, f"Connection error: {str(e)}")
     
     def test_product_lines(self):
-        """Test /api/product-lines endpoint"""
+        """Test /api/product-lines endpoint - NEW 2025 6-Product-Line Structure"""
         try:
             response = requests.get(f"{self.base_url}/product-lines", timeout=10)
             if response.status_code == 200:
                 data = response.json()
                 product_lines = data.get("product_lines", [])
                 
-                # Check if all expected product lines are present
-                expected_lines = ["baseline", "superiorline", "en54", "video"]
+                # NEW 2025 STRUCTURE: Check if all 6 expected product lines are present
+                expected_lines = [
+                    "intrusion_baseline",    # Baseline Intrusion Protection
+                    "intrusion_superior",    # Superior Intrusion Protection
+                    "video_baseline",        # Baseline Video Surveillance
+                    "video_superior",        # Superior Video Surveillance
+                    "en54",                  # EN54 Fire & Life Safety
+                    "comfort_automation"     # Comfort & Automation
+                ]
                 found_lines = [pl["id"] for pl in product_lines]
                 
                 missing_lines = [line for line in expected_lines if line not in found_lines]
                 if not missing_lines:
-                    self.log_test("Product Lines", True, f"All 4 product lines found: {found_lines}")
+                    self.log_test("Product Lines (2025)", True, f"All 6 new product lines found: {found_lines}")
                     
                     # Check structure of each product line
                     for pl in product_lines:
-                        required_fields = ["id", "name", "description", "target_group", "features"]
+                        required_fields = ["id", "name", "description"]
                         missing_fields = [field for field in required_fields if field not in pl]
                         if missing_fields:
                             self.log_test("Product Lines Structure", False, f"Missing fields in {pl['id']}: {missing_fields}")
                         else:
-                            self.log_test(f"Product Line {pl['id']}", True, f"Complete structure with {len(pl['features'])} features")
+                            self.log_test(f"Product Line {pl['id']}", True, f"Complete structure: {pl['name']}")
                 else:
-                    self.log_test("Product Lines", False, f"Missing product lines: {missing_lines}", found_lines)
+                    self.log_test("Product Lines (2025)", False, f"Missing product lines: {missing_lines}", found_lines)
             else:
-                self.log_test("Product Lines", False, f"HTTP {response.status_code}", response.text)
+                self.log_test("Product Lines (2025)", False, f"HTTP {response.status_code}", response.text)
         except Exception as e:
-            self.log_test("Product Lines", False, f"Connection error: {str(e)}")
+            self.log_test("Product Lines (2025)", False, f"Connection error: {str(e)}")
     
     def test_categories(self):
         """Test /api/categories endpoint"""

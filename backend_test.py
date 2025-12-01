@@ -663,6 +663,11 @@ class AjaxBackendTester:
         self.test_accessory_system()
         self.test_product_database_completeness()
         
+        # 2025 AJAX PRODUCT REQUIREMENTS TEST
+        print("\n" + "🆕 2025 AJAX PRODUCT REQUIREMENTS")
+        print("=" * 60)
+        self.test_2025_ajax_product_requirements()
+        
         # Summary
         print("\n" + "=" * 60)
         print("📊 TEST SUMMARY")

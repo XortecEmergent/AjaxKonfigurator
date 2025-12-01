@@ -1897,6 +1897,12 @@ def get_ajax_categories_complete():
             "name": "Netzteile",
             "description": "Stromversorgungseinheiten",
             "icon": "power"
+        },
+        {
+            "id": "cases",
+            "name": "Gehäuse",
+            "description": "Montagegehäuse für Ajax-Module",
+            "icon": "box"
         }
     ]
 

@@ -320,12 +320,12 @@ class AjaxBackendTester:
             
             self.log_test("Video Product Line", True, f"Retrieved {len(video_products)} video products")
             
-            # Check for specific Ajax cameras
+            # Check for specific Ajax cameras (updated to match actual 2025 product data)
             expected_cameras = [
                 "BulletCam HL (5 Mp/2.8 mm)",
-                "BulletCam HL (8 Mp/4 mm)", 
+                "BulletCam HL (8 Mp/2.8 mm)",  # Corrected: 2.8mm not 4mm
                 "TurretCam HL (5 Mp/2.8 mm)",
-                "DomeCam Mini HL",
+                "DomeCam Mini HL (5 Mp/2.8 mm)",  # Corrected: includes lens spec
                 "IndoorCam"
             ]
             

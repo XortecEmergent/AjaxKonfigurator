@@ -75,6 +75,7 @@ class Product(BaseModel):
     short_description: str
     usps: List[str]
     image_url: str
+    colors: Optional[List[str]] = None
     specifications: ProductSpecification
     features: List[ProductFeature]
     compatible_hubs: Optional[List[str]] = None

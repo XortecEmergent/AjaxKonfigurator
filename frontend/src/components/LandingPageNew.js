@@ -7,22 +7,22 @@ const LandingPageNew = ({ onStart }) => {
     {
       title: "Intrusion Protection",
       description: "Wired and wireless intrusion protection devices",
-      image: "https://ajax.systems/api/cdn-img/?img=%2Findex%2Ffirst-block%2Fintrusion-protection%2Fintrusion-protection.xl.jpg&1764237252"
+      image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Cdefs%3E%3ClinearGradient id='grad1' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%23374151'/%3E%3Cstop offset='100%25' stop-color='%236B7280'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='400' height='300' fill='url(%23grad1)'/%3E%3Cg transform='translate(200,150)'%3E%3Ccircle cx='0' cy='-30' r='40' fill='%23fff' opacity='0.9'/%3E%3Cpath d='M -15 -30 L 15 -30 L 15 -10 L -15 -10 Z' fill='%23000'/%3E%3Ccircle cx='0' cy='30' r='20' fill='%23fff' opacity='0.8'/%3E%3C/g%3E%3C/svg%3E"
     },
     {
       title: "Video Surveillance", 
       description: "Professional video surveillance solutions",
-      image: "https://ajax.systems/api/cdn-img/?img=%2Findex%2Ffirst-block%2Fvideo-surveillance%2Fvideo-surveillance.xl.jpg&1764152916"
+      image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Cdefs%3E%3ClinearGradient id='grad2' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%231F2937'/%3E%3Cstop offset='100%25' stop-color='%23374151'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='400' height='300' fill='url(%23grad2)'/%3E%3Cg transform='translate(200,150)'%3E%3Crect x='-50' y='-30' width='100' height='60' rx='5' fill='%23fff' opacity='0.9'/%3E%3Ccircle cx='20' cy='0' r='25' fill='%23000' opacity='0.8'/%3E%3Ccircle cx='20' cy='0' r='15' fill='%23fff'/%3E%3C/g%3E%3C/svg%3E"
     },
     {
       title: "Fire and Life Safety",
       description: "Complete fire detection and safety systems", 
-      image: "https://ajax.systems/api/cdn-img/?img=%2Findex%2Ffirst-block%2Ffire-detection%2Ffire.xl.jpg&1764152890"
+      image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Cdefs%3E%3ClinearGradient id='grad3' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%23DC2626'/%3E%3Cstop offset='100%25' stop-color='%23EF4444'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='400' height='300' fill='url(%23grad3)'/%3E%3Cg transform='translate(200,150)'%3E%3Cpath d='M -20 20 Q -30 0 -20 -20 Q 0 -30 20 -20 Q 30 0 20 20 Q 0 30 -20 20' fill='%23fff' opacity='0.9'/%3E%3C/g%3E%3C/svg%3E"
     },
     {
       title: "Comfort and Automation",
       description: "Smart home automation solutions",
-      image: "https://ajax.systems/api/cdn-img/?img=%2Findex%2Ffirst-block%2Fcomfort-automation%2Fcomfort-automation.xl.jpg&1764152878"
+      image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Cdefs%3E%3ClinearGradient id='grad4' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%23059669'/%3E%3Cstop offset='100%25' stop-color='%2310B981'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='400' height='300' fill='url(%23grad4)'/%3E%3Cg transform='translate(200,150)'%3E%3Crect x='-40' y='-40' width='80' height='80' rx='10' fill='%23fff' opacity='0.9'/%3E%3Ccircle cx='-15' cy='-15' r='8' fill='%23000'/%3E%3Ccircle cx='15' cy='-15' r='8' fill='%23000'/%3E%3Ccircle cx='-15' cy='15' r='8' fill='%23000'/%3E%3Ccircle cx='15' cy='15' r='8' fill='%23000'/%3E%3C/g%3E%3C/svg%3E"
     }
   ];
 

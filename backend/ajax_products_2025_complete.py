@@ -603,7 +603,7 @@ def get_ajax_products_2025_complete():
         {
             "name": "NVR DC (8-ch)",
             "category": "nvrs",
-            "product_line": "intrusion_baseline",
+            "product_line": "video_baseline",
             "description": "Network video recorder for 8 channels powered by a low-voltage power supply",
             "short_description": "NEU: DC-betriebener 8-Kanal NVR",
             "usps": ["NEU", "DC-Betrieb", "8 Kanäle", "Niederspannung"],

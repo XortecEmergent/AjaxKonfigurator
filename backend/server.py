@@ -208,7 +208,7 @@ async def init_products():
         return
     
     # Load new 2025 Ajax products data
-    products_data = get_ajax_products_2025()
+    products_data = get_ajax_products_2025_complete()
     
     # Insert products into database
     for product_data in products_data:

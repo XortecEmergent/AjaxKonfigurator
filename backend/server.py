@@ -205,8 +205,8 @@ async def init_products():
     if existing_products > 0:
         return
     
-    # COMPLETE Ajax products data based on Xortec catalog
-    products_data = [
+    # Load new 2025 Ajax products data
+    products_data = get_ajax_products_2025()
         # ================== HUB-ZENTRALEN (Alle Modelle) ==================
         {
             "name": "Hub 2 Plus Jeweller",

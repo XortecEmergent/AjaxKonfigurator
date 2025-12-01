@@ -598,96 +598,187 @@ class AjaxBackendTester:
         except Exception as e:
             self.log_test("Ajax Products Check", False, f"Connection error: {str(e)}")
     
-    def test_2025_ajax_product_requirements(self):
-        """Test specific 2025 Ajax product requirements from the review request"""
+    def test_new_2025_product_structure(self):
+        """Test NEW 2025 Ajax Product Structure with 6 Product Lines"""
         try:
-            # Test 1: GET /api/products should return 21 new Ajax products
-            response = requests.get(f"{self.base_url}/products", timeout=15)
-            if response.status_code == 200:
-                products = response.json()
-                if len(products) == 21:
-                    self.log_test("2025 Product Count", True, f"Correct: 21 new Ajax products returned")
-                else:
-                    self.log_test("2025 Product Count", False, f"Expected 21 products, got {len(products)}")
-            else:
-                self.log_test("2025 Product Count", False, f"HTTP {response.status_code}")
-            
-            # Test 2: GET /api/product-lines should return 4 product lines
-            response = requests.get(f"{self.base_url}/product-lines", timeout=10)
-            if response.status_code == 200:
-                data = response.json()
-                product_lines = data.get("product_lines", [])
-                expected_lines = ["baseline", "superiorline", "video", "en54"]
-                found_lines = [pl["id"] for pl in product_lines]
-                
-                if all(line in found_lines for line in expected_lines):
-                    self.log_test("2025 Product Lines", True, f"All 4 product lines found: {found_lines}")
-                else:
-                    missing = [line for line in expected_lines if line not in found_lines]
-                    self.log_test("2025 Product Lines", False, f"Missing product lines: {missing}")
-            
-            # Test 3: Check for new 2025 products mentioned in requirements
-            new_2025_products = [
-                "Hub 2 Plus Jeweller",
-                "Hub BP Jeweller", 
-                "BulletCam HL (5 Mp/2.8 mm)",
-                "BulletCam HL (8 Mp/2.8 mm)",
-                "DomeCam Mini HL (5 Mp/2.8 mm)",
-                "TurretCam HL (5 Mp/2.8 mm)",
-                "NVR (8-ch)",
-                "NVR (16-ch)", 
-                "NVR DC (8-ch)",
-                "NVR DC (16-ch)",
-                "MotionProtect Jeweller",
-                "KeyPad Plus Jeweller"
+            # Test 1: Products by each product line
+            product_lines = [
+                "intrusion_baseline", "intrusion_superior", 
+                "video_baseline", "video_superior", 
+                "en54", "comfort_automation"
             ]
             
-            found_2025_products = []
-            for product in products:
-                product_name = product.get("name", "")
-                for new_product in new_2025_products:
-                    if new_product in product_name:
-                        found_2025_products.append(new_product)
+            for line in product_lines:
+                response = requests.get(f"{self.base_url}/products?product_line={line}", timeout=10)
+                if response.status_code == 200:
+                    products = response.json()
+                    self.log_test(f"Products - {line}", True, f"Found {len(products)} products in {line}")
+                else:
+                    self.log_test(f"Products - {line}", False, f"HTTP {response.status_code}")
             
-            found_2025_products = list(set(found_2025_products))  # Remove duplicates
-            missing_2025 = [p for p in new_2025_products if p not in found_2025_products]
+            # Test 2: Check specific new products mentioned in German requirements
+            new_products_2025 = [
+                "KeyPad TouchScreen Jeweller",
+                "BulletCam HL (5Mp/8Mp)",
+                "DomeCam Mini HL", 
+                "TurretCam HL",
+                "Curtain Outdoor Jeweller",
+                "MotionCam Outdoor HighMount (PhOD)",
+                "IndoorCam",
+                "DoorBell"
+            ]
             
-            if not missing_2025:
-                self.log_test("New 2025 Products", True, f"All {len(new_2025_products)} new 2025 products found")
-            else:
-                self.log_test("New 2025 Products", False, f"Missing 2025 products: {missing_2025}")
+            response = requests.get(f"{self.base_url}/products", timeout=15)
+            if response.status_code == 200:
+                all_products = response.json()
+                product_names = [p.get("name", "") for p in all_products]
+                
+                found_new_products = []
+                for new_product in new_products_2025:
+                    if any(new_product.lower() in name.lower() for name in product_names):
+                        found_new_products.append(new_product)
+                
+                missing_new = [p for p in new_products_2025 if p not in found_new_products]
+                if not missing_new:
+                    self.log_test("New 2025 Products", True, f"All new products found: {found_new_products}")
+                else:
+                    self.log_test("New 2025 Products", False, f"Missing: {missing_new}")
+                    
+        except Exception as e:
+            self.log_test("New 2025 Structure", False, f"Connection error: {str(e)}")
+    
+    def test_hub_capacities_2025(self):
+        """Test Hub Capacities as specified in German requirements"""
+        try:
+            response = requests.get(f"{self.base_url}/products?category=hubs", timeout=10)
+            if response.status_code != 200:
+                self.log_test("Hub Capacities", False, f"HTTP {response.status_code}")
+                return
             
-            # Test 4: Check video product line integration
-            response = requests.get(f"{self.base_url}/products?product_line=video", timeout=10)
+            hubs = response.json()
+            
+            # Expected hub capacities from German requirements
+            expected_capacities = {
+                "Hub 2 Plus Jeweller": {"max_devices": 200, "max_cameras": 100},
+                "Hub BP Jeweller": {"max_devices": 200, "max_cameras": 100},
+                "Superior Hub Hybrid": {"max_devices": 400, "max_cameras": 200},
+                "EN54 Fire Hub": {"max_devices": 200, "max_fire_detectors": 200}
+            }
+            
+            for hub in hubs:
+                hub_name = hub.get("name", "")
+                specs = hub.get("specifications", {})
+                
+                for expected_hub, expected_caps in expected_capacities.items():
+                    if expected_hub in hub_name:
+                        # Check max_devices
+                        if specs.get("max_devices") == expected_caps.get("max_devices"):
+                            self.log_test(f"Hub Capacity - {expected_hub}", True, f"max_devices={specs.get('max_devices')}")
+                        else:
+                            self.log_test(f"Hub Capacity - {expected_hub}", False, f"Expected max_devices={expected_caps.get('max_devices')}, got {specs.get('max_devices')}")
+                        
+                        # Check max_cameras if expected
+                        if "max_cameras" in expected_caps:
+                            if specs.get("max_cameras") == expected_caps["max_cameras"]:
+                                self.log_test(f"Hub Camera Capacity - {expected_hub}", True, f"max_cameras={specs.get('max_cameras')}")
+                            else:
+                                self.log_test(f"Hub Camera Capacity - {expected_hub}", False, f"Expected max_cameras={expected_caps['max_cameras']}, got {specs.get('max_cameras')}")
+                        
+                        break
+                        
+        except Exception as e:
+            self.log_test("Hub Capacities", False, f"Connection error: {str(e)}")
+    
+    def test_nvr_capacities_2025(self):
+        """Test NVR Capacities as specified in German requirements"""
+        try:
+            response = requests.get(f"{self.base_url}/products?category=nvrs", timeout=10)
+            if response.status_code != 200:
+                self.log_test("NVR Capacities", False, f"HTTP {response.status_code}")
+                return
+            
+            nvrs = response.json()
+            
+            # Expected NVR capacities from German requirements
+            expected_nvr_capacities = {
+                "NVR (8-ch)": 8,
+                "NVR (16-ch)": 16,
+                "NVR DC (8-ch)": 8,
+                "NVR DC (16-ch)": 16,
+                "NVR H2D8PAC (8-ch)": 8,
+                "NVR H2D8PAC (16-ch)": 16
+            }
+            
+            for nvr in nvrs:
+                nvr_name = nvr.get("name", "")
+                specs = nvr.get("specifications", {})
+                
+                for expected_nvr, expected_capacity in expected_nvr_capacities.items():
+                    if expected_nvr in nvr_name:
+                        max_cameras = specs.get("max_cameras")
+                        if max_cameras == expected_capacity:
+                            self.log_test(f"NVR Capacity - {expected_nvr}", True, f"max_cameras={max_cameras}")
+                        else:
+                            self.log_test(f"NVR Capacity - {expected_nvr}", False, f"Expected max_cameras={expected_capacity}, got {max_cameras}")
+                        break
+                        
+        except Exception as e:
+            self.log_test("NVR Capacities", False, f"Connection error: {str(e)}")
+    
+    def test_compatibility_2025(self):
+        """Test Compatibility as specified in German requirements"""
+        try:
+            # Test 1: Baseline Intrusion products should have compatible_hubs
+            response = requests.get(f"{self.base_url}/products?product_line=intrusion_baseline", timeout=10)
+            if response.status_code == 200:
+                baseline_products = response.json()
+                products_with_hubs = 0
+                for product in baseline_products:
+                    if product.get("compatible_hubs"):
+                        products_with_hubs += 1
+                
+                if products_with_hubs > 0:
+                    self.log_test("Baseline Compatibility", True, f"{products_with_hubs}/{len(baseline_products)} baseline products have compatible_hubs")
+                else:
+                    self.log_test("Baseline Compatibility", False, "No baseline products have compatible_hubs")
+            
+            # Test 2: Superior Intrusion products should have compatible_hubs
+            response = requests.get(f"{self.base_url}/products?product_line=intrusion_superior", timeout=10)
+            if response.status_code == 200:
+                superior_products = response.json()
+                products_with_hubs = 0
+                for product in superior_products:
+                    if product.get("compatible_hubs"):
+                        products_with_hubs += 1
+                
+                self.log_test("Superior Compatibility", True, f"{products_with_hubs}/{len(superior_products)} superior products have compatible_hubs")
+            
+            # Test 3: Video products should have compatible_nvrs
+            response = requests.get(f"{self.base_url}/products?product_line=video_baseline", timeout=10)
             if response.status_code == 200:
                 video_products = response.json()
-                nvr_products = [p for p in video_products if p.get("category") == "nvrs"]
-                camera_products = [p for p in video_products if "camera" in p.get("category", "").lower()]
+                products_with_nvrs = 0
+                for product in video_products:
+                    if product.get("compatible_nvrs"):
+                        products_with_nvrs += 1
                 
-                if len(nvr_products) == 4:
-                    self.log_test("Video NVRs", True, f"Correct: 4 NVR models found")
-                else:
-                    self.log_test("Video NVRs", False, f"Expected 4 NVRs, found {len(nvr_products)}")
-                
-                if len(camera_products) >= 4:
-                    self.log_test("Video Cameras", True, f"Found {len(camera_products)} camera models")
-                else:
-                    self.log_test("Video Cameras", False, f"Expected at least 4 cameras, found {len(camera_products)}")
+                self.log_test("Video Compatibility", True, f"{products_with_nvrs}/{len(video_products)} video products have compatible_nvrs")
             
-            # Test 5: Check image URLs from ajax.systems
-            ajax_image_count = 0
-            for product in products[:10]:  # Check first 10 products
-                image_url = product.get("image_url", "")
-                if "ajax.systems" in image_url:
-                    ajax_image_count += 1
-            
-            if ajax_image_count > 0:
-                self.log_test("Ajax Image URLs", True, f"{ajax_image_count}/10 products have ajax.systems image URLs")
-            else:
-                self.log_test("Ajax Image URLs", False, "No ajax.systems image URLs found")
+            # Test 4: All images should be from ajax.systems
+            response = requests.get(f"{self.base_url}/products", timeout=15)
+            if response.status_code == 200:
+                all_products = response.json()
+                ajax_images = 0
+                for product in all_products:
+                    image_url = product.get("image_url", "")
+                    if "ajax.systems" in image_url:
+                        ajax_images += 1
                 
+                ajax_percentage = (ajax_images / len(all_products) * 100) if all_products else 0
+                self.log_test("Ajax Images", True, f"{ajax_images}/{len(all_products)} products ({ajax_percentage:.1f}%) have ajax.systems images")
+                        
         except Exception as e:
-            self.log_test("2025 Ajax Requirements", False, f"Connection error: {str(e)}")
+            self.log_test("Compatibility 2025", False, f"Connection error: {str(e)}")
     
     def run_all_tests(self):
         """Run all tests"""

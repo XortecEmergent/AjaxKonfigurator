@@ -49,7 +49,11 @@ const ConfiguratorComplete = ({ onShowImpressum }) => {
     try {
       const url = productLine ? `${API}/categories?product_line=${productLine}` : `${API}/categories`;
       const response = await axios.get(url);
-      setCategories(response.data.categories || []);
+      // Filter out hubs and nvrs categories for component selection (Step 3)
+      const filteredCategories = (response.data.categories || []).filter(cat => 
+        cat.id !== 'hubs' && cat.id !== 'nvrs'
+      );
+      setCategories(filteredCategories);
     } catch (error) {
       console.error('Error fetching categories:', error);
     }

@@ -33,14 +33,18 @@ const LandingPageNew = ({ onStart }) => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
             <div className="flex items-center space-x-8">
-              <div className="h-8 px-4 py-2 bg-orange-500 text-white font-bold rounded">
-                XORTEC
-              </div>
+              <img
+                src="https://xortec.de/media/image/c6/55/58/xortec_logo_ohne_zusatz200x34.png"
+                alt="Xortec GmbH"
+                className="h-8"
+              />
               <div className="hidden md:flex items-center space-x-2">
                 <span className="text-gray-400">×</span>
-                <div className="h-6 px-3 py-1 bg-black text-white font-bold text-sm rounded">
-                  AJAX
-                </div>
+                <img
+                  src="https://ajax.systems/assets/img/logo/ajax-logo.svg"
+                  alt="Ajax Systems"
+                  className="h-6 filter brightness-0"
+                />
               </div>
             </div>
             <div className="text-right text-sm text-gray-600">

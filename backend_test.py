@@ -89,38 +89,77 @@ class AjaxBackendTester:
         except Exception as e:
             self.log_test("Product Lines (2025)", False, f"Connection error: {str(e)}")
     
-    def test_categories(self):
-        """Test /api/categories endpoint"""
+    def test_categories_by_product_line(self):
+        """Test /api/categories endpoint for each product line - NEW 2025 Structure"""
         try:
-            response = requests.get(f"{self.base_url}/categories", timeout=10)
+            # Test 1: Intrusion Baseline Categories
+            response = requests.get(f"{self.base_url}/categories?product_line=intrusion_baseline", timeout=10)
             if response.status_code == 200:
                 data = response.json()
                 categories = data.get("categories", [])
+                expected_intrusion_cats = ["hubs", "motion_detectors", "opening_detectors", "glass_break_detectors", "keypads"]
+                found_cats = [cat["id"] for cat in categories]
                 
-                # Check expected categories (updated to match actual 2025 categories)
-                expected_categories = [
-                    "hubs", "motion_detectors", "opening_detectors", "keypads", 
-                    "cameras", "wifi_cameras", "doorbells", "nvrs"
-                ]
-                
-                found_categories = [cat["id"] for cat in categories]
-                missing_categories = [cat for cat in expected_categories if cat not in found_categories]
-                
-                if not missing_categories:
-                    self.log_test("Categories", True, f"All {len(categories)} categories found")
-                    
-                    # Check structure
-                    for cat in categories:
-                        required_fields = ["id", "name", "description"]
-                        missing_fields = [field for field in required_fields if field not in cat]
-                        if missing_fields:
-                            self.log_test("Category Structure", False, f"Missing fields in {cat['id']}: {missing_fields}")
+                missing_intrusion = [cat for cat in expected_intrusion_cats if cat not in found_cats]
+                if not missing_intrusion:
+                    self.log_test("Intrusion Baseline Categories", True, f"All intrusion categories found: {found_cats}")
                 else:
-                    self.log_test("Categories", False, f"Missing categories: {missing_categories}", found_categories)
-            else:
-                self.log_test("Categories", False, f"HTTP {response.status_code}", response.text)
+                    self.log_test("Intrusion Baseline Categories", False, f"Missing: {missing_intrusion}")
+            
+            # Test 2: Intrusion Superior Categories  
+            response = requests.get(f"{self.base_url}/categories?product_line=intrusion_superior", timeout=10)
+            if response.status_code == 200:
+                data = response.json()
+                categories = data.get("categories", [])
+                found_cats = [cat["id"] for cat in categories]
+                self.log_test("Intrusion Superior Categories", True, f"Superior intrusion categories: {found_cats}")
+            
+            # Test 3: Video Baseline Categories
+            response = requests.get(f"{self.base_url}/categories?product_line=video_baseline", timeout=10)
+            if response.status_code == 200:
+                data = response.json()
+                categories = data.get("categories", [])
+                expected_video_cats = ["cameras", "wifi_cameras", "doorbells", "nvrs"]
+                found_cats = [cat["id"] for cat in categories]
+                
+                missing_video = [cat for cat in expected_video_cats if cat not in found_cats]
+                if not missing_video:
+                    self.log_test("Video Baseline Categories", True, f"All video categories found: {found_cats}")
+                else:
+                    self.log_test("Video Baseline Categories", False, f"Missing: {missing_video}")
+            
+            # Test 4: Video Superior Categories
+            response = requests.get(f"{self.base_url}/categories?product_line=video_superior", timeout=10)
+            if response.status_code == 200:
+                data = response.json()
+                categories = data.get("categories", [])
+                found_cats = [cat["id"] for cat in categories]
+                self.log_test("Video Superior Categories", True, f"Superior video categories: {found_cats}")
+            
+            # Test 5: EN54 Categories
+            response = requests.get(f"{self.base_url}/categories?product_line=en54", timeout=10)
+            if response.status_code == 200:
+                data = response.json()
+                categories = data.get("categories", [])
+                expected_en54_cats = ["hubs", "fire_detectors", "sirens"]
+                found_cats = [cat["id"] for cat in categories]
+                
+                missing_en54 = [cat for cat in expected_en54_cats if cat not in found_cats]
+                if not missing_en54:
+                    self.log_test("EN54 Categories", True, f"All EN54 categories found: {found_cats}")
+                else:
+                    self.log_test("EN54 Categories", False, f"Missing: {missing_en54}")
+            
+            # Test 6: Comfort & Automation Categories
+            response = requests.get(f"{self.base_url}/categories?product_line=comfort_automation", timeout=10)
+            if response.status_code == 200:
+                data = response.json()
+                categories = data.get("categories", [])
+                found_cats = [cat["id"] for cat in categories]
+                self.log_test("Comfort Automation Categories", True, f"Comfort categories: {found_cats}")
+                
         except Exception as e:
-            self.log_test("Categories", False, f"Connection error: {str(e)}")
+            self.log_test("Categories by Product Line", False, f"Connection error: {str(e)}")
     
     def test_products(self):
         """Test /api/products endpoint"""

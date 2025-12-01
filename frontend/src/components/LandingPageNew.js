@@ -166,11 +166,9 @@ const LandingPageNew = ({ onStart }) => {
               <div className="aspect-square bg-gradient-to-br from-gray-900 to-black rounded-2xl p-8 text-white">
                 <div className="h-full flex flex-col justify-center">
                   <div className="mb-8">
-                    <img
-                      src="https://ajax.systems/assets/img/logo/ajax-logo.svg"
-                      alt="Ajax Systems"
-                      className="h-8 filter invert"
-                    />
+                    <div className="h-8 px-4 py-2 bg-white text-black font-bold text-lg rounded inline-block">
+                      AJAX SYSTEMS
+                    </div>
                   </div>
                   <h3 className="text-2xl font-bold mb-4">Vertrauenswürdig weltweit</h3>
                   <p className="text-gray-300 mb-6">

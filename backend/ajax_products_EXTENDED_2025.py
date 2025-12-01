@@ -1658,6 +1658,18 @@ def get_ajax_categories_complete():
             "name": "Lichtschalter",
             "description": "Smarte Touch-Lichtschalter",
             "icon": "light"
+        },
+        {
+            "id": "voice_modules",
+            "name": "Voice Module",
+            "description": "Sprachmodule für Alarmverifikation",
+            "icon": "microphone"
+        },
+        {
+            "id": "power_supplies",
+            "name": "Netzteile",
+            "description": "Stromversorgungseinheiten",
+            "icon": "power"
         }
     ]
 

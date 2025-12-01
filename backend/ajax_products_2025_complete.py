@@ -500,7 +500,7 @@ def get_ajax_products_2025_complete():
         {
             "name": "IndoorCam",
             "category": "wifi_cameras",
-            "product_line": "intrusion_baseline",
+            "product_line": "video_baseline",
             "description": "Indoor Wi-Fi security camera with a PIR motion sensor and built-in AI",
             "short_description": "NEU: Wi-Fi Indoor-Kamera mit PIR",
             "usps": ["NEU", "Wi-Fi", "PIR-Sensor", "KI-Analyse"],

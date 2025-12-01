@@ -11,6 +11,7 @@ import uuid
 from datetime import datetime
 from fastapi.responses import FileResponse
 import json
+from ajax_products_2025 import get_ajax_products_2025, get_ajax_categories_2025, get_ajax_product_lines_2025
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')

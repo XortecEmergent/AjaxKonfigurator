@@ -76,6 +76,7 @@ def get_ajax_products_2025_complete():
                 "communication": ["Wi-Fi", "Ethernet", "2G/3G/LTE (2x SIM)"],
                 "max_devices": 400,
                 "max_cameras": 200,
+                "max_cameras": 200,
                 "operating_temp": "-25°C bis +70°C",
                 "xortec_nr": "600810701",
                 "hersteller_nr": "25338.70.WH1"

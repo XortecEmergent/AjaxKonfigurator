@@ -683,6 +683,90 @@ def get_ajax_products_complete():
             ],
             "accessories": ["PSU Professional", "UPS Module", "Fibra Splitter"]
         },
+        {
+            "name": "Superior Hub Hybrid 2",
+            "category": "hubs",
+            "product_line": "intrusion_superior",
+            "description": "Hybrid control panel for medium to large setups. Works with up to 250 Fibra and Jeweller devices. Grade 3 certified",
+            "short_description": "NEU: Grade 3 Hybrid-Hub für mittlere bis große Anlagen",
+            "usps": ["NEU", "Grade 3", "Bis zu 250 Geräte", "Fibra + Jeweller"],
+            "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fhub_hybrid_2_xl_953608b81a%402.jpg&1761295315",
+            "colors": ["White"],
+            "specifications": {
+                "frequency": "868 MHz (Jeweller + Fibra)",
+                "range": "bis zu 11,450 ft (wireless), 6,550 ft (wired)",
+                "communication": ["Ethernet", "2G/3G/LTE (2x SIM)"],
+                "max_devices": 250,
+                "max_cameras": 250,
+                "operating_temp": "-25°C bis +70°C",
+                "security_groups": 25,
+                "automation_scenarios": 64,
+                "xortec_nr": "600810702",
+                "hersteller_nr": "SUP.HH2.WH"
+            },
+            "features": [
+                {"name": "Grade 3 Zertifizierung", "description": "EN 50131 Grade 3 zertifiziert"},
+                {"name": "250 Geräte", "description": "Unterstützt bis zu 250 verdrahtete oder kabellose Geräte"},
+                {"name": "25 Sicherheitsgruppen", "description": "Flexible Zugangsverwaltung"}
+            ],
+            "accessories": ["Backup Battery", "External Antenna"]
+        },
+        {
+            "name": "Superior Hub G3 Jeweller",
+            "category": "hubs",
+            "product_line": "intrusion_superior",
+            "description": "Wireless control panel with support for photo verification. Connectable via Ethernet, Wi-Fi, and two SIM cards (2G/LTE). Grade 3 certified",
+            "short_description": "NEU: Weltweit erste kabellose Grade 3 Zentrale",
+            "usps": ["NEU", "Grade 3", "Wireless", "Bis zu 250 Geräte"],
+            "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fsuperior_hub_g3_j_xl_74cd3c8c40%402.jpg&1763225615",
+            "colors": ["White"],
+            "specifications": {
+                "frequency": "868 MHz (Superior Jeweller)",
+                "range": "bis zu 11,450 ft",
+                "communication": ["Ethernet", "Wi-Fi", "2G/LTE (2x SIM)"],
+                "max_devices": 250,
+                "max_cameras": 528,
+                "operating_temp": "-10°C bis +40°C",
+                "security_groups": 25,
+                "automation_scenarios": 64,
+                "xortec_nr": "600810703",
+                "hersteller_nr": "SUP.HG3J.WH"
+            },
+            "features": [
+                {"name": "Weltweit erste wireless Grade 3", "description": "Erste komplett kabellose Grade 3 Sicherheitszentrale"},
+                {"name": "4 Kommunikationswege", "description": "Ethernet, Wi-Fi, 2x LTE SIM"},
+                {"name": "250 Geräte", "description": "Bis zu 250 kabellose Ajax-Geräte"}
+            ],
+            "accessories": ["Superior Internal Battery", "External Antenna"]
+        },
+        {
+            "name": "Superior MegaHub",
+            "category": "hubs",
+            "product_line": "intrusion_superior",
+            "description": "Hybrid control panel for the biggest projects. Works with up to 999 Fibra and Jeweller devices. Grade 3 certified",
+            "short_description": "NEU: Enterprise Hub für bis zu 999 Geräte",
+            "usps": ["NEU", "Grade 3", "Bis zu 999 Geräte", "Enterprise"],
+            "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fmega_hub1_xl_cdf9412ceb%402.jpg&1763040650",
+            "colors": ["White"],
+            "specifications": {
+                "frequency": "868 MHz (Jeweller + Fibra)",
+                "range": "bis zu 6,550 ft",
+                "communication": ["Ethernet", "Wi-Fi", "2G/LTE (2x SIM)"],
+                "max_devices": 999,
+                "max_cameras": 999,
+                "operating_temp": "-10°C bis +40°C",
+                "security_groups": 100,
+                "automation_scenarios": 100,
+                "xortec_nr": "600810704",
+                "hersteller_nr": "SUP.MH.WH"
+            },
+            "features": [
+                {"name": "999 Geräte", "description": "Unübertroffene Kapazität für Enterprise-Projekte"},
+                {"name": "100 Sicherheitsgruppen", "description": "Flexible Zugangsverwaltung für große Anlagen"},
+                {"name": "100 Szenarien", "description": "Umfassende Automation"}
+            ],
+            "accessories": ["18 Ah Backup Battery", "External Antenna", "Fibra Accessories"]
+        },
 
         # ========================================================================
         # INTRUSION SUPERIOR - MOTION DETECTORS

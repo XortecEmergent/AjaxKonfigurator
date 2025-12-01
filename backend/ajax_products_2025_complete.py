@@ -20,6 +20,7 @@ def get_ajax_products_2025_complete():
                 "communication": ["Wi-Fi", "Ethernet", "2G/3G/LTE (2x SIM)"],
                 "max_devices": 200,
                 "max_cameras": 100,
+                "max_cameras": 100,
                 "operating_temp": "0°C bis +50°C",
                 "xortec_nr": "600810057/600810058",
                 "hersteller_nr": "25338.52.BL1/25338.52.WH1"
@@ -44,6 +45,7 @@ def get_ajax_products_2025_complete():
                 "range": "bis zu 2000m (Jeweller)",
                 "communication": ["2G/3G/LTE (2x SIM)"],
                 "max_devices": 200,
+                "max_cameras": 100,
                 "max_cameras": 100,
                 "battery_life": "bis zu 16 Stunden",
                 "operating_temp": "-25°C bis +50°C",
@@ -100,6 +102,7 @@ def get_ajax_products_2025_complete():
                 "range": "bis zu 2000m",
                 "communication": ["Wi-Fi", "Ethernet", "2G/3G/LTE"],
                 "max_devices": 200,
+                "max_cameras": 100,
                 "max_fire_detectors": 200,
                 "operating_temp": "0°C bis +50°C",
                 "xortec_nr": "600810437",

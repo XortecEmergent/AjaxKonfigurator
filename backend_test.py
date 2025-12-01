@@ -781,37 +781,40 @@ class AjaxBackendTester:
             self.log_test("Compatibility 2025", False, f"Connection error: {str(e)}")
     
     def run_all_tests(self):
-        """Run all tests"""
-        print(f"🚀 Starting Ajax Konfigurator Backend Tests")
+        """Run all tests - NEW 2025 Ajax Konfigurator Backend Testing"""
+        print(f"🚀 Starting Ajax Konfigurator Backend Tests - 2025 Structure")
         print(f"📡 Backend URL: {self.base_url}")
         print("=" * 60)
         
-        # Run all tests
+        # Basic API Tests
         self.test_api_root()
         self.test_product_lines()
-        self.test_categories()
+        self.test_categories_by_product_line()
         self.test_products()
+        
+        # NEW 2025 STRUCTURE TESTS
+        print("\n" + "🆕 NEW 2025 AJAX PRODUCT STRUCTURE TESTS")
+        print("=" * 60)
+        self.test_new_2025_product_structure()
+        self.test_hub_capacities_2025()
+        self.test_nvr_capacities_2025()
+        self.test_compatibility_2025()
+        
+        # Legacy tests for completeness
+        print("\n" + "🔍 ADDITIONAL FUNCTIONALITY TESTS")
+        print("=" * 60)
         self.test_product_filtering()
         self.test_compatibility()
         self.test_configurations()
         self.test_specific_ajax_products()
-        
-        # NEW COMPREHENSIVE TESTS FOR FINAL REVIEW
-        print("\n" + "🔍 COMPREHENSIVE VIDEO & ACCESSORY TESTS")
-        print("=" * 60)
         self.test_video_product_line()
         self.test_hubs_endpoint_for_video()
         self.test_accessory_system()
         self.test_product_database_completeness()
         
-        # 2025 AJAX PRODUCT REQUIREMENTS TEST
-        print("\n" + "🆕 2025 AJAX PRODUCT REQUIREMENTS")
-        print("=" * 60)
-        self.test_2025_ajax_product_requirements()
-        
         # Summary
         print("\n" + "=" * 60)
-        print("📊 TEST SUMMARY")
+        print("📊 TEST SUMMARY - 2025 Ajax Konfigurator")
         print("=" * 60)
         
         total_tests = len(self.test_results)

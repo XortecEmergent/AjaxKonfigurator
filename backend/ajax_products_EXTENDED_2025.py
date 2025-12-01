@@ -245,7 +245,7 @@ def get_ajax_products_complete():
             "description": "Wireless IR motion detector",
             "short_description": "Standard PIR-Bewegungsmelder",
             "usps": ["12m Erfassung", "Grade 2", "7 Jahre Batterie", "Haustierimmun"],
-            "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fmotionprotect_7e25a60ef8%402.png&1689152842",
+            "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fmp_xl_93d1779d25%402.jpg&1714486620",
             "colors": ["Black", "White"],
             "specifications": {
                 "frequency": "868 MHz (Jeweller)",

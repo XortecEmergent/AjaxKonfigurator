@@ -15,7 +15,7 @@ function App() {
       ) : showLandingPage ? (
         <LandingPageNew onStart={() => setShowLandingPage(false)} />
       ) : (
-        <ConfiguratorNew onShowImpressum={() => setShowImpressum(true)} />
+        <ConfiguratorComplete onShowImpressum={() => setShowImpressum(true)} />
       )}
     </>
   );

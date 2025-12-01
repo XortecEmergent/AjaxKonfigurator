@@ -63,7 +63,7 @@ def get_ajax_products_2025_complete():
         {
             "name": "Superior Hub Hybrid (4G)",
             "category": "hubs",
-            "product_line": "superiorline",
+            "product_line": "intrusion_superior",
             "description": "Professional control panel for high-security applications with Jeweller and Fibra protocol support",
             "short_description": "Grade 3 Hub für höchste Sicherheitsanforderungen",
             "usps": ["Grade 3", "Fibra + Jeweller", "Bis zu 400 Geräte", "Professional"],

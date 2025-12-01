@@ -102,7 +102,7 @@ def get_ajax_products_2025_complete():
                 "frequency": "868 MHz (Jeweller)",
                 "range": "bis zu 2000m",
                 "communication": ["Wi-Fi", "Ethernet", "2G/3G/LTE"],
-                "max_devices": 200,
+                "max_fire_detectors": 200,
                 "max_cameras": 100,
                 "max_fire_detectors": 200,
                 "operating_temp": "0°C bis +50°C",

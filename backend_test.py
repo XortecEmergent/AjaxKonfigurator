@@ -548,6 +548,97 @@ class AjaxBackendTester:
         except Exception as e:
             self.log_test("Ajax Products Check", False, f"Connection error: {str(e)}")
     
+    def test_2025_ajax_product_requirements(self):
+        """Test specific 2025 Ajax product requirements from the review request"""
+        try:
+            # Test 1: GET /api/products should return 21 new Ajax products
+            response = requests.get(f"{self.base_url}/products", timeout=15)
+            if response.status_code == 200:
+                products = response.json()
+                if len(products) == 21:
+                    self.log_test("2025 Product Count", True, f"Correct: 21 new Ajax products returned")
+                else:
+                    self.log_test("2025 Product Count", False, f"Expected 21 products, got {len(products)}")
+            else:
+                self.log_test("2025 Product Count", False, f"HTTP {response.status_code}")
+            
+            # Test 2: GET /api/product-lines should return 4 product lines
+            response = requests.get(f"{self.base_url}/product-lines", timeout=10)
+            if response.status_code == 200:
+                data = response.json()
+                product_lines = data.get("product_lines", [])
+                expected_lines = ["baseline", "superiorline", "video", "en54"]
+                found_lines = [pl["id"] for pl in product_lines]
+                
+                if all(line in found_lines for line in expected_lines):
+                    self.log_test("2025 Product Lines", True, f"All 4 product lines found: {found_lines}")
+                else:
+                    missing = [line for line in expected_lines if line not in found_lines]
+                    self.log_test("2025 Product Lines", False, f"Missing product lines: {missing}")
+            
+            # Test 3: Check for new 2025 products mentioned in requirements
+            new_2025_products = [
+                "Hub 2 Plus Jeweller",
+                "Hub BP Jeweller", 
+                "BulletCam HL (5 Mp/2.8 mm)",
+                "BulletCam HL (8 Mp/2.8 mm)",
+                "DomeCam Mini HL (5 Mp/2.8 mm)",
+                "TurretCam HL (5 Mp/2.8 mm)",
+                "NVR (8-ch)",
+                "NVR (16-ch)", 
+                "NVR DC (8-ch)",
+                "NVR DC (16-ch)",
+                "MotionProtect Jeweller",
+                "KeyPad Plus Jeweller"
+            ]
+            
+            found_2025_products = []
+            for product in products:
+                product_name = product.get("name", "")
+                for new_product in new_2025_products:
+                    if new_product in product_name:
+                        found_2025_products.append(new_product)
+            
+            found_2025_products = list(set(found_2025_products))  # Remove duplicates
+            missing_2025 = [p for p in new_2025_products if p not in found_2025_products]
+            
+            if not missing_2025:
+                self.log_test("New 2025 Products", True, f"All {len(new_2025_products)} new 2025 products found")
+            else:
+                self.log_test("New 2025 Products", False, f"Missing 2025 products: {missing_2025}")
+            
+            # Test 4: Check video product line integration
+            response = requests.get(f"{self.base_url}/products?product_line=video", timeout=10)
+            if response.status_code == 200:
+                video_products = response.json()
+                nvr_products = [p for p in video_products if p.get("category") == "nvrs"]
+                camera_products = [p for p in video_products if "camera" in p.get("category", "").lower()]
+                
+                if len(nvr_products) == 4:
+                    self.log_test("Video NVRs", True, f"Correct: 4 NVR models found")
+                else:
+                    self.log_test("Video NVRs", False, f"Expected 4 NVRs, found {len(nvr_products)}")
+                
+                if len(camera_products) >= 4:
+                    self.log_test("Video Cameras", True, f"Found {len(camera_products)} camera models")
+                else:
+                    self.log_test("Video Cameras", False, f"Expected at least 4 cameras, found {len(camera_products)}")
+            
+            # Test 5: Check image URLs from ajax.systems
+            ajax_image_count = 0
+            for product in products[:10]:  # Check first 10 products
+                image_url = product.get("image_url", "")
+                if "ajax.systems" in image_url:
+                    ajax_image_count += 1
+            
+            if ajax_image_count > 0:
+                self.log_test("Ajax Image URLs", True, f"{ajax_image_count}/10 products have ajax.systems image URLs")
+            else:
+                self.log_test("Ajax Image URLs", False, "No ajax.systems image URLs found")
+                
+        except Exception as e:
+            self.log_test("2025 Ajax Requirements", False, f"Connection error: {str(e)}")
+    
     def run_all_tests(self):
         """Run all tests"""
         print(f"🚀 Starting Ajax Konfigurator Backend Tests")

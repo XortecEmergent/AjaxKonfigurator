@@ -1256,6 +1256,13 @@ function App() {
       ) : showLandingPage ? (
         <LandingPageNew onStart={() => setShowLandingPage(false)} />
       ) : (
+        <ConfiguratorNew onShowImpressum={() => setShowImpressum(true)} />
+      )}
+    </div>
+  );
+}
+
+export default App;
         <div className="min-h-screen bg-gradient-to-br from-gray-900 via-orange-900 to-gray-800">
       {/* Header */}
       <header className="bg-black/20 backdrop-blur-sm border-b border-gray-700">

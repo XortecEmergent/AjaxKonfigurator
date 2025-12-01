@@ -760,6 +760,18 @@ def get_ajax_categories_2025_complete():
             "name": "NVRs",
             "description": "Netzwerk-Videorekorder",
             "icon": "nvr"
+        },
+        {
+            "id": "fire_detectors",
+            "name": "Brandmelder",
+            "description": "Rauch- und Wärmemelder",
+            "icon": "fire"
+        },
+        {
+            "id": "sirens",
+            "name": "Sirenen",
+            "description": "Innen- und Außensirenen",
+            "icon": "siren"
         }
     ]
 

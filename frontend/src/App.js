@@ -8,11 +8,8 @@ import { Badge } from './components/ui/badge';
 import { Progress } from './components/ui/progress';
 import { ArrowRight, ArrowLeft, Settings, ShoppingCart, Download, CheckCircle2, Info, Zap, Shield, Wifi, Plus, Minus, AlertCircle, FileSpreadsheet } from 'lucide-react';
 import LandingPageNew from './components/LandingPageNew';
+import ConfiguratorNew from './components/ConfiguratorNew';
 import Impressum from './components/Impressum';
-import AccessoryModal from './components/AccessoryModal';
-import StepNavigation from './components/StepNavigation';
-import ColorSelector from './components/ColorSelector';
-import { downloadExcel, generateQuotePDF } from './utils/excelExport';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;

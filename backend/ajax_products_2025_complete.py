@@ -628,7 +628,7 @@ def get_ajax_products_2025_complete():
         {
             "name": "NVR DC (16-ch)",
             "category": "nvrs",
-            "product_line": "intrusion_baseline",
+            "product_line": "video_baseline",
             "description": "Network video recorder for 16 channels powered by a low-voltage power supply",
             "short_description": "NEU: DC-betriebener 16-Kanal NVR",
             "usps": ["NEU", "DC-Betrieb", "16 Kanäle", "Erweiterte Kapazität"],

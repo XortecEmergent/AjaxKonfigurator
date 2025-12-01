@@ -249,16 +249,24 @@ async def get_categories(product_line: str = None):
     try:
         all_categories = get_ajax_categories_2025_complete()
         
-        if product_line == "video":
-            # For video line, filter relevant categories
+        if product_line in ["video_baseline", "video_superior"]:
+            # For video lines, filter relevant categories
             video_categories = [cat for cat in all_categories if cat["id"] in ["cameras", "wifi_cameras", "doorbells", "nvrs"]]
             return {"categories": video_categories}
-        elif product_line and product_line != "video":
-            # For other specific lines, exclude video-specific categories
-            other_categories = [cat for cat in all_categories if cat["id"] not in ["cameras", "wifi_cameras", "doorbells", "nvrs"]]
-            return {"categories": other_categories}
+        elif product_line in ["intrusion_baseline", "intrusion_superior"]:
+            # For intrusion lines, filter relevant categories
+            intrusion_categories = [cat for cat in all_categories if cat["id"] in ["hubs", "motion_detectors", "opening_detectors", "glass_break_detectors", "keypads"]]
+            return {"categories": intrusion_categories}
+        elif product_line == "en54":
+            # For EN54 line, filter relevant categories
+            en54_categories = [cat for cat in all_categories if cat["id"] in ["hubs", "fire_detectors", "sirens"]]
+            return {"categories": en54_categories}
+        elif product_line == "comfort_automation":
+            # For comfort & automation line, filter relevant categories
+            comfort_categories = [cat for cat in all_categories if cat["id"] in ["relays", "switches", "sensors"]]
+            return {"categories": comfort_categories}
         else:
-            # When no product_line is specified, return ALL categories
+            # Default: return all categories
             return {"categories": all_categories}
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error fetching categories: {str(e)}")

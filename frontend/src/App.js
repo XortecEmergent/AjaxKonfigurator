@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './App.css';
 import LandingPageNew from './components/LandingPageNew';
+import ConfiguratorNew from './components/ConfiguratorNew';
 import Impressum from './components/Impressum';
 
 function App() {

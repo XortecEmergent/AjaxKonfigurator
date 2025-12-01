@@ -1257,7 +1257,7 @@ function App() {
       {showImpressum ? (
         <Impressum onClose={() => setShowImpressum(false)} />
       ) : showLandingPage ? (
-        <LandingPage onStartConfigurator={startConfigurator} />
+        <LandingPageNew onStart={() => setShowLandingPage(false)} />
       ) : (
         <div className="min-h-screen bg-gradient-to-br from-gray-900 via-orange-900 to-gray-800">
       {/* Header */}

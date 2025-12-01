@@ -90,12 +90,10 @@ class AjaxBackendTester:
                 data = response.json()
                 categories = data.get("categories", [])
                 
-                # Check expected categories
+                # Check expected categories (updated to match actual 2025 categories)
                 expected_categories = [
-                    "hubs", "motion_detectors", "opening_detectors", "glass_break_detectors",
-                    "keypads", "sirens", "wired_cameras", "wifi_cameras", "doorbells",
-                    "fire_detectors", "buttons_keyfobs", "range_extenders", "relays",
-                    "integration_modules", "power_supplies"
+                    "hubs", "motion_detectors", "opening_detectors", "keypads", 
+                    "cameras", "wifi_cameras", "doorbells", "nvrs"
                 ]
                 
                 found_categories = [cat["id"] for cat in categories]

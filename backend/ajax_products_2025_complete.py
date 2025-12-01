@@ -420,7 +420,7 @@ def get_ajax_products_2025_complete():
         {
             "name": "BulletCam HL (8 Mp/2.8 mm)",
             "category": "cameras", 
-            "product_line": "intrusion_baseline",
+            "product_line": "video_baseline",
             "description": "Wired AI-powered security IP camera with a 110° viewing angle, hybrid illumination, TrueWDR, microphone, and PoE/12 V. For outdoor and indoor use.",
             "short_description": "NEU: 8MP KI-Kamera mit Hybrid-Beleuchtung",
             "usps": ["NEU", "8MP Ultra HD", "Hybrid-Beleuchtung", "KI-Powered"],

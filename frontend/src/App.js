@@ -1,1 +1,24 @@
-import React, { useState } from 'react';\nimport './App.css';\nimport LandingPageNew from './components/LandingPageNew';\nimport ConfiguratorNew from './components/ConfiguratorNew';\nimport Impressum from './components/Impressum';\n\nfunction App() {\n  const [showLandingPage, setShowLandingPage] = useState(true);\n  const [showImpressum, setShowImpressum] = useState(false);\n\n  return (\n    <>\n      {showImpressum ? (\n        <Impressum onClose={() => setShowImpressum(false)} />\n      ) : showLandingPage ? (\n        <LandingPageNew onStart={() => setShowLandingPage(false)} />\n      ) : (\n        <ConfiguratorNew onShowImpressum={() => setShowImpressum(true)} />\n      )}\n    </>\n  );\n}\n\nexport default App;"
+import React, { useState } from 'react';
+import './App.css';
+import LandingPageNew from './components/LandingPageNew';
+import ConfiguratorNew from './components/ConfiguratorNew';
+import Impressum from './components/Impressum';
+
+function App() {
+  const [showLandingPage, setShowLandingPage] = useState(true);
+  const [showImpressum, setShowImpressum] = useState(false);
+
+  return (
+    <>
+      {showImpressum ? (
+        <Impressum onClose={() => setShowImpressum(false)} />
+      ) : showLandingPage ? (
+        <LandingPageNew onStart={() => setShowLandingPage(false)} />
+      ) : (
+        <ConfiguratorNew onShowImpressum={() => setShowImpressum(true)} />
+      )}
+    </>
+  );
+}
+
+export default App;"

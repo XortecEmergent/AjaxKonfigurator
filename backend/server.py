@@ -253,10 +253,13 @@ async def get_categories(product_line: str = None):
             # For video line, filter relevant categories
             video_categories = [cat for cat in all_categories if cat["id"] in ["cameras", "wifi_cameras", "doorbells", "nvrs"]]
             return {"categories": video_categories}
-        else:
-            # For other lines, exclude video-specific categories
+        elif product_line and product_line != "video":
+            # For other specific lines, exclude video-specific categories
             other_categories = [cat for cat in all_categories if cat["id"] not in ["cameras", "wifi_cameras", "doorbells", "nvrs"]]
             return {"categories": other_categories}
+        else:
+            # When no product_line is specified, return ALL categories
+            return {"categories": all_categories}
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error fetching categories: {str(e)}")
 

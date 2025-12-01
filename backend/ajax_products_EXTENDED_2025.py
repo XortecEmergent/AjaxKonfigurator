@@ -271,7 +271,7 @@ def get_ajax_products_complete():
             "description": "Wireless IR motion detector with an additional K-band microwave sensor",
             "short_description": "Dual-Technologie Bewegungsmelder",
             "usps": ["Duale Sensorik", "Grade 2", "Anti-Masking", "Falschalarmsicher"],
-            "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fmotionprotect_plus_111a8e0f23%402.png&1689159156",
+            "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fmp_xl_93d1779d25%402.jpg&1714486620",
             "colors": ["Black", "White"],
             "specifications": {
                 "frequency": "868 MHz (Jeweller)",

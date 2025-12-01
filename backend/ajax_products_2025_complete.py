@@ -446,7 +446,7 @@ def get_ajax_products_2025_complete():
         {
             "name": "DomeCam Mini HL (5 Mp/2.8 mm)",
             "category": "cameras",
-            "product_line": "intrusion_baseline",
+            "product_line": "video_baseline",
             "description": "Wired AI-powered security IP camera with a 110° viewing angle, hybrid illumination, TrueWDR, microphone, and PoE/12 V. For outdoor and indoor use.",
             "short_description": "NEU: Kompakte Dome-Kamera mit Hybrid-Beleuchtung",
             "usps": ["NEU", "Kompaktes Design", "Hybrid-Beleuchtung", "Vandalismusschutz"],

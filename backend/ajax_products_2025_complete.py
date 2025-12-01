@@ -553,7 +553,7 @@ def get_ajax_products_2025_complete():
         {
             "name": "NVR (8-ch)",
             "category": "nvrs", 
-            "product_line": "intrusion_baseline",
+            "product_line": "video_baseline",
             "description": "Network video recorder for 8 channels",
             "short_description": "Standard 8-Kanal NVR",
             "usps": ["8 Kanäle", "Standard Features", "Zuverlässig", "Kosteneffizient"],

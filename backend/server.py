@@ -225,7 +225,7 @@ async def root():
 async def get_product_lines():
     """Get available product lines"""
     return {
-        "product_lines": get_ajax_product_lines_2025_complete()
+        "product_lines": get_ajax_product_lines_complete()
     }
 
 @api_router.delete("/reset-products")

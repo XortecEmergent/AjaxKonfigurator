@@ -209,11 +209,6 @@ async def init_products():
     products_data = get_ajax_products_2025()
     
     # Insert products into database
-        {
-            "name": "Hub 2 Plus Jeweller",
-            "category": "hubs",
-            "product_line": "baseline",
-            "description": "Gefahrenmeldezentrale in schwarz/weiß, 200 Komponenten, 25 Sicherungsbereiche, 200 Benutzer, MotionCam Unterstützung, bis zu 100 Kameras GSM 2G/3G/4G, WLAN 2,4 GHz (802.11 b/g/n) u. Ethernet Kommunikationsmodul",
             "short_description": "Zentrale mit Fotoverifizierung, WLAN und mehrfacher Konnektivität",
             "usps": ["Fotoverifizierung", "WLAN + Ethernet + 2x SIM", "Bis zu 200 Geräte", "4 Kommunikationskanäle"],
             "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fhub_256999a1dd%402.png&1688287078",

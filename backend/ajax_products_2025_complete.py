@@ -578,7 +578,7 @@ def get_ajax_products_2025_complete():
         {
             "name": "NVR (16-ch)",
             "category": "nvrs",
-            "product_line": "intrusion_baseline",
+            "product_line": "video_baseline",
             "description": "Network video recorder for 16 channels",
             "short_description": "Standard 16-Kanal NVR",
             "usps": ["16 Kanäle", "Erweiterte Kapazität", "4K Recording", "RAID Support"],

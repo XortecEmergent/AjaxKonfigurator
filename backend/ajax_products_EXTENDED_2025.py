@@ -297,7 +297,7 @@ def get_ajax_products_complete():
             "description": "Wireless IR motion detector supporting photo by alarm feature",
             "short_description": "PIR-Bewegungsmelder mit Kamera",
             "usps": ["Foto-Verifikation", "Grade 2", "Anti-Sabotage", "Haustierimmun"],
-            "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fmotion_cam_jeweller_black_50c00ca247%402.png&1727442738",
+            "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fmc_j_xl_c08a42c711%402.jpg&1721123433",
             "colors": ["Black", "White"],
             "specifications": {
                 "frequency": "868 MHz (Jeweller)",

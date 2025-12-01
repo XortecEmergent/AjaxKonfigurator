@@ -678,7 +678,7 @@ def get_ajax_products_2025_complete():
         {
             "name": "NVR H2D8PAC (16-ch)",
             "category": "nvrs",
-            "product_line": "intrusion_baseline",
+            "product_line": "video_baseline",
             "description": "16-channel network video recorder with 4K HDMI output, 8 PoE ports, and support for 2 hot-swappable HDDs",
             "short_description": "Kommend: Professional 16-Kanal NVR mit PoE",
             "usps": ["Kommend", "16 Kanäle", "8 PoE Ports", "Hot-Swap HDDs"],

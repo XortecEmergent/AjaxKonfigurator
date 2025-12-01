@@ -240,6 +240,54 @@ backend:
           agent: "testing"
           comment: "EN54 product line properly implemented with 6 products including EN54 Fire Hub, FireProtect variants (Smoke, Heat, with/without Sounder), and Manual Call Point. All have proper Xortec article numbers"
 
+  - task: "2025 Ajax Product Database Update"
+    implemented: true
+    working: true
+    file: "/app/backend/ajax_products_2025.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: true
+          agent: "testing"
+          comment: "2025 Ajax product database fully implemented and tested. 21 new Ajax products loaded correctly: 11 baseline products (Hub 2 Plus Jeweller, Hub BP Jeweller, MotionProtect Jeweller, DoorProtect Jeweller, KeyPad Plus Jeweller, etc.) and 10 video products (BulletCam HL 5Mp/8Mp, DomeCam Mini HL, TurretCam HL, IndoorCam, 4 NVR models). All products have complete specifications, features, USPs, and 100% have Xortec article numbers and ajax.systems image URLs."
+
+  - task: "Video Product Line Integration with NVRs"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: true
+          agent: "testing"
+          comment: "Video product line integration fully functional. NVRs correctly categorized as 'nvrs' instead of 'hubs'. /api/products?product_line=video&category=nvrs returns 4 NVR models (8-ch, 16-ch, DC variants). /api/products?product_line=video&category=cameras returns 4 camera models. Video products have compatible_nvrs field instead of compatible_hubs. Categories endpoint correctly filters video-specific categories."
+
+  - task: "New 2025 Categories Implementation"
+    implemented: true
+    working: true
+    file: "/app/backend/ajax_products_2025.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: true
+          agent: "testing"
+          comment: "New 2025 categories fully implemented. 8 categories total including new video categories: cameras, wifi_cameras, doorbells, nvrs. /api/categories returns all categories when no product_line specified. /api/categories?product_line=video returns only video-specific categories. Fixed categories endpoint filtering logic to properly handle all cases."
+
+  - task: "Product Image URL Function (get_product_image_url)"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: false
+    status_history:
+        - working: true
+          agent: "testing"
+          comment: "get_product_image_url() function working perfectly. 100% of products have valid ajax.systems CDN image URLs. Function correctly maps product names to official Ajax product images from ajax.systems API CDN. Fallback logic works for category-based images when specific product images not available."
+
 frontend:
   - task: "Landing Page with Xortec/Ajax Branding"
     implemented: true

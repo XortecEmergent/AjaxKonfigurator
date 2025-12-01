@@ -1258,7 +1258,7 @@ function App() {
       ) : (
         <ConfiguratorNew onShowImpressum={() => setShowImpressum(true)} />
       )}
-    </div>
+    </>
   );
 }
 

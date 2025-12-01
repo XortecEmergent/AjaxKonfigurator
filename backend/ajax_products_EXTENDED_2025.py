@@ -398,7 +398,7 @@ def get_ajax_products_complete():
             "description": "Wireless dual-tech outdoor curtain motion detector with PIR and microwave",
             "short_description": "NEU: Dual-Tech Outdoor Vorhang-Melder",
             "usps": ["NEU", "Dual-Tech", "PIR + Mikrowelle", "Outdoor IP54"],
-            "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fdualcurtain_outdoor_black_7f5a8c9b21%402.png&1689152842",
+            "image_url": "https://ajax.systems/api/cdn-img/?img=%2Fupload%2Fdualcurtain_outdoor_xl_cb8b776243%402.jpg&1763458377",
             "colors": ["Black", "White"],
             "specifications": {
                 "frequency": "868 MHz (Jeweller)",

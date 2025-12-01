@@ -377,7 +377,7 @@ class AjaxBackendTester:
                 categories = data.get("categories", [])
                 category_names = [cat.get("name", "") for cat in categories]
                 
-                expected_video_categories = ["NVR-Recorder", "Kameras"]
+                expected_video_categories = ["NVRs", "Kameras", "Wi-Fi Kameras", "Türklingeln"]
                 found_video_categories = [cat for cat in expected_video_categories if any(cat in name for name in category_names)]
                 
                 if len(found_video_categories) == len(expected_video_categories):
